@@ -33,7 +33,7 @@ class CategoryDemon < JobUtilsDemon
       cat.name = row["Category Name"]
       cat.is_adult = (row["Is Adult"].to_i == 1)
       cat.description = row["Category Description"]
-      cat.save!
+      cat.save
     end
 
     elements.each do |row|

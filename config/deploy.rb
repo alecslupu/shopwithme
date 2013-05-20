@@ -52,6 +52,7 @@ namespace :deploy do
   desc "fix permissions "
   task :permission_fix do
     run "cd #{release_path}; mkdir -p #{release_path}/tmp/cache; chmod -R 0777 #{release_path}/tmp/cache"
+    run "cd #{release_path}; mkdir -p #{release_path}/tmp/aw; chmod -R 0777 #{release_path}/tmp/aw"
   end
 
   task :assets_precompile, :roles => :web, :except => { :no_release => true } do

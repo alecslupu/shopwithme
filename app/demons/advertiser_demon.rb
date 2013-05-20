@@ -43,7 +43,7 @@ class AdvertiserDemon < JobUtilsDemon
       advertiser.click_through = row["Default Clickthrough"]
       advertiser.enabled = (row["Default Clickthrough"] != "You are not joined to this merchant")
 
-      advertiser.save!
+      advertiser.save
 
       if advertiser.persisted? 
         if (row["Product Feed Enabled"].downcase == "yes")
@@ -58,7 +58,7 @@ class AdvertiserDemon < JobUtilsDemon
             Resque.enqueue(ProductFeedWorker, advertiser.id)
           end
 
-          feed.save!
+          feed.save
         end
       end
     end
