@@ -29,7 +29,7 @@ class CategoryDemon < JobUtilsDemon
     elements.sort_by! {|e| e["Category Name"] }
     elements.each do |row|
       cat = Category.where(:id => row["Category ID"].to_i).first_or_initialize
-      cat.id = cat.awid
+      cat.id = cat.awid.to_i
       cat.name = row["Category Name"]
       cat.is_adult = (row["Is Adult"].to_i == 1)
       cat.description = row["Category Description"]
