@@ -55,6 +55,7 @@ namespace :deploy do
   end
 
   task :assets_precompile, :roles => :web, :except => { :no_release => true } do
+    run "rm -r #{release_path}/public/assets"
     run "cd #{release_path}; rake RAILS_ENV=#{rails_env} assets:precompile"
   end
 
