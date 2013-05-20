@@ -1,0 +1,167 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "bootstrap";
+
+body{
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.btn-charlie {
+  background-color: hsl(108, 44%, 52%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f2f9f0", endColorstr="#64ba4e");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#f2f9f0), to(#64ba4e));
+  background-image: -moz-linear-gradient(top, #f2f9f0, #64ba4e);
+  background-image: -ms-linear-gradient(top, #f2f9f0, #64ba4e);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f9f0), color-stop(100%, #64ba4e));
+  background-image: -webkit-linear-gradient(top, #f2f9f0, #64ba4e);
+  background-image: -o-linear-gradient(top, #f2f9f0, #64ba4e);
+  background-image: linear-gradient(#f2f9f0, #64ba4e);
+  border-color: #64ba4e #64ba4e hsl(108, 44%, 41%);
+  color: #666 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.72);
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn-golf {
+  background-color: hsl(195, 79%, 46%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#daf2fa", endColorstr="#18a3d1");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#daf2fa), to(#18a3d1));
+  background-image: -moz-linear-gradient(top, #daf2fa, #18a3d1);
+  background-image: -ms-linear-gradient(top, #daf2fa, #18a3d1);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #daf2fa), color-stop(100%, #18a3d1));
+  background-image: -webkit-linear-gradient(top, #daf2fa, #18a3d1);
+  background-image: -o-linear-gradient(top, #daf2fa, #18a3d1);
+  background-image: linear-gradient(#daf2fa, #18a3d1);
+  border-color: #18a3d1 #18a3d1 hsl(195, 79%, 34.5%);
+  color: #666 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  -webkit-font-smoothing: antialiased;
+}
+
+.product-list > a {
+  color: #18a3d1;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+}
+
+.product-list {
+  padding: 5px;
+  background-image: -moz-linear-gradient(top, #f2f2f2, #ffffff);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#ffffff));
+  background-image: -webkit-linear-gradient(top, #f2f2f2, #ffffff);
+  background-image: -o-linear-gradient(top, #f2f2f2, #ffffff);
+  background-image: linear-gradient(to bottom, #f2f2f2, #ffffff);
+  background-repeat: repeat-x;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2f2f2', endColorstr='#ffffffff', GradientType=0);
+  *zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+
+  img.img-polaroid {
+    width: 85px;
+  }
+
+
+  .price-tag
+  {
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg); /* IE 9 */
+    -webkit-transform: rotate(-45deg);
+    z-index: 1;
+    width: 110px;
+    position: absolute;
+    top: 8px;
+    font-size: 9px;
+    background-color: #F00;
+    color: #fff;
+    left: -38px;
+    text-align: center;
+    height: 20px;
+  }
+}
+
+
+.advertiser_logos {
+  a {
+    margin: 5px;
+    display: block;
+    float: left;
+    border: 1px solid #000;
+  }
+}
+
+.right {
+  .category-list { margin-top: 15px; }
+}
+
+
+.home.index {
+  .hero-unit {
+    padding: 30px;
+    font-size: 14px;
+  }
+}
+
+.brands.index, 
+.advertiser.index {
+  .product-list {
+    img {
+      border: 1px solid #000;
+      margin: auto 0px;
+    }
+    .btn {
+      width: 159px;
+    }
+  }
+}
+
+.product-detail {
+  margin-top: 15px !important;
+}
+.other_products {
+  position: relative;
+  
+  img {
+    width: 60px;
+  }
+
+  .price-tag
+  {
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg); /* IE 9 */
+    -webkit-transform: rotate(-45deg);
+    z-index: 1;
+    width: 110px;
+    position: absolute;
+    top: 10px;
+    font-size: 9px;
+    background-color: #F00;
+    color: #fff;
+    left: -35px;
+    text-align: center;
+    height: 20px;
+  }
+
+}

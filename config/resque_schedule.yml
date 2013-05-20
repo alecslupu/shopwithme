@@ -1,0 +1,6 @@
+queue_download_categories:
+  cron: "0 0 * * *"
+  class: CategoryWorker
+  description: "This job downloads the categories and imports them into the website "
+  # queue: category
+  # args:

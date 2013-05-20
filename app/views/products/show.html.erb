@@ -1,0 +1,63 @@
+<% content_for(:page_title) { "#{@product.name} by #{@product.advertiser}" } %>
+<% content_for(:page_description) { "View #{@product.name}"} %>
+
+<div class="media span8 product-detail">
+
+  <ul class="breadcrumb">
+    <li><a href="<%=root_url%>">Home</a> <span class="divider">/</span></li>
+    <li><%= link_to raw(@product.category), category_advertiser_path(@product.advertiser,@product.category), {
+      :title => raw(@product.category)
+      }  %><span class="divider">/</span></li>
+    <li><%= link_to raw(@product.advertiser.name), advertiser_path(@product.advertiser), {
+      :title => raw(@product.advertiser.name)
+      }  %><span class="divider">/</span>
+  </li>
+    <li class="active"><%=raw @product.name.split(" ").first(10).join(" ")%></li>
+  </ul>
+
+  <a class="pull-left" href="<%=visit_product_path(@product)%>" title="<%=raw @product.name%>">
+    <img src="<%=@product.aw_image_url%>" title="<%=raw @product.name%>" class="media-object img-polaroid">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><%=raw @product.name%></h4>
+    <p><%=raw @product.description %></p>
+
+    <p class="clearfix pull-right">
+      <%= link_to 'Details', visit_product_path(@product), {
+        :class => 'btn btn-charlie', 
+        :title => raw(@product.name)
+      }  %>
+    </p>
+  </div>
+
+    <p class="clearfix pull-left">
+      <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+      <a class="addthis_button_preferred_1"></a>
+      <a class="addthis_button_preferred_2"></a>
+      <a class="addthis_button_preferred_3"></a>
+      <a class="addthis_button_preferred_4"></a>
+      <a class="addthis_button_compact"></a>
+      <a class="addthis_counter addthis_bubble_style"></a>
+      </div>
+      <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51993ef2289b1b22"></script>
+    </p>
+</div>
+
+<div class="span4">
+  <% if @product.product_by_advertiser.size > 0 %>
+    <h3>Other products by this merchant</h3>
+    <% @product.product_by_advertiser.each do |product|%>
+    <div class="media other_products">
+    <a class="pull-left" href="<%=product_path(product)%>" title="<%=raw product.name%>">
+      <div class="price-tag"><%=product.search_price %> <%=product.currency%> </div>
+      <img class="media-object img-polaroid" data-src="holder.js/64x64" src="<%=product.aw_image_url%>">
+    </a>
+    <h4 class="media-heading"><%= link_to raw(product.name), product_path(product), {
+      :title => raw(product.name)
+    }  %></h4>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+

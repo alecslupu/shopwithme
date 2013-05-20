@@ -1,0 +1,22 @@
+<div class="media product-list">
+  <a class="pull-left" href="<%=product_path(product)%>" title="<%=raw product.name%>">
+    <div class="price-tag"><%=product.search_price %> <%=product.currency%> </div>
+    <img class="media-object img-polaroid" data-src="holder.js/64x64" src="<%=product.aw_image_url%>">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><%= link_to raw(product.name), visit_product_path(product), {
+      :title => raw(product.name)
+    }  %></h4>
+    <small class="clearfix"><%= raw product.description %></small>
+    <% unless product.category.nil?%>
+    <small>
+      <%= link_to raw(product.category), category_advertiser_path(product.advertiser,product.category), {
+      :title => "More in category &quot;"+ raw(product.category) + "&quot; by this merchant"
+    }  %></small>
+    <% end %>
+    <%= link_to 'Details', visit_product_path(product), {
+      :class => 'btn btn-charlie pull-right', 
+      :title => raw(product.name)
+    }  %>
+  </div>
+</div>

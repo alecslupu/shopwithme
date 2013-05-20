@@ -1,0 +1,21 @@
+<div class="hero-unit clearfix">
+  <h1>Over <%=number_with_delimiter Product.count%> products <small>including...</small></h1>
+  <p>&nbsp;</p>
+
+  <% products = Product.random.limit(10) %>
+
+  <ul class="unstyled inline-block span5">
+    <% products.first(5).each do |product| %>
+    <li><%= link_to raw(product.name), visit_product_path(product), {
+      :title => raw(product.name)
+    }  %></li>
+    <% end %>
+  </ul>
+  <ul class="unstyled inline-block span5">
+    <% products.last(5).each do |product| %>
+    <li><%= link_to raw(product.name), visit_product_path(product), {
+      :title => raw(product.name)
+    }  %></li>
+    <% end %>
+  </ul>
+</div>

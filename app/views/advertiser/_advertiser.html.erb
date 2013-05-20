@@ -1,0 +1,12 @@
+<div class="media product-list">
+  <%= render :partial => 'logo', :locals => {:advertiser => advertiser} %>
+  <div class="media-body pull-left">
+    <h4 class="media-heading"><%= link_to raw(advertiser.name), advertiser_path(advertiser), {
+      :title => raw(advertiser.name)
+    }  %><small><%= raw(' &mdash; ' + advertiser.strapline) unless advertiser.strapline.empty? %></small></h4>
+  </div>
+  <%= link_to "View #{number_with_delimiter(advertiser.products.count)} products", advertiser_path(advertiser), {
+      :class => 'btn btn-charlie pull-right', 
+      :title => raw(advertiser.name)
+    } %>
+</div>

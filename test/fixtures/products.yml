@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  advertiser: 
+  category: 
+  aw_product_id: 1
+  merchant_product_id: 1
+  name: MyString
+  description: MyString
+  aw_deep_link: MyText
+  aw_image_url: MyString
+  aw_thumb_url: MyString
+  search_price: 1.5
+  currency: MyString
+  delivery_cost: 1.5
+  valid_to: 2013-05-18 21:18:58
+  valid_from: 2013-05-18 21:18:58
+  stock_quantity: 1
+  model_number: MyString
+  brand: 
+
+two:
+  advertiser: 
+  category: 
+  aw_product_id: 1
+  merchant_product_id: 1
+  name: MyString
+  description: MyString
+  aw_deep_link: MyText
+  aw_image_url: MyString
+  aw_thumb_url: MyString
+  search_price: 1.5
+  currency: MyString
+  delivery_cost: 1.5
+  valid_to: 2013-05-18 21:18:58
+  valid_from: 2013-05-18 21:18:58
+  stock_quantity: 1
+  model_number: MyString
+  brand: 

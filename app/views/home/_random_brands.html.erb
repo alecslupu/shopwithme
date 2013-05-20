@@ -1,0 +1,8 @@
+<div class="hero-unit">
+  <h1>Over <%=Brand.with_products.count%> brands <small>including...</small></h1>
+  <ul class="inline">
+    <% Brand.random.limit(30).each do |brand| %>
+      <li><a href="<%=brand_path(brand)%>" title="<%=brand%>" ><%=brand%></a></li>
+    <% end %>
+  </ul>
+</div>

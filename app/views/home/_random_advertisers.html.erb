@@ -1,0 +1,7 @@
+<div class="hero-unit">
+  <h1>Over <%=Advertiser.with_products.count%> merchants <small>including...</small></h1>
+  
+  <div class="advertiser_logos clearfix">
+    <%= render :partial => 'advertiser/logo', :collection => Advertiser.random.limit(26), :as => :advertiser %>
+  </div>
+</div>

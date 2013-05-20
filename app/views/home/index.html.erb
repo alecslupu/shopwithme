@@ -1,0 +1,14 @@
+<% content_for(:page_title) { "ShopWithMe" } %>
+<% content_for(:page_description) { "ShopWithMe" } %>
+
+<% cache("home_products_well", :expires => 15.minutes ) do  %>
+  <%= render 'random_products' %>
+<% end %>
+
+<% cache("home_brands_well", :expires => 10.minutes ) do %>
+  <%= render 'random_brands' %>
+<% end %>
+
+<% cache('home_advertisers_well', :expires => 15.minutes ) do  %>
+  <%= render 'random_advertisers' %>
+<% end %>

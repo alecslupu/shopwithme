@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  feed_version: 1
+  feed_last_refresh: 2013-05-18 15:01:37
+  feed_last_modified: 2013-05-18 15:01:37
+  feed_product_count: 1
+  advertiser: 
+
+two:
+  feed_version: 1
+  feed_last_refresh: 2013-05-18 15:01:37
+  feed_last_modified: 2013-05-18 15:01:37
+  feed_product_count: 1
+  advertiser: 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:page_title) ? 'ShopWithMe - ' + yield(:page_title) : (raise "no title" ) %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+  <meta name="description" content="<%= content_for?(:page_description) ? 'ShopWithMe - ' + yield(:page_description) : (raise "no page_description" ) %>"/>
+
+</head>
+<body class="<%= params[:controller] + " " + params[:action] %>">
+
+<%= render 'layouts/header' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <%= yield %>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
+</body>
+</html>

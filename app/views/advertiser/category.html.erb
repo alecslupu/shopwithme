@@ -1,0 +1,32 @@
+<% content_for(:page_title) { "Products in category #{@category} by #{@advertiser.name}" } %> 
+<% content_for(:page_description) { @advertiser.strapline.blank? ? @advertiser.name : "Listing producs of #{@advertiser.strapline} in #{@category}" } %>
+
+<div class="span8">
+  <h2><%=raw("#{@category} by #{@advertiser}")%></h2>
+
+  <%= render @products %>
+  <%= paginate @products, :window => 2 %>
+</div>
+<div class="span4 right">
+  <h3>has products in <%=pluralize( @advertiser.categories_count.size, "category" )%></h3>
+  <ul class="nav nav-tabs nav-stacked category-list">
+    <% @advertiser.categories_count.each do |cat_hash| %>
+      <% next if cat_hash.first.nil? %>
+      <li><a href="<%=category_advertiser_path(@advertiser,cat_hash.first) %>" title="More in category <%=raw cat_hash.first%>"><%=raw cat_hash.first%>  (<%=cat_hash.last%>)</a></li>
+    <% end %>
+  </ul>
+
+<%
+=begin %>
+  <% if @category.advertisers.with_products.size > 0 %>
+  <h3>Other merchants in this category</h3>
+  <div class="advertiser_logos clearfix">
+    <%= render :partial => 'advertiser/logo', :collection => @category.advertisers.with_products, :as => :advertiser %>
+  </div>
+  <% end %>
+
+<%
+=end %>
+</div>
+
+
