@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "shop-with.me"
 role :app, application
 role :web, application
@@ -7,12 +9,15 @@ set :user, "root"
 set :deploy_to, "/var/www/apps/#{application}"
 
 set :use_sudo, false
+set :keep_releases, 5
 
+set :rails_env, "production"
+set :branch, "master"
 
+set :scm, :git
+set :deploy_via, :remote_cache
+set :repository, "git@github.com:alecslupu/shopwithme.git"
 
-set :scm, :none
-set :repository, "."
-set :deploy_via, :copy
 
 
 set :port, 22222
@@ -38,7 +43,9 @@ namespace :deploy do
   end
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared'
+after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate"
+# after "deploy:update",  "deploy:cleanup"
+
 
 
 # set :application, "set your application name here"
