@@ -27,6 +27,7 @@ class AdvertiserDemon < JobUtilsDemon
   def process_advertisers(elements)
 
     elements.each_with_index do |row, index|
+
       advertiser = Advertiser.where(:id => row["Merchant ID"].to_i).first_or_initialize 
 
       advertiser.name             = row["Merchant Name"]
@@ -43,6 +44,7 @@ class AdvertiserDemon < JobUtilsDemon
       advertiser.click_through = row["Default Clickthrough"]
       advertiser.enabled = (row["Default Clickthrough"] != "You are not joined to this merchant")
 
+      enabled = advertiser.enabled_changed?
       advertiser.save
 
       if advertiser.persisted? 
@@ -54,10 +56,9 @@ class AdvertiserDemon < JobUtilsDemon
             af.feed_product_count = row["Product Feed No. Products"].to_i
           end
 
-          if (advertiser.enabled_changed? or feed.feed_last_modified_changed?)
+          if (@enabled or feed.feed_last_modified_changed?)
             Resque.enqueue(ProductFeedWorker, advertiser.id)
           end
-
           feed.save
         end
       end

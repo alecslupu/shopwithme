@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>
     <% if Rails.env == 'production' %>
-      <%= 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : "" ) %></title>
+      <title><%= 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : "" ) %></title>
       <meta name="description" content="<%= 'ShopWithMe' + (content_for?(:page_description) ? ' - ' + yield(:page_description) : "") %>"/>
       <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-41086843-1']);
-  _gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-41086843-1']);
+        _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
 
-</script>
+      </script>
 
     <% else %>
-      <%= 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : (raise "no title" )) %></title>
+      <title><%= 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : (raise "no title" )) %></title>
       <meta name="description" content="<%= content_for?(:page_description) ? 'ShopWithMe - ' + yield(:page_description) : (raise "no page_description" ) %>"/>
 
     <% end %>
@@ -28,17 +27,25 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-
-
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="<%= params[:controller] + " " + params[:action] %>">
 
 <%= render 'layouts/header' %>
+  
 <div class="container-fluid">
   <div class="row-fluid">
-    <%= yield %>
+    <div class="span9">
+      <%= yield %>
+    </div>
+    <div class="span3">
+      <%= render 'sidebar' %>
+    </div>
   </div>
 </div>
+
 <%= render 'layouts/footer' %>
+
 </body>
 </html>

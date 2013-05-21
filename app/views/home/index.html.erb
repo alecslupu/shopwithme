@@ -1,14 +1,169 @@
 <% content_for(:page_title) { "ShopWithMe" } %>
 <% content_for(:page_description) { "ShopWithMe" } %>
 
-<% cache("home_products_well", :expires => 15.minutes ) do  %>
-  <%= render 'random_products' %>
-<% end %>
-
-<% cache("home_brands_well", :expires => 10.minutes ) do %>
-  <%= render 'random_brands' %>
-<% end %>
-
-<% cache('home_advertisers_well', :expires => 15.minutes ) do  %>
-  <%= render 'random_advertisers' %>
-<% end %>
+<form class="search_top_form">            
+  <ul>
+    <li>
+      <input type="text" value="" placeholder="Keyword...">
+    </li>
+    <li>
+      <select name="type">
+        <option value="1">Auto</option>
+        <option value="2">Beauty and Fitness</option>
+        <option value="3">Real Estate</option>
+      </select>
+    </li>
+    <li>
+      <select name="city">
+        <option value="1">All city...</option>
+        <option value="2">Da Nang</option>
+        <option value="3">Ho Chi Minh</option>
+      </select>
+    </li>
+    <li>
+      <button class="btn btn-warning"><i class="icon-search icon-white"></i> Search Now</button>
+    </li>
+  </ul>
+</form>
+<div class="main_content">
+  <h3 class="title"><span class="pull-left">FEATURED LISTINGS</span><span class="pull-right"><a href="view_all.html">View all listings</a></span></h3>
+  <div class="container-fluid">
+    <div class="row-fluid product_listing">
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m2.png" alt="Academy Theatre" title="Academy Theatre"></a>
+          <a href="detail.html" class="title">Academy Theatre</a> <span class="label label-success">new</span><br/>in <a href="view_all.html" class="subinfo">Entertainment</a> by <a href="#" class="subinfo">Amanda</a>
+          <p>This is example text for the overview section. This is my boss, Jonathan...</p>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m3.png" alt="Special Jewelry" title="Special Jewelry"></a>
+          <br/><a href="detail.html" class="title">Special Jewelry</a><br/>in <a href="view_all.html" class="subinfo">Real Estate</a> by <a href="#" class="subinfo">Anthony Bill</a>
+          <p>This is example text for the overview section. There's a voice that keep...</p>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m6.png" alt="Soft Bed Hotel" title="Soft Bed Hotel"></a>
+          <a href="detail.html" class="title">Soft Bed Hotel</a><br/>in <a href="view_all.html" class="subinfo">Travel</a> by <a href="#" class="subinfo">Julia</a>
+          <p>This is example text for the overview section. Just the good ol' boys, n...</p>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m1.png" alt="Fly Airlines" title="Fly Airlines"></a>
+          <a href="detail.html" class="title">Fly Airlines</a><br/>in <a href="view_all.html" class="subinfo">Sports</a> by <a href="#" class="subinfo">Carl Gilmore</a>
+          <p>This is example text for the overview section. One for all and all for o...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="title"><span class="pull-left">FEATURED DEALS</span><span class="pull-right"><a href="view_all.html">View all deals</a></span></h3>            
+  <div class="row-fluid">
+    <div class="span7">
+      <div class="featured-item">
+        <div class="pull-left deal-tag-info">
+          <div class="deal-tag">$54</div>
+          <div class="deal-discount">55% OFF</div>
+        </div>
+        <div class="pull-left">
+          <a href="detail.html"><img src="img/products/4_photo_2916.jpg" alt="55% off - The Prettiest Beauty Parlon" title="55% off - The Prettiest Beauty Parlon" class="img deal-featured"></a>
+          <p><strong><a href="detail.html" title="55% off - The Prettiest Beauty Parlon">55% off - The Prettiest Beauty Parlon</a></strong>
+            <br/>by <a href="#" title="The Prettiest Beauty Parlon">The Prettiest Beauty Parlon</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="span5">
+      <div class="other_info">
+        <div class="item">
+          <div class="deal-tag">$70</div>
+          <strong><a href="detail.html" title="70% OFF for satellite T.V. at Soft Bed Hotel">70% OFF for satellite T.V. at Soft Bed Hotel</a></strong>
+          <br/>by <a href="#" title="Soft Bed Hotel">Soft Bed Hotel</a>
+        </div>
+        <div class="item">
+          <div class="deal-tag">$50</div>
+          <strong><a href="detail.html" title="$50 - one month - Workout Gym">$50 - one month - Workout Gym</a></strong>
+          <br/>by <a href="#" title="Workout">Workout</a>
+        </div>
+        <div class="item">
+          <div class="deal-tag">$23</div>
+          <strong><a href="detail.html" title="$23 For 30 Minute Massage">$23 For 30 Minute Massage</a></strong>
+          <br/>by <a href="#" title="Relaxation Spa">Relaxation Spa</a>
+        </div>
+        <div class="item">
+          <div class="deal-tag">$60</div>
+          <strong><a href="detail.html" title="Weekday Promotion - 60% OFF">Weekday Promotion - 60% OFF</a></strong>
+          <br/>by <a href="#" title="Golf Club Resort">Golf Club Resort</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="title"><span class="pull-left">FEATURED CLASSIFIEDS</span><span class="pull-right"><a href="view_all.html">View all classifieds</a></span></h3>
+  <div class="container-fluid">
+    <div class="row-fluid product_listing">
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m4.png" alt="Sell Harley-Davidson" title="Sell Harley-Davidson"></a>
+          <a href="detail.html" class="title">Sell Harley-Davidson</a> <span class="label">$200</span><br/>in <a href="view_all.html" class="subinfo">Entertainment</a> by <a href="#" class="subinfo">Amanda</a>                   
+        </div>
+      </div>
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m7.png" alt="Winter Make-up" title="Winter Make-up"></a>
+          <a href="detail.html" class="title">Winter Make-up</a> <span class="label">$370</span><br/>in <a href="view_all.html" class="subinfo">Health</a> by <a href="#" class="subinfo">Julia</a>                   
+        </div>
+      </div>
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m8.png" alt="Office Furniture" title="Office Furniture"></a>
+          <a href="detail.html" class="title">Office Furniture</a> <span class="label">$120</span><br/>in <a href="view_all.html" class="subinfo">Leisure</a> by <a href="#" class="subinfo">Jane</a>                   
+        </div>
+      </div>
+      <div class="span3">
+        <div class="item">
+          <a href="detail.html"><img class="img" src="img/products/m2.png" alt="BMW Deluxe" title="BMW Deluxe"></a>
+          <a href="detail.html" class="title">BMW Deluxe</a> <span class="label label-important">ask</span><br/>in <a href="view_all.html" class="subinfo">Food</a> by <a href="#" class="subinfo">Mark</a>                   
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="title"><span class="pull-left">RECENT ARTICLES</span><span class="pull-right"><a href="view_all.html">View all articles</a></span></h3>
+  <div class="row-fluid">
+    <div class="span7">
+      <div class="featured-item">
+        <a href="#"><img src="img/products/8_photo_2993.jpg" alt="Investing in Stocks" title="Investing in Stocks" class="img pull-left"></a>
+        <strong><a href="#">Investing in Stocks</a></strong>
+        <p>Published: 05/12/2010 by <a href="#" target="_blank"> Olivia Matthew</a> in <a href="#">Finance</a></p>
+        <p>This is example text for the overview section. This is my boss, Jonathan Hart, a self-made millionaire, he's quite a guy</p>
+      </div>
+      <div class="featured-item">
+        <a href="#"><img src="img/products/7_photo_3011.jpg" alt="Retirement Plans" title="Retirement Plans" class="img pull-left"></a>
+        <strong><a href="#">Retirement Plans</a></strong>
+        <p>Published: 01/24/2010 by <a href="#" target="_blank"> Anthony Mark</a> in <a href="#">Finance</a></p>
+        <p>This is example text for the overview section. One for all and all for one, Muskehounds are always ready.</p>
+      </div>
+    </div>
+    <div class="span5">
+      <div class="other_info">
+        <p>
+          <strong><a href="#">Personal Growth Personal Growth</a></strong>
+          <br/>in <a href="#">Life Style</a> - 01/01/2010         
+        </p>
+        
+        <p>
+          <strong><a href="#">Starting a Business</a></strong>            
+          <br/>in <a href="#">Business</a> - 12/26/2009         
+        </p>            
+        <p>
+          <strong><a href="#">Health for kids</a></strong>              
+          <br/>in <a href="#">Fitness</a> - 12/21/2009          
+        </p>            
+        <p>
+          <strong><a href="#">The future of recycling</a></strong>
+          <br/>in <a href="#">Volunteer</a> - 07/04/2009
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

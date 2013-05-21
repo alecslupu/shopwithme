@@ -1,3 +1,48 @@
+  <div class="container-fluid" id="top-bar">
+    <div class="row-fluid">
+      <div class="span12">
+        <a class="brand pull-left" href="index.html"><img src="img/logo.png" alt="e-Classifieds" title="e-Classifieds"></a>
+        <ul class="nav nav-pills pull-right">
+          <li class="phone"><img src="img/phone.png" alt="" /></li>
+          <li><a href="#"><i class="icon-user icon-white"></i> Sign In</a></li>
+          <li><a href="#"><i class="icon-edit icon-white"></i> Create your profile</a></li>
+        </ul>                 
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar">
+    <div class="navbar-inner main-menu">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>            
+          <div class="nav-collapse collapse">
+            <ul class="nav" id="main-nav">
+              <li<%= ' class=active' if  params[:controller] == 'home'%>>
+                <a href="<%=root_path%>">Home</a>
+              </li>
+              <li<%= ' class=active' if  params[:controller] == 'advertiser'%>>
+                <a href="listing.html">Listings</a>
+              </li>
+              <li<%= ' class=active' if  params[:controller] == 'brands'%>>
+                <a href="classifieds.html">Classifieds</a>
+              </li>
+              <li><a href="deals.html">Deals</a></li>
+              <li><a href="#">Articles</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>  
+<!--
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
@@ -5,10 +50,10 @@
       </button>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li<%= ' class=active' if  params[:controller] == 'home'%>><a href="<%=root_path%>">Home</a></li>
-          <li<%= ' class=active' if  params[:controller] == 'advertiser'%>><a href="<%=advertisers_path%>">Merchants</a></li>
+          <li><a href="">Home</a></li>
+          <li><a href="<%=advertisers_path%>">Merchants</a></li>
        
-          <li<%= ' class=active' if  params[:controller] == 'brands'%>><a href="<%=brands_path%>">Brands</a></li>
+          <li><a href="<%=brands_path%>">Brands</a></li>
           <%
 =begin %>
            <li class="dropdown"><a href="#" class="dropdown-toggle"><b class="caret"></b>Dropdown </a>
@@ -34,8 +79,9 @@
         <form class="navbar-form pull-right">
           <input class="search-query" placeholder="Search" type="text">
         </form>
-      -->
+      --><!--
       </div>
     </div>
   </div>
 </div>
+-->
