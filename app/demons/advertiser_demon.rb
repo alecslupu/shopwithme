@@ -40,7 +40,7 @@ class AdvertiserDemon < JobUtilsDemon
       advertiser.category = Category.where(:name => row["Merchant Category"]).first
       advertiser.country = Country.where(:country_code => row["Primary Region"]).first
 
-      advertiser.promote_url = "http://www.awin1.com/awclick.php?mid=#{a.id}&id=176745"
+      advertiser.promote_url = "http://www.awin1.com/awclick.php?mid=#{advertiser.id}&id=176745"
       advertiser.url = row["Display URL"]
       advertiser.click_through = row["Default Clickthrough"]
       advertiser.enabled = (row["Default Clickthrough"] != "You are not joined to this merchant")
