@@ -40,6 +40,7 @@ gem "resque-history"
 
 gem 'kaminari'
 gem 'zip'
+gem 'newrelic_rpm'
 
 
 
