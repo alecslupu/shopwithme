@@ -1,0 +1,37 @@
+<% content_for(:page_title) { @category.name } %>
+<% content_for(:page_description) { "View products in #{@category.name}"} %>
+
+<%=render 'products/search_form' %>
+<div class="main_content detail-product">
+
+  <ul class="breadcrumb">
+    <li><a href="<%=root_url%>">Home</a> <span class="divider">/</span></li>
+    <% @category.self_and_ancestors.each do |category| %>
+
+      <% if @category.id == category.id  %>
+        <li class="active"><%=category%></li>
+      <% else %>
+        <li><%= link_to_category(category)%><span class="divider">/</span></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <% if @category.children.count > 0 %>
+    <h3 class="title"><span class="pull-left">BROWSE BY SUBCATEGORY</span></h3>
+    <% @category.children.each_with_index do |cat, index| %>
+      <% if index % 4 == 0 %><div class="row-fluid"><% end %>
+     <div class="span3">» <%= link_to_category(cat)%><span>(<%=cat.products.size%>)</span></div>
+      <% if index % 4 == 3 %></div><% end %>
+    <% end %>
+    <% if @category.children.count % 4 != 0 %></div><% end %>
+  <% end %>
+  <h3 class="title">LISTINGS in <%=@category%></h3>
+
+  <% if @products.size > 0 %>
+    <%= render @products %>
+    <%= paginate @products, :window => 2 %>
+  <% else %>
+    <%= render 'products/no_products' %>
+  <% end %>
+
+</div>

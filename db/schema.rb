@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519100923) do
+ActiveRecord::Schema.define(:version => 20130525173859) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130519100923) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "products_count"
+    t.string   "promote_url"
   end
 
   add_index "advertisers", ["category_id"], :name => "index_advertisers_on_category_id"
@@ -85,8 +86,9 @@ ActiveRecord::Schema.define(:version => 20130519100923) do
     t.integer  "awid"
     t.boolean  "is_adult"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "products_count"
   end
 
   add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
@@ -138,6 +140,30 @@ ActiveRecord::Schema.define(:version => 20130519100923) do
     t.integer  "brand_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.float    "display_price"
+    t.float    "store_price"
+    t.string   "merchant_category"
+    t.string   "merchant_deep_link"
+    t.string   "merchant_image_url"
+    t.string   "commission_group"
+    t.string   "condition"
+    t.string   "delivery_time"
+    t.string   "ean"
+    t.string   "in_stock"
+    t.string   "isbn"
+    t.string   "is_for_sale"
+    t.string   "language"
+    t.string   "merchant_thumb_url"
+    t.string   "mpn"
+    t.string   "pre_order"
+    t.string   "product_type"
+    t.string   "promotional_text"
+    t.string   "upc"
+    t.text     "warranty"
+    t.integer  "parent_product_id"
+    t.float    "rrp_price"
+    t.string   "web_offer"
+    t.text     "specifications"
   end
 
   add_index "products", ["advertiser_id"], :name => "index_products_on_advertiser_id"

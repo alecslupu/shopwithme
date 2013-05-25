@@ -14,3 +14,31 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+var product_details = {
+  initialize: function(){
+    $('.thumbnail').fancybox({
+      openEffect  : 'none',
+      closeEffect : 'none'
+    });
+    $('#myTab a:first').tab('show');
+    $('#myTab a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+
+    
+    $('.carousel').carousel({
+        interval: false
+    });
+  }
+}
+
+
+$(document).ready(function() {
+  body = $("body");
+  if (body.hasClass('products') && body.hasClass("show")) {
+    product_details.initialize();
+  }
+});

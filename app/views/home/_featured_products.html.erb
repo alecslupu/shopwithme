@@ -1,0 +1,24 @@
+<h3 class="title">
+  <span class="pull-left">FEATURED PRODUCTS</span>
+  <span class="pull-right"><a href="<%=products_path%>" title="View all products">View all products</a></span>
+</h3>
+
+<% categories = Category.random.with_products.limit(12)%>
+<div class="container-fluid">
+  <% categories.each_with_index do |category, index| %>
+    <% if (index % 4) == 0 %> <div class="row-fluid product_listing"> <% end %>
+      <% product = category.products.random.first %>
+
+      <div class="span3">
+        <div class="item">
+          <%= avatar_of_product(product, {}, {:class => "img"})%>
+          <%= link_to_product(product, :short , { :class => "title" }) %>
+          <% if product.newer? %><span class="label label-success">new</span><br/><% end %>
+          in <%= link_to_category(product.category,:short, {:class => "subinfo"}) %>
+          at <%= link_to_advertiser(product.advertiser, :short, {:class => "subinfo"}) %>
+          <p><%=product.short_description%></p>
+        </div>
+      </div>
+    <% if (index % 4) == 3 %> </div>  <% end %>
+  <% end %>
+</div>

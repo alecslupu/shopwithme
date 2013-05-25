@@ -38,6 +38,7 @@ gem 'resque'
 gem 'resque-scheduler'
 gem "resque-history"
 
+gem 'kaminari'
 gem 'zip'
 
 

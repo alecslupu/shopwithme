@@ -1,64 +1,12 @@
 <% content_for(:page_title) { "ShopWithMe" } %>
 <% content_for(:page_description) { "ShopWithMe" } %>
 
-<form class="search_top_form">            
-  <ul>
-    <li>
-      <input type="text" value="" placeholder="Keyword...">
-    </li>
-    <li>
-      <select name="type">
-        <option value="1">Auto</option>
-        <option value="2">Beauty and Fitness</option>
-        <option value="3">Real Estate</option>
-      </select>
-    </li>
-    <li>
-      <select name="city">
-        <option value="1">All city...</option>
-        <option value="2">Da Nang</option>
-        <option value="3">Ho Chi Minh</option>
-      </select>
-    </li>
-    <li>
-      <button class="btn btn-warning"><i class="icon-search icon-white"></i> Search Now</button>
-    </li>
-  </ul>
-</form>
+<%= render 'products/search_form' %>
 <div class="main_content">
-  <h3 class="title"><span class="pull-left">FEATURED LISTINGS</span><span class="pull-right"><a href="view_all.html">View all listings</a></span></h3>
-  <div class="container-fluid">
-    <div class="row-fluid product_listing">
-      <div class="span3">
-        <div class="item">
-          <a href="detail.html"><img class="img" src="img/products/m2.png" alt="Academy Theatre" title="Academy Theatre"></a>
-          <a href="detail.html" class="title">Academy Theatre</a> <span class="label label-success">new</span><br/>in <a href="view_all.html" class="subinfo">Entertainment</a> by <a href="#" class="subinfo">Amanda</a>
-          <p>This is example text for the overview section. This is my boss, Jonathan...</p>
-        </div>
-      </div>
-      <div class="span3">
-        <div class="item">
-          <a href="detail.html"><img class="img" src="img/products/m3.png" alt="Special Jewelry" title="Special Jewelry"></a>
-          <br/><a href="detail.html" class="title">Special Jewelry</a><br/>in <a href="view_all.html" class="subinfo">Real Estate</a> by <a href="#" class="subinfo">Anthony Bill</a>
-          <p>This is example text for the overview section. There's a voice that keep...</p>
-        </div>
-      </div>
-      <div class="span3">
-        <div class="item">
-          <a href="detail.html"><img class="img" src="img/products/m6.png" alt="Soft Bed Hotel" title="Soft Bed Hotel"></a>
-          <a href="detail.html" class="title">Soft Bed Hotel</a><br/>in <a href="view_all.html" class="subinfo">Travel</a> by <a href="#" class="subinfo">Julia</a>
-          <p>This is example text for the overview section. Just the good ol' boys, n...</p>
-        </div>
-      </div>
-      <div class="span3">
-        <div class="item">
-          <a href="detail.html"><img class="img" src="img/products/m1.png" alt="Fly Airlines" title="Fly Airlines"></a>
-          <a href="detail.html" class="title">Fly Airlines</a><br/>in <a href="view_all.html" class="subinfo">Sports</a> by <a href="#" class="subinfo">Carl Gilmore</a>
-          <p>This is example text for the overview section. One for all and all for o...</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= Rails.cache.fetch('featured_products', :expires => 5.hours ){ render 'featured_products' } %>
+
+<%
+=begin %>
   <h3 class="title"><span class="pull-left">FEATURED DEALS</span><span class="pull-right"><a href="view_all.html">View all deals</a></span></h3>            
   <div class="row-fluid">
     <div class="span7">
@@ -166,4 +114,6 @@
       </div>
     </div>
   </div>
+  <%
+=end %>
 </div>

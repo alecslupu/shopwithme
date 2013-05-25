@@ -1,0 +1,15 @@
+<% content_for(:page_title) { @advertiser.name } %>
+<% content_for(:page_description) { "View products by #{@advertiser.name} - #{@advertiser.strapline}"} %>
+
+<%=render 'products/search_form' %>
+<div class="main_content detail-product">
+  <h3 class="title">LISTINGS by <%=@advertiser%></h3>
+
+  <% if @products.size > 0 %>
+    <%= render @products %>
+    <%= paginate @products, :window => 2 %>
+  <% else %>
+    <%= render 'products/no_products' %>
+  <% end %>
+
+</div>

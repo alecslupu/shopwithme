@@ -18,14 +18,16 @@
 
       </script>
 
-    <% else %>
+    <% elsif !devise_controller? %>
+
+    <%= Rails.cache.fetch("cache_#{params.flatten.join("_")}", :expires => 3.hours)  do %>
       <title><%= 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : (raise "no title" )) %></title>
-      <meta name="description" content="<%= content_for?(:page_description) ? 'ShopWithMe - ' + yield(:page_description) : (raise "no page_description" ) %>"/>
+      <meta name="description" content="<%= content_for?(:page_description) ? 'ShopWithMe - ' + yield(:page_description) : ( raise "no page_description" ) %>"/>
+    <% end %>
 
     <% end %>
     
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta name="robots" content="index, follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,12 +42,12 @@
       <%= yield %>
     </div>
     <div class="span3">
-      <%= render 'sidebar' %>
+      <%= render  params[:action] + '_sidebar' unless devise_controller? %>
     </div>
   </div>
 </div>
 
-<%= render 'layouts/footer' %>
+<%= Rails.cache.fetch("cache_footer", :expires => 20.minutes ) { render 'layouts/footer' } %>
 
 </body>
 </html>

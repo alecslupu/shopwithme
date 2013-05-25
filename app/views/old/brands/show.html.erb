@@ -1,0 +1,10 @@
+<% content_for(:page_title) { "View #{@brand.name} products" } %>
+<% content_for(:page_description) { "View #{@brand.name} products - #{@products.map{|a| a.name}.join(', ')}" } %>
+
+
+<div class="span8">
+  <h2><%=raw(@brand)%></h2>
+
+  <%= render @products %>
+  <%= paginate @products, :window => 2 %>
+</div>

@@ -1,11 +1,16 @@
 ShopWithMe::Application.routes.draw do
 
-
-
-
   get "brands/show"
 
   get "brands/index"
+
+  get "advertisers/show"
+
+  get "advertisers/index"
+
+  get "categories/show"
+
+  get "categories/index"
 
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
@@ -13,19 +18,32 @@ ShopWithMe::Application.routes.draw do
     mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   end
   
-  resources :brands, :only => [:show, :index]
-  resources :products do 
+  resources :products, :only => [:index, :show] do 
     member do 
       get :visit
     end
   end
 
-  resources :advertisers, :controller => :advertiser, :only => [ :show, :index ] do 
-    member do 
-      get 'category/:category_id', :action => :category, :as => 'category'
-    end
-    # resources :categories, :only => [:show]
-  end
+
+  resources :advertisers, :only => [ :index, :show ]
+  resources :brands, :only => [ :index, :show ]
+  resources :categories, :only => [ :show ]
+
+
+  # get "brands/show"
+  # get "brands/index"
+  # resources :brands, :only => [:show, :index]
+  # resources :products do 
+  #   member do 
+  #     get :visit
+  #   end
+  # end
+
+  # resources :advertisers, :controller => :advertiser, :only => [ :show, :index ] do 
+  #   member do 
+  #     get 'category/:category_id', :action => :category, :as => 'category'
+  #   end
+  # end
   
   root :to => 'home#index'
 

@@ -1,10 +1,15 @@
-<% content_for(:page_title) { "View #{@brand.name} products" } %>
-<% content_for(:page_description) { "View #{@brand.name} products - #{@products.map{|a| a.name}.join(', ')}" } %>
+<% content_for(:page_title) { @brand.name } %>
+<% content_for(:page_description) { "View products by #{@brand.name}"} %>
 
+<%=render 'products/search_form' %>
+<div class="main_content detail-product">
+  <h3 class="title">LISTINGS by <%=@brand%></h3>
 
-<div class="span8">
-  <h2><%=raw(@brand)%></h2>
+  <% if @products.size > 0 %>
+    <%= render @products %>
+    <%= paginate @products, :window => 2 %>
+  <% else %>
+    <%= render 'products/no_products' %>
+  <% end %>
 
-  <%= render @products %>
-  <%= paginate @products, :window => 2 %>
 </div>

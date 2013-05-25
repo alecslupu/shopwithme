@@ -13,8 +13,14 @@ class Category < ActiveRecord::Base
     })
   end
 
+  scope :random, order("RAND()")
+  scope :with_products, where('products_count > 0')
 
   def to_s
     name
   end
+
+  def short_title 
+    name.split(" ").first(5).join(" ")
+  end 
 end

@@ -1,63 +1,149 @@
 <% content_for(:page_title) { "#{@product.name} by #{@product.advertiser}" } %>
 <% content_for(:page_description) { "View #{@product.name}"} %>
-
-<div class="media span8 product-detail">
-
-  <ul class="breadcrumb">
-    <li><a href="<%=root_url%>">Home</a> <span class="divider">/</span></li>
-    <li><%= link_to raw(@product.category), category_advertiser_path(@product.advertiser,@product.category), {
-      :title => raw(@product.category)
-      }  %><span class="divider">/</span></li>
-    <li><%= link_to raw(@product.advertiser.name), advertiser_path(@product.advertiser), {
-      :title => raw(@product.advertiser.name)
-      }  %><span class="divider">/</span>
-  </li>
-    <li class="active"><%=raw @product.name.split(" ").first(10).join(" ")%></li>
-  </ul>
-
-  <a class="pull-left" href="<%=visit_product_path(@product)%>" title="<%=raw @product.name%>">
-    <img src="<%=@product.aw_image_url%>" title="<%=raw @product.name%>" class="media-object img-polaroid">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading"><%=raw @product.name%></h4>
-    <p><%=raw @product.description %></p>
-
-    <p class="clearfix pull-right">
-      <%= link_to 'Details', visit_product_path(@product), {
-        :class => 'btn btn-charlie', 
-        :title => raw(@product.name)
-      }  %>
-    </p>
-  </div>
-
-    <p class="clearfix pull-left">
-      <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-      <a class="addthis_button_preferred_1"></a>
-      <a class="addthis_button_preferred_2"></a>
-      <a class="addthis_button_preferred_3"></a>
-      <a class="addthis_button_preferred_4"></a>
-      <a class="addthis_button_compact"></a>
-      <a class="addthis_counter addthis_bubble_style"></a>
-      </div>
-      <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51993ef2289b1b22"></script>
-    </p>
-</div>
-
-<div class="span4">
-  <% if @product.product_by_advertiser.size > 0 %>
-    <h3>Other products by this merchant</h3>
-    <% @product.product_by_advertiser.each do |product|%>
-    <div class="media other_products">
-    <a class="pull-left" href="<%=product_path(product)%>" title="<%=raw product.name%>">
-      <div class="price-tag"><%=product.search_price %> <%=product.currency%> </div>
-      <img class="media-object img-polaroid" data-src="holder.js/64x64" src="<%=product.aw_image_url%>">
-    </a>
-    <h4 class="media-heading"><%= link_to raw(product.name), product_path(product), {
-      :title => raw(product.name)
-    }  %></h4>
+<div class="main_content detail-product">           
+  <h3 class="title"><%=raw(@product.category)%></h3>      
+  <div class="row-fluid">
+    <div class="span4">
+      <%= link_to(image_tag(@product.aw_image_url, {
+        :alt => raw(@product.name),
+        :title => raw(@product.name),
+      }), @product.merchant_image_url, {
+        :class => "thumbnail", 
+        :title => raw(@product.name),
+        :"data-fancybox-group" => "group1"
+      } )%>
+      <ul class="thumbnails small">               
+        <li class="span4">
+          <%= link_to(image_tag(@product.aw_image_url, {
+        :alt => raw(@product.name),
+        :title => raw(@product.name),
+      }), @product.merchant_image_url, {
+        :class => "thumbnail", 
+        :title => raw(@product.name),
+        :"data-fancybox-group" => "group1"
+      } )%>
+        </li>
+      </ul> 
     </div>
-    <% end %>
-  <% end %>
+
+   <!--  <div class="span8">
+      <ul class="social pull-right">
+        <li>                  
+          <div class="fb-like" send="false" layout="button_count" data-href="example.org"></div>
+          <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+        </li>
+        <li>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-url="http://a-smart.vn/products/itab-a989i3g-goi-dien.html" data-text="iTab A989i(3G)" data-via="a-smart.vn">Tweet</a>
+          <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        </li>
+      </ul>
+    </div> -->
+
+    <div class="span8">
+      <h5><!-- <span class="label label-important">10%</span> --> <%= raw(@product.name)%></h5>
+      <%= raw(@product.description)%>
+      <h4 class="clearfix"><strong>Price: 
+          <span class="label label-important price"><%=@product.price%> <%=@product.currency%></span></strong></h4>                
+      <div class="contact-information">
+        <h5>MERCHANT INFORMATION</h5>
+        <address>       
+          <i><%= raw(@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
+        </address>
+        <%= link_to 'Details', visit_product_path(@product), {
+          :class => 'btn btn-charlie', 
+          :title => raw(@product.name)
+        }  %>
+<% 
+=begin %> <p><strong>Contact Name:</strong> Adam Samdllor<br/>
+          <strong>Phone:</strong> (434) 658-4638<br/>
+          <strong>E-mail:</strong> <a href="#myModal" role="button" data-toggle="modal">send an e-mail</a><br/>
+          <strong>URL:</strong> <a href="#" target="_blank">http://www.cuongv.com</a></p>
+<% 
+=end %>
+      </div>              
+    </div>              
+  </div>
+  <br />
+  <div class="row-fluid">
+    <div class="span12">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#specs">SPECIFICATIONS</a></li>
+        <% 
+=begin %>
+        <li><a href="#profile">RECENT REVIEWS</a></li>
+        <% 
+=end %>
+      </ul>              
+      <div class="tab-content">
+        <div class="tab-pane active" id="specs">
+          <%= @product.specifications.blank? ? "There are no specifications available" : raw(@product.specifications)%>
+        </div>
+        <% 
+=begin %>
+        <div class="tab-pane" id="profile">
+          <div class="reviews-item">
+            <div>
+              <a href="#" title="John"><img class="img" src="img/products/1_photo_1776.jpg" alt="" title=""></a>
+            </div>
+            <strong><a href="#">Ann Hotel</a></strong>
+            <div class="rate">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+              <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+              <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+            </div>
+            <a href="#">» Read More</a>
+            <p>The staff are the best! The rooms were clean! The parking was great!I had a great stay there! Can't wait to come back!!</p>
+            <div class="info">
+              <p>by&nbsp;<a href="#" title="John">John</a>
+                <br>Arlington, VA, 08/05/2011 - 03:37 pm</p>
+            </div>
+          </div>
+          <div class="reviews-item">
+            <div>
+              <a href="#" title="Mark"><img class="img" src="img/products/218_photo_1772.jpg" alt="" title=""></a>
+            </div>
+            <strong><a href="#">Mattew Law Firm</a></strong>
+            <div class="rate">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+            </div>
+            <a href="#">» Read More</a>
+            <p>They were responsive, attentive and friendly while helping us.</p>
+            <div class="info">
+              <p>by&nbsp;<a href="#" title="Mark">Mark</a>
+                <br>Tulsa, Oklahoma, 06/16/2010 - 06:26 pm</p>
+            </div>
+          </div>
+          <div class="reviews-item">
+            <div class="item">
+              <a href="#" title="Julia"><img class="img" src="img/products/9_photo_1778.jpg" alt="" title=""></a>
+            </div>
+            <strong><a href="#">Tayu</a></strong>
+            <div class="rate">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+              <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+            </div>
+            <a href="#">» Read More</a>
+            <p>The best part of this restaurant was definitely the decor and the server. We had the agedashi tofu and it was THE BES...</p>
+            <div class="info">
+              <p>by&nbsp;<a href="#" title="Julia">Julia</a>
+                <br/>Norwich, New York, 06/16/2010 - 06:19 pm</p>
+            </div>
+          </div>
+        </div>
+<% 
+=end %>
+      </div>              
+    </div>              
+  </div>            
 </div>
 
+        

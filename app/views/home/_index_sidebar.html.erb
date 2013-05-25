@@ -1,0 +1,88 @@
+<%= Rails.cache.fetch('sidebar_categories', :expires => 24.hours) {render 'layouts/sidebar_categories'} %>
+<%
+=begin %>
+
+<h3 class="title nmb">RANDOM ITEMS</h3>
+<div id="myCarousel" class="carousel slide home">
+  <div class="carousel-inner">
+    <div class="item active">
+      <img alt="" src="img/products/sitemgr_photo_360.jpg" />
+      <div class="carousel-caption">
+        <h4>Save 30%</h4>
+        <p>Lorem Ipsum is simply dummy text of the printing.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img alt="" src="img/products/sitemgr_photo_2627.jpg" />
+      <div class="carousel-caption">
+        <h4>Save 12%</h4>
+        <p>Sed ut perspiciatis unde omnis iste.</p>
+      </div>
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+</div>
+
+
+<h3 class="title nmb">RECENT REVIEWS</h3>
+<div class="reviews-item">
+  <div>
+    <a href="#" title="John"><img class="img" src="img/products/1_photo_1776.jpg" alt="" title=""></a>
+  </div>
+  <strong><a href="#">Ann Hotel</a></strong>
+  <div class="rate">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+    <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+    <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+  </div>
+  <a href="#">» Read More</a>
+  <p>The staff are the best! The rooms were clean! The parking was great!I had a great stay there! Can't wait to come back!!</p>
+  <div class="info">
+    <p>by&nbsp;<a href="#" title="John">John</a>
+    <br/>Arlington, VA, 08/05/2011 - 03:37 pm</p>
+  </div>
+</div>
+<div class="reviews-item">
+  <div>
+    <a href="#" title="Mark"><img class="img" src="img/products/218_photo_1772.jpg" alt="" title=""></a>
+  </div>
+  <strong><a href="#">Mattew Law Firm</a></strong>
+  <div class="rate">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+  </div>
+  <a href="#">» Read More</a>
+  <p>They were responsive, attentive and friendly while helping us.</p>
+  <div class="info">
+    <p>by&nbsp;<a href="#" title="Mark">Mark</a>
+    <br/>Tulsa, Oklahoma, 06/16/2010 - 06:26 pm</p>
+  </div>
+</div>
+<div class="reviews-item">
+  <div class="item">
+    <a href="#" title="Julia"><img class="img" src="img/products/9_photo_1778.jpg" alt="" title=""></a>
+  </div>
+  <strong><a href="#">Tayu</a></strong>
+  <div class="rate">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
+    <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
+  </div>
+  <a href="#">» Read More</a>
+  <p>The best part of this restaurant was definitely the decor and the server. We had the agedashi tofu and it was THE BES...</p>
+  <div class="info">
+    <p>by&nbsp;<a href="#" title="Julia">Julia</a>
+    <br/>Norwich, New York, 06/16/2010 - 06:19 pm</p>
+  </div>
+</div>
+
+<%
+=end %>

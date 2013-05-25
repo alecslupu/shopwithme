@@ -1,0 +1,26 @@
+<h3 class="title nm">BROWSE BY CATEGORY</h3>
+<div class="accordion right-col" id="accordion">
+  <% categories = Category.roots %>
+    <% categories.each do |category| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=category.id%>">
+          <h3 class="title nm nl"><%=category%></h3>
+        </a>
+      </div>
+      <div id="collapse<%=category.id%>" class="accordion-body collapse out">
+        <div class="accordion-inner">
+          <ul class="nav nav-list">
+            <% if category.children.size > 0 %>
+              <% category.children.each do |cat|%>
+              <li>» <%= link_to_category(cat)%><span>(<%=cat.products.size%>)</span></li>
+              <% end %>
+            <% else %>
+            <li>» <%= link_to_category(category)%><span>(<%=category.products.size%>)</span></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
