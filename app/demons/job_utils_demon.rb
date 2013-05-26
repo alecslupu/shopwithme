@@ -44,14 +44,18 @@ class JobUtilsDemon  # <  Struct.new(:user_id, :user_password)
   end
 
   def extract(path, archive_name, extracted_filename)
-    Zip::ZipFile.open(path.join(archive_name)) do |zf| 
-      zf.entries.each_with_index do |e, i| 
-        if File.exists?(path.join(extracted_filename))
-          raise "could not extract the file as already exists"
-        else 
-          zf.extract(e, path.join(extracted_filename))
+    begin
+      Zip::ZipFile.open(path.join(archive_name)) do |zf| 
+        zf.entries.each_with_index do |e, i| 
+          if File.exists?(path.join(extracted_filename))
+            raise "could not extract the file as already exists"
+          else 
+            zf.extract(e, path.join(extracted_filename))
+          end
         end
       end
+    rescue Zip­:­:Zip­Error => e
+      
     end
   end 
 

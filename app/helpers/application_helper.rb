@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def link_to_brand(brand, type= :short, options ={})
-    return 'Brand Not Available' if category.nil?
+    return 'Brand Not Available' if brand.nil?
     defaults = {:title => raw(brand) }
 
     title = (type == :short ? brand.short_title : brand)
