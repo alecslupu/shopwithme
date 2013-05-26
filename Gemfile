@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem 'awesome_nested_set'
 gem 'rails_admin_nested_set'
 
+gem 'dalli'
 
 gem 'zeus', :group => :test
 gem "friendly_id", "~> 4.0.9"

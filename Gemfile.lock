@@ -57,6 +57,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     columnize (0.3.6)
+    dalli (2.6.2)
     debug_inspector (0.0.2)
     debugger (1.6.0)
       columnize (>= 0.3.1)
@@ -250,6 +251,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.1.0)
   capistrano
   coffee-rails (~> 3.2.1)
+  dalli
   debugger
   devise
   friendly_id (~> 4.0.9)
