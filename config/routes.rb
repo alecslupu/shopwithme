@@ -1,17 +1,5 @@
 ShopWithMe::Application.routes.draw do
-
-  get "brands/show"
-
-  get "brands/index"
-
-  get "advertisers/show"
-
-  get "advertisers/index"
-
-  get "categories/show"
-
-  get "categories/index"
-
+  
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
     mount Resque::Server.new, :at => "/jobs"

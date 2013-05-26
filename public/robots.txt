@@ -3,3 +3,4 @@
 # To ban all spiders from the entire site uncomment the next two lines:
 # User-Agent: *
 # Disallow: /
+Sitemap: http://YOUR_BUCKET.s3.amazonaws.com/sitemaps/sitemap1.xml.gz

@@ -43,6 +43,9 @@ gem 'kaminari'
 gem 'zip'
 gem 'newrelic_rpm'
 
+gem 'sitemap_generator'
+
+
 
 
 # To use ActiveModel has_secure_password
