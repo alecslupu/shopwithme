@@ -72,4 +72,7 @@ ShopWithMe::Application.configure do
                         :email_prefix => "[ShopWithMe] ",
                         :sender_address => %{"ShopWithMe Application Error" <shopwithme.errors@shop-with.me>},
                         :exception_recipients => %w{contact@alecslupu.ro}
+
+  
+  config.action_mailer.delivery_method = :sendmail
 end
