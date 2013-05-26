@@ -21,6 +21,7 @@ module ApplicationHelper
   end
 
   def link_to_brand(brand, type= :short, options ={})
+    return 'Brand Not Available' if category.nil?
     defaults = {:title => raw(brand) }
 
     title = (type == :short ? brand.short_title : brand)
@@ -28,6 +29,8 @@ module ApplicationHelper
   end
 
   def link_to_category(category, type = :short, options = {})
+    return 'Category Not Available' if category.nil?
+
     defaults = {:title => raw(category) }
 
     title = (type == :short ? category.short_title : category)
