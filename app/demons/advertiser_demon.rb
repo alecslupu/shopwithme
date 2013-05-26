@@ -5,6 +5,7 @@ class AdvertiserDemon < JobUtilsDemon
   def process 
     process_advertisers(get_data)
   end 
+  protected
   
   private 
 
