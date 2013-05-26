@@ -70,7 +70,3 @@ after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:a
 # after "deploy:update",  "deploy:cleanup"
 before 'deploy:create_symlink', 'deploy:permission_fix'
 
-after "deploy", "refresh_sitemaps"
-task :refresh_sitemaps do
-  run "cd #{latest_release} && RAILS_ENV=#{rails_env} rake sitemap:refresh"
-end
