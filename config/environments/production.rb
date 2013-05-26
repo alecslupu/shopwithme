@@ -70,6 +70,6 @@ ShopWithMe::Application.configure do
 
   config.middleware.use "ExceptionNotifier",
                         :email_prefix => "[ShopWithMe] ",
-                        :sender_address => %{"ShopWithMe Application Error" <noreply@productdepository.com> },
+                        :sender_address => %{"ShopWithMe Application Error" <shopwithme.errors@productdepository.com>},
                         :exception_recipients => %w{shopwithme.errors@productdepository.com}
 end
