@@ -55,7 +55,7 @@ class JobUtilsDemon  # <  Struct.new(:user_id, :user_password)
         end
       end
 
-    rescue ZipError => e
+    rescue Zip::ZipError => e
 
     end
   end 
