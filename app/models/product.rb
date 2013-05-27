@@ -7,9 +7,17 @@ class Product < ActiveRecord::Base
   extend FriendlyId
 
   friendly_id :name, use: :slugged
-  paginates_per 10
+  
+  paginates_per 15
 
   scope :random, order("RAND()")
+  
+  scope :page_with_cached_total_count, lambda {|page_number, total_count|
+    page(page_number).extending {
+      # open scope to smuggle total_count
+      define_method(:total_count) { @total_count = total_count }
+    }
+  }
 
   def to_s 
     name

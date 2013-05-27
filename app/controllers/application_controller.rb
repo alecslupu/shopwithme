@@ -9,6 +9,7 @@ Delayed::Job.enqueue CategoryJob.new.perform
   def async_add_achievement_to_users
     Resque.enqueue(CategoryWorker)
     Resque.enqueue(AdvertiserWorker)
+    Resque.enqueue(SitemapWorker)
     
   end
 

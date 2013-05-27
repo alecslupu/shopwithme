@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
 
   def index 
-    @products = Product.includes(:category, :advertiser, :brand).page params[:page]
+    product_count = Rails.cache.fetch('all_products_count') { Product.count }
+    @products = Product.includes(:category, :advertiser, :brand).page_with_cached_total_count params[:page], product_count
   end
 
   def show

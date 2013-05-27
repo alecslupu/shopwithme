@@ -42,6 +42,7 @@ namespace :deploy do
   task :symlink_shared do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
+    run "ln -nfs #{shared_path}/sitemaps #{release_path}/public/sitemaps"
   end
   
   desc "Sync the public/assets directory."
@@ -59,14 +60,9 @@ namespace :deploy do
     run "rm -r #{release_path}/public/assets"
     run "cd #{release_path}; rake RAILS_ENV=#{rails_env} assets:precompile"
   end
-
-  task :copy_old_sitemap do
-    run "if [ -e #{previous_release}/public/sitemaps/sitemap.xml.gz ]; then cp #{previous_release}/public/sitemap* #{current_release}/public/; fi"
-  end
-
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile', "deploy:copy_old_sitemap"
+after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile'
 # after "deploy:update",  "deploy:cleanup"
 before 'deploy:create_symlink', 'deploy:permission_fix'
 
