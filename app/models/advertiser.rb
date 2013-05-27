@@ -4,6 +4,8 @@ class Advertiser < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   has_one :advertiser_feed, :dependent => :destroy 
 
+  before_save :fetch_products 
+  after_save :enqueue_feed 
   
   attr_accessible :active, :click_through, :description, :enabled, :logo, :metadata_version, :name, :strapline, :url
   extend FriendlyId
@@ -30,5 +32,15 @@ class Advertiser < ActiveRecord::Base
   #   products.where('category_id IS NOT NULL ').group(:category).count.delete_if {|key, value| key.nil? }
   # end
 
+private 
+  def fetch_products
+    @enqueue = self.enabled? && self.enabled_changed?
+  end 
+
+  def enqueue_feed
+    if @enqueue == true
+      Resque.enqueue(ProductFeedWorker, id)
+    end
+  end
 end
 
