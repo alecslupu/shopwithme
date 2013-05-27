@@ -3,3 +3,8 @@
 
 en:
   hello: "Hello world"
+  admin:
+    actions:
+      feed:
+        bulk_link: "Bulk enqueue"
+        menu: "Ubdate feed"

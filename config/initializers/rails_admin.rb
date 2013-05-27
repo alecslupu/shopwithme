@@ -1,5 +1,7 @@
 # RailsAdmin config file. Generated on May 17, 2013 19:03
 # See github.com/sferik/rails_admin for more informations
+require Rails.root.join('lib', 'rails_admin','rails_admin_feed.rb')
+
 
 RailsAdmin.config do |config|
 
@@ -34,6 +36,12 @@ RailsAdmin.config do |config|
     nested_set do
       visible do
         %w(Category).include? bindings[:abstract_model].model_name
+      end
+    end
+    feed do
+      # Make it visible only for article model. You can remove this if you don't need.
+      visible do
+        bindings[:abstract_model].model.to_s == "Advertiser"
       end
     end
   end
