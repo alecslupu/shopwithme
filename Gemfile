@@ -44,6 +44,7 @@ gem 'zip'
 gem 'newrelic_rpm'
 
 gem 'sitemap_generator'
+gem 'htmlentities'
 
 
 

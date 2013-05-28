@@ -1,4 +1,5 @@
 require 'net/http'
+require 'htmlentities'
 
 class JobUtilsDemon  # <  Struct.new(:user_id, :user_password)
   # def initialize(args)

@@ -25,14 +25,15 @@ class CategoryDemon < JobUtilsDemon
   end 
 
   def process_categories(elements)
+    coder = HTMLEntities.new
 
-    elements.sort_by! {|e| e["Category Name"] }
+    elements.sort_by! {|e| coder.decode(e["Category Name"]) }
     elements.each do |row|
       cat = Category.where(:id => row["Category ID"].to_i).first_or_initialize
       # cat.id = cat.awid.to_i
-      cat.name = row["Category Name"]
+      cat.name = coder.decode(row["Category Name"])
       cat.is_adult = (row["Is Adult"].to_i == 1)
-      cat.description = row["Category Description"]
+      cat.description = coder.decode(row["Category Description"])
       cat.save
     end
 

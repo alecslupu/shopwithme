@@ -26,19 +26,20 @@ class AdvertiserDemon < JobUtilsDemon
   end 
 
   def process_advertisers(elements)
+    coder = HTMLEntities.new
 
     elements.each_with_index do |row, index|
 
       advertiser = Advertiser.where(:id => row["Merchant ID"].to_i).first_or_initialize 
 
-      advertiser.name             = row["Merchant Name"]
+      advertiser.name             = coder.decode(row["Merchant Name"])
       advertiser.logo             = row["Logo"]
       advertiser.active           = (row["Active"].downcase == "yes")
       advertiser.metadata_version = row["Merchant Metadata Version"].to_i
-      advertiser.strapline        = row["Strapline"]
-      advertiser.description      = row["Description"]
+      advertiser.strapline        = coder.decode(row["Strapline"])
+      advertiser.description      = coder.decode(row["Description"])
 
-      advertiser.category = Category.where(:name => row["Merchant Category"]).first
+      advertiser.category = Category.where(:name => coder.decode(row["Merchant Category"])).first
       advertiser.country = Country.where(:country_code => row["Primary Region"]).first
 
       advertiser.promote_url = "http://www.awin1.com/awclick.php?mid=#{advertiser.id}&id=176745"

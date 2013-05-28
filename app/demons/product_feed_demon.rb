@@ -4,6 +4,8 @@ class ProductFeedDemon < JobUtilsDemon
 
   FIELDS = "merchant_id,merchant_category,merchant_deep_link,merchant_image_url,aw_thumb_url,commission_group,condition,delivery_time,ean,in_stock,isbn,is_for_sale,language,merchant_thumb_url,mpn,parent_product_id,pre_order,product_type,promotional_text,rrp_price,specifications,upc,warranty,web_offer,aw_product_id,merchant_product_id,product_name,display_price,store_price,description,category_id,aw_deep_link,aw_image_url,search_price,currency,delivery_cost,brand_name,brand_id,valid_to,valid_from,stock_quantity,model_number".split(',')
   def process(merchant_id)
+    @coder = HTMLEntities.new
+
     @merchant_id = merchant_id
     get_data
   end
@@ -66,9 +68,9 @@ class ProductFeedDemon < JobUtilsDemon
     product.advertiser          = @advertiser
     product.category            = Category.where(:id => row[FIELDS.index('category_id')].to_i).first
     product.merchant_product_id = row[FIELDS.index('merchant_product_id')].to_i
-    product.name                = row[FIELDS.index('product_name')]
-    product.description         = row[FIELDS.index('description')]
-    product.aw_deep_link        = row[FIELDS.index('aw_deep_link')]
+    product.name                = @coder.decode(row[FIELDS.index('product_name')])
+    product.description         = @coder.decode(row[FIELDS.index('description')])
+    product.aw_deep_link        = @coder.decode(row[FIELDS.index('aw_deep_link')])
     product.aw_image_url        = row[FIELDS.index('aw_image_url')]
     product.aw_thumb_url        = row[FIELDS.index('aw_thumb_url')]
     product.search_price        = row[FIELDS.index('search_price')].to_f
@@ -77,37 +79,37 @@ class ProductFeedDemon < JobUtilsDemon
     product.delivery_cost       = row[FIELDS.index('delivery_cost')].to_f
     product.currency            = row[FIELDS.index('currency')]
     product.valid_to            = row[FIELDS.index('valid_to')]
-    product.valid_from          = row[FIELDS.index('valid_from')]
-    product.stock_quantity      = row[FIELDS.index('stock_quantity')].to_i
-    product.model_number        = row[FIELDS.index('model_number')]
+    product.valid_from          = @coder.decode(row[FIELDS.index('valid_from')])
+    product.stock_quantity      = @coder.decode(row[FIELDS.index('stock_quantity')]).to_i
+    product.model_number        = @coder.decode(row[FIELDS.index('model_number')])
 
-    product.merchant_category   = row[FIELDS.index('merchant_category')]
+    product.merchant_category   = @coder.decode(row[FIELDS.index('merchant_category')])
     product.merchant_deep_link  = row[FIELDS.index('merchant_deep_link')]
     product.merchant_image_url  = row[FIELDS.index('merchant_image_url')]
     product.commission_group    = row[FIELDS.index('commission_group')]
-    product.condition           = row[FIELDS.index('condition')]
+    product.condition           = @coder.decode(row[FIELDS.index('condition')])
     product.delivery_time       = row[FIELDS.index('delivery_time')]
-    product.ean                 = row[FIELDS.index('ean')]
+    product.ean                 = @coder.decode(row[FIELDS.index('ean')])
     product.in_stock            = row[FIELDS.index('in_stock')]
-    product.isbn                = row[FIELDS.index('isbn')]
+    product.isbn                = @coder.decode(row[FIELDS.index('isbn')])
     product.is_for_sale         = row[FIELDS.index('is_for_sale')]
-    product.language            = row[FIELDS.index('language')]
+    product.language            = @coder.decode(row[FIELDS.index('language')])
     product.merchant_thumb_url  = row[FIELDS.index('merchant_thumb_url')]
-    product.mpn                 = row[FIELDS.index('mpn')] 
+    product.mpn                 = @coder.decode(row[FIELDS.index('mpn')])
     product.parent_product_id   = row[FIELDS.index('parent_product_id')]
     product.pre_order           = row[FIELDS.index('pre_order')]
     product.product_type        = row[FIELDS.index('product_type')]
-    product.promotional_text    = row[FIELDS.index('promotional_text')]
+    product.promotional_text    = @coder.decode(row[FIELDS.index('promotional_text')])
     product.rrp_price           = row[FIELDS.index('rrp_price')]
-    product.specifications      = row[FIELDS.index('specifications')]
+    product.specifications      = @coder.decode(row[FIELDS.index('specifications')])
     product.upc                 = row[FIELDS.index('upc')]
-    product.warranty            = row[FIELDS.index('warranty')]
-    product.web_offer           = row[FIELDS.index('web_offer')]
+    product.warranty            = @coder.decode(row[FIELDS.index('warranty')])
+    product.web_offer           = @coder.decode(row[FIELDS.index('web_offer')])
 
     if row[FIELDS.index('brand_id')].to_i > 0 
       brand = Brand.where(:id => row[FIELDS.index('brand_id')].to_i).first_or_create do |b|
         b.id   = row[FIELDS.index('brand_id')].to_i
-        b.name = row[FIELDS.index('brand_name')]
+        b.name = @coder.decode(row[FIELDS.index('brand_name')])
       end
       product.brand = brand  if brand.persisted?
     end 

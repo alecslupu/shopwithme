@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
   scope :random, order("RAND()")
   
   scope :page_with_cached_total_count, lambda {|page_number, total_count|
-    page(page_number).extending {
+    order(:id).page(page_number).extending {
       # open scope to smuggle total_count
       define_method(:total_count) { @total_count = total_count }
     }
