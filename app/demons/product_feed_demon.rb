@@ -79,7 +79,7 @@ class ProductFeedDemon < JobUtilsDemon
     product.delivery_cost       = row[FIELDS.index('delivery_cost')].to_f
     product.currency            = row[FIELDS.index('currency')]
     product.valid_to            = row[FIELDS.index('valid_to')]
-    product.valid_from          = @coder.decode(row[FIELDS.index('valid_from')])
+    product.valid_from          = row[FIELDS.index('valid_from')]
     product.stock_quantity      = @coder.decode(row[FIELDS.index('stock_quantity')]).to_i
     product.model_number        = @coder.decode(row[FIELDS.index('model_number')])
 
