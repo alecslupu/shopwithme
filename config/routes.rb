@@ -29,6 +29,8 @@ ShopWithMe::Application.routes.draw do
     get 'page/:page', :action => :show, :on => :member
   end 
 
+  match '(errors)/:status', to: 'errors#show', constraints: {status: /\d{3}/}
+
 
   # get "brands/show"
   # get "brands/index"

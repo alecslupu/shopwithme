@@ -75,4 +75,6 @@ ShopWithMe::Application.configure do
 
   
   config.action_mailer.delivery_method = :sendmail
+  config.exceptions_app = self.routes
+
 end
