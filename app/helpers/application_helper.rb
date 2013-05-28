@@ -7,6 +7,14 @@ module ApplicationHelper
     return link_to raw(title), product_path(product), defaults.merge(options)
   end
 
+  def avatar_of_product(product, link_options = {}, image_options = {})
+    return if product.nil?
+    default_link_options = { :title => raw(product) }
+    default_image_options = {:title => raw(product), :alt => raw(product)}
+
+    return link_to image_tag(product.aw_image_url, default_image_options.merge(image_options)), product_path(product), default_link_options.merge(link_options)
+  end
+
   def link_to_advertiser(advertiser, type = :short, options = {})
     return 'Merchant name Not Available' if advertiser.nil?
     defaults = {:title => raw(advertiser) }
@@ -15,12 +23,12 @@ module ApplicationHelper
     return link_to raw(title), advertiser_path(advertiser), defaults.merge(options)
   end
 
-  def avatar_of_product(product, link_options = {}, image_options = {})
-    return if product.nil?
-    default_link_options = { :title => raw(product) }
-    default_image_options = {:title => raw(product), :alt => raw(product)}
+  def avatar_of_advertiser(advertiser, link_options = {}, image_options = {})
+    return if advertiser.nil?
+    default_link_options = { :title => raw(advertiser.strapline), :class => 'pull-left' }
+    default_image_options = {:title => raw(advertiser.strapline), :alt => raw(advertiser.strapline)}
 
-    return link_to image_tag(product.aw_image_url, default_image_options.merge(image_options)), product_path(product), default_link_options.merge(link_options)
+    return link_to image_tag(advertiser.logo, default_image_options.merge(image_options)), advertiser_path(advertiser), default_link_options.merge(link_options)
   end
 
   def link_to_brand(brand, type= :short, options ={})

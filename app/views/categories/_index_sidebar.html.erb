@@ -3,7 +3,7 @@
 
 <div class="reviews-item">
   <ul class="inline padded">
-    <% @category.fetch_advertisers.random.limit(9).each do |advertiser| %>
+    <% Advertiser.fetch_by_categories_id(@categories.map(&:id)).random.limit(9).each do |advertiser| %>
       <li><%=avatar_of_advertiser(advertiser)%></li>
     <% end %>
   </ul>

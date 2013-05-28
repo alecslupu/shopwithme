@@ -298,7 +298,8 @@ ul.social li{
   font-family: 'PT Sans', arial, tahoma, sans-serif;
   margin:0;
 } 
-.detail-product h3.title{
+
+.detail-product h3.title .pull-left {
   text-transform: uppercase;
 }
 .detail-product .contact-information{
@@ -369,3 +370,13 @@ ul.depth2 {
 .detail-product > .breadcrumb {
   margin: 20px 0;
 }
+
+
+ul.padded li a{
+  margin: 2px;
+  display: block;
+  float: left;
+  border: 1px solid #000;
+}
+
+.uppercase { text-transform: uppercase; }

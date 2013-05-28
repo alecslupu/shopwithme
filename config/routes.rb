@@ -24,7 +24,7 @@ ShopWithMe::Application.routes.draw do
     get 'page/:page', :action => :show, :on => :member
   end 
 
-  resources :categories, :only => [ :show ] do 
+  resources :categories, :only => [ :show, :index ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
   end 

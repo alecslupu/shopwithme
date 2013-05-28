@@ -2,6 +2,7 @@ class Advertiser < ActiveRecord::Base
   belongs_to :category
   belongs_to :country
   has_many :products, :dependent => :destroy
+  has_many :categories, :through => :products
   has_one :advertiser_feed, :dependent => :destroy 
 
   before_save :fetch_products 
@@ -9,6 +10,9 @@ class Advertiser < ActiveRecord::Base
   
   attr_accessible :active, :click_through, :description, :enabled, :logo, :metadata_version, :name, :strapline, :url
   extend FriendlyId
+
+  scope :random, order("RAND()")
+  
 
   friendly_id :name, use: :slugged
 
@@ -22,6 +26,10 @@ class Advertiser < ActiveRecord::Base
   
   def single_url
     url.split(", ").first
+  end 
+
+  def self.fetch_by_categories_id(category_ids)
+    joins(:categories).group(:id).where(['categories.id IN (?)', category_ids])
   end 
 
   # scope :enabled, where(:enabled => true)
