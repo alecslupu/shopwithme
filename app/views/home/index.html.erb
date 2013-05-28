@@ -3,7 +3,7 @@
 
 <%= render 'products/search_form' %>
 <div class="main_content">
-  <%= Rails.cache.fetch('featured_products', :expires => 5.hours ){ render 'featured_products' } %>
+  <%= Rails.cache.fetch('featured_products', :expires_in => 5.hours ){ render 'featured_products' } %>
 
 <%
 =begin %>

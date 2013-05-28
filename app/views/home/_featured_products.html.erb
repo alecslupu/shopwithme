@@ -3,7 +3,7 @@
   <span class="pull-right"><a href="<%=products_path%>" title="View all products">View all products</a></span>
 </h3>
 
-<% categories = Category.random.with_products.limit(12)%>
+<% categories = Category.for_homepage(12)%>
 <div class="container-fluid">
   <% categories.each_with_index do |category, index| %>
     <% if (index % 4) == 0 %> <div class="row-fluid product_listing"> <% end %>
@@ -19,6 +19,7 @@
           <p><%=product.short_description%></p>
         </div>
       </div>
-    <% if (index % 4) == 3 %> </div>  <% end %>
+    <% if (index % 4) == 3 %></div>  <% end %>
   <% end %>
+  <% if (categories.size % 4) < 3 && (categories.size % 4) != 0 %></div>  <% end %>
 </div>

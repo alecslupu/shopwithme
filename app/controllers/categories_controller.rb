@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
-    product_count = Rails.cache.fetch("all_category_#{@category.id}_products_count") { @category.products.size }
+    product_count = Rails.cache.fetch("all_category_#{@category.id}_products_count",:expires_in => 6.hours) { @category.products.size }
     @products = @category.products.page_with_cached_total_count(params[:page], product_count) 
   end
 

@@ -1,5 +1,6 @@
 module ApplicationHelper
   def link_to_product(product, type = :short, options = {})
+    return if product.nil?
     defaults = {:title => raw(product) }
 
     title = (type == :short ? product.short_title : product)
@@ -7,6 +8,7 @@ module ApplicationHelper
   end
 
   def link_to_advertiser(advertiser, type = :short, options = {})
+    return 'Merchant name Not Available' if advertiser.nil?
     defaults = {:title => raw(advertiser) }
 
     title = (type == :short ? advertiser.short_title : advertiser)
@@ -14,6 +16,7 @@ module ApplicationHelper
   end
 
   def avatar_of_product(product, link_options = {}, image_options = {})
+    return if product.nil?
     default_link_options = { :title => raw(product) }
     default_image_options = {:title => raw(product), :alt => raw(product)}
 

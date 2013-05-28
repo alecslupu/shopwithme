@@ -15,6 +15,9 @@ class Category < ActiveRecord::Base
 
   scope :random, order("RAND()")
   scope :with_products, where('products_count > 0')
+  scope :no_adult, where(:is_adult => 0)
+  scope :for_homepage, lambda { |limit| random.no_adult.with_products.limit(limit) }
+  
 
   def to_s
     name
