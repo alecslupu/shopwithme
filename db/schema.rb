@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525173859) do
+ActiveRecord::Schema.define(:version => 20130529210035) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -184,5 +184,35 @@ ActiveRecord::Schema.define(:version => 20130525173859) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
+
+  create_table "random_advertiser_products", :force => true do |t|
+    t.integer  "advertiser_id"
+    t.integer  "product_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "random_advertiser_products", ["advertiser_id"], :name => "index_random_advertiser_products_on_advertiser_id"
+  add_index "random_advertiser_products", ["product_id"], :name => "index_random_advertiser_products_on_product_id"
+
+  create_table "random_brand_products", :force => true do |t|
+    t.integer  "brand_id"
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "random_brand_products", ["brand_id"], :name => "index_random_brand_products_on_brand_id"
+  add_index "random_brand_products", ["product_id"], :name => "index_random_brand_products_on_product_id"
+
+  create_table "random_category_products", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "random_category_products", ["category_id"], :name => "index_random_category_products_on_category_id"
+  add_index "random_category_products", ["product_id"], :name => "index_random_category_products_on_product_id"
 
 end

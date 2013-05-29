@@ -2,6 +2,7 @@ class Advertiser < ActiveRecord::Base
   belongs_to :category
   belongs_to :country
   has_many :products, :dependent => :destroy
+  has_many :random_products, :class_name => 'RandomAdvertiserProduct', :dependent => :destroy
   has_many :categories, :through => :products
   has_one :advertiser_feed, :dependent => :destroy 
 
@@ -18,6 +19,15 @@ class Advertiser < ActiveRecord::Base
 
   friendly_id :name, use: :slugged
   paginates_per 5
+
+  def compute_random_products(how_many)
+    transaction do 
+      random_products.clear
+      products.random.limit(how_many).each do |product|
+        random_products.create(:product => product)
+      end
+    end
+  end
 
   def to_s 
     name

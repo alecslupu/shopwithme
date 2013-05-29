@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
   attr_accessible :name, :is_adult, :description #:depth, :lft, , :parent_id, :rgt
   has_many :products
+  has_many :random_products, :class_name => 'RandomCategoryProduct', :dependent => :destroy
   has_many :advertisers, :through => :products
   
   extend FriendlyId
@@ -32,4 +33,13 @@ class Category < ActiveRecord::Base
   def short_title 
     name.split(" ").first(5).join(" ")
   end 
+  
+  def compute_random_products(how_many)
+    transaction do 
+      random_products.clear
+      products.random.limit(how_many).each do |product|
+        random_products.create(:product => product)
+      end
+    end
+  end
 end

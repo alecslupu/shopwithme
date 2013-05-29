@@ -4,8 +4,8 @@
 </h3>
 <div class="container-fluid">
   <div class="row-fluid product_listing">
-
-    <% advertiser.products.include_all.random.limit(4).each do |product|%>
+    <% advertiser.random_products.includes(:product => [:advertiser, :category, :brand]).limit(4).each do |random_product|%>
+      <% product = random_product.product %>
       <div class="span3">
         <div class="item">
           <%= avatar_of_product(product, {}, {:class => "img"})%>
