@@ -9,8 +9,8 @@ module ApplicationHelper
 
   def avatar_of_product(product, link_options = {}, image_options = {})
     return if product.nil?
-    default_link_options = { :title => product) }
-    default_image_options = {:title => product), :alt => (product)}
+    default_link_options = { :title => product }
+    default_image_options = {:title => product, :alt => (product)}
 
     return link_to image_tag(product.aw_image_url, default_image_options.merge(image_options)), product_path(product), default_link_options.merge(link_options)
   end
