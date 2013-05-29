@@ -36,9 +36,9 @@ class SitemapWorker < ResqueJob
         end
       end 
 
-      # Advertiser.page(1).num_pages.times do |index|
-      #   add "#{advertisers_path}/page/#{index}", :changefreq => 'daily', :priority => 0.9
-      # end 
+      Advertiser.page(1).num_pages.times do |index|
+        add "#{advertisers_path}/page/#{index}" #, :changefreq => 'daily', :priority => 0.9
+      end 
 
 
       # Shall we add Merchants 

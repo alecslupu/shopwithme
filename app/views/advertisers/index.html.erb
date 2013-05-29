@@ -1,2 +1,16 @@
-<h1>Advertisers#index</h1>
-<p>Find me in app/views/advertisers/index.html.erb</p>
+<% content_for(:page_title) { "ShopWithMe - Listing all the merchants" } %>
+<% content_for(:page_description) { "ShopWithMe - Listing all the merchants" } %>
+
+<%= render 'products/search_form' %>
+
+<div class="main_content detail-product">
+  <h3 class="title uppercase">Merchants</h3>
+
+  <% if @advertisers.size > 0 %>
+    <%= render @advertisers %>
+    <%= paginate @advertisers, :window => 2 %>
+  <% else %>
+    <%= render 'advertisers/no_advertisers' %>
+  <% end %>
+
+</div>

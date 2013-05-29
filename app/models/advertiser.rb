@@ -12,9 +12,12 @@ class Advertiser < ActiveRecord::Base
   extend FriendlyId
 
   scope :random, order("RAND()")
+  scope :alphabetically, order(:name)
+  scope :with_products, where('products_count > 0')
   
 
   friendly_id :name, use: :slugged
+  paginates_per 5
 
   def to_s 
     name

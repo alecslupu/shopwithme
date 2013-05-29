@@ -28,8 +28,11 @@
               <li<%= ' class=active' if  params[:controller] == 'home'%>>
                 <a href="<%=root_path%>">Home</a>
               </li>
-              <li<%= ' class=active' if  params[:controller] == 'advertiser'%>>
+              <li<%= ' class=active' if  params[:controller] == 'categories'%>>
                 <a href="<%=categories_path%>">Categories</a>
+              </li>
+              <li<%= ' class=active' if  params[:controller] == 'advertisers'%>>
+                <a href="<%=advertisers_path%>">Merchants</a>
               </li>
               <!--<li<%= ' class=active' if  params[:controller] == 'brands'%>>
                 <a href="classifieds.html">Classifieds</a>

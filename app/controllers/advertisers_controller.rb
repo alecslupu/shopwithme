@@ -6,5 +6,6 @@ class AdvertisersController < ApplicationController
   end
 
   def index
+    @advertisers = Advertiser.alphabetically.with_products.page(params[:page])
   end
 end

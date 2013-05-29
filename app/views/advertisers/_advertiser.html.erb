@@ -1,0 +1,22 @@
+<h3 class="title">
+  <span class="pull-left"><%=advertiser%></span>
+  <span class="pull-right"><%= link_to('View products',advertiser_path(advertiser), :title => advertiser)%></span>
+</h3>
+<div class="container-fluid">
+  <div class="row-fluid product_listing">
+
+    <% advertiser.products.include_all.random.limit(4).each do |product|%>
+      <div class="span3">
+        <div class="item">
+          <%= avatar_of_product(product, {}, {:class => "img"})%>
+          <%= link_to_product(product, :short , { :class => "title" }) %>
+          <% if product.newer? %><span class="label label-success">new</span><br/><% end %>
+          in <%= link_to_category(product.category,:short, {:class => "subinfo"}) %>
+          at <%= link_to_advertiser(product.advertiser, :short, {:class => "subinfo"}) %>
+          <p><%=product.short_description%></p>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
