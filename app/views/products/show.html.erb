@@ -47,7 +47,7 @@
       <div class="contact-information">
         <h5>MERCHANT INFORMATION</h5>
         <address>       
-          <i><%= (@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
+          <i><%= raw(@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
         </address>
         <%= link_to 'Details', visit_product_path(@product), {
           :class => 'btn btn-charlie', 

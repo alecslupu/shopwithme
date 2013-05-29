@@ -1,9 +1,8 @@
-
-<h3 class="title nmb">MERCHANTS IN THIS CATEGORY</h3>
+<h3 class="title nm">MERCHANTS IN THIS CATEGORY</h3>
 
 <div class="reviews-item">
   <ul class="inline padded">
-    <% Rails.cache.fetch("advertisers_for_#{@category.id}_category", :expires_in => 3.hours) do %>
+    <% cache("advertisers_for_#{@category.id}_category", :expires_in => 3.hours) do %>
       <% @category.fetch_advertisers.random.limit(9).each do |advertiser| %>
         <li><%=avatar_of_advertiser(advertiser)%></li>
       <% end %>
@@ -11,5 +10,9 @@
   </ul>
 </div>
 
-<%= Rails.cache.fetch('sidebar_categories', :expires => 24.hours) {render 'layouts/sidebar_categories'} %>
+
+<% cache('sidebar_categories', :expires => 24.hours) do %>
+  <%= render 'layouts/sidebar_categories' %>
+<% end %>
+
 
