@@ -7,7 +7,7 @@
 <div class="container-fluid">
   <% categories.each_with_index do |category, index| %>
     <% if (index % 4) == 0 %> <div class="row-fluid product_listing"> <% end %>
-      <% product = category.products.random.first %>
+      <% product = category.random_products.first.product %>
 
       <div class="span3">
         <div class="item">

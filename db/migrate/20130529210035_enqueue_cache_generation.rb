@@ -1,7 +1,7 @@
 class EnqueueCacheGeneration < ActiveRecord::Migration
   def up
     Category.with_products.each do |c|
-      c.compute_random_products(10)
+      c.compute_random_products(18)
       Resque.enqueue_at(4.hours.from_now,CategoryProductRandomCacheWorker, c.id)
     end 
     Brand.with_products.each do |c|
