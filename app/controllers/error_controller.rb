@@ -1,7 +1,9 @@
 class ErrorController < ApplicationController
 
-  layout :error
+  layout 'error'
+
   def show
-    render action: request.path[1..-1]
+    template = request.path[1..-1]
+    render template , :layout => 'error', :status => template
   end 
 end

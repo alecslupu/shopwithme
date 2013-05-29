@@ -8,7 +8,12 @@ class AdvertiserProductRandomCacheWorker < ResqueJob
     a.compute_random_products(10)
 
     Resque.remove_delayed(AdvertiserProductRandomCacheWorker, advertiser_id)
-    Resque.enqueue_at(3.hours.from_now, AdvertiserProductRandomCacheWorker, advertiser_id)
+
+    if a.products_count > 30000
+      Resque.enqueue_at(a.products_count.seconds.from_now, AdvertiserProductRandomCacheWorker, advertiser_id)
+    else
+      Resque.enqueue_at(4.hours.from_now, AdvertiserProductRandomCacheWorker, advertiser_id)
+    end
   end
   
 end
