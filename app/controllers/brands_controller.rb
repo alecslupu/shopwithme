@@ -14,5 +14,6 @@ class BrandsController < ApplicationController
     
   # end
   def index
+    @brands = Brand.alphabetically.with_products.page(params[:page])
   end
 end

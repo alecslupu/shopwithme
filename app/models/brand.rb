@@ -6,6 +6,10 @@ class Brand < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  scope :with_products, where('products_count > 0')
+  scope :alphabetically, order(:name)
+  paginates_per 5
+
   def to_s 
     name
   end
@@ -13,8 +17,8 @@ class Brand < ActiveRecord::Base
   def short_title 
     name.split(" ").first(5).join(" ")
   end
-
-  # scope :with_products, where('products_count > 0')
+  
+  # 
   # scope :random, with_products.order("Rand()")
-  # scope :ordered, with_products.order(:name)
+  # scope :ordered, with_products.
 end

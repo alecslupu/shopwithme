@@ -3,8 +3,11 @@
 
 <div class="reviews-item">
   <ul class="inline padded">
-    <% Advertiser.fetch_by_categories_id(@categories.map(&:id)).random.limit(9).each do |advertiser| %>
-      <li><%=avatar_of_advertiser(advertiser)%></li>
+    <% categories = @categories.map(&:id) %>
+    <% Rails.cache.fetch("advertisers_for_#{categories.join("_")}_categories", :expires_in => 4.hours) do %>
+      <% Advertiser.fetch_by_categories_id(@categories.map(&:id)).random.limit(9).each do |advertiser| %>
+        <li><%=avatar_of_advertiser(advertiser)%></li>
+      <% end %>
     <% end %>
   </ul>
 </div>

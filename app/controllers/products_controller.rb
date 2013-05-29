@@ -7,9 +7,9 @@ class ProductsController < ApplicationController
 
   def show
     begin
-      @product = Product.find(params[:id])
+      @product = Product.cached_find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
-      render 'error/404'
+      render 'error/404', :layout => 'error', :status => :not_found
     end
   end 
 
