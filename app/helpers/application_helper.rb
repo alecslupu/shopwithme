@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def avatar_of_product(product, link_options = {}, image_options = {})
-    return if product.nil?
+    return if product.nil? || product.aw_image_url.blank?
     default_link_options = { :title => product }
     default_image_options = {:title => product, :alt => (product)}
 
