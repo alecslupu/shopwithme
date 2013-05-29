@@ -16,7 +16,7 @@ class SitemapWorker < ResqueJob
       end
 
       Category.page(1).num_pages.times do |index|
-        add "#{categories_path}/page/#{index}", :changefreq => 'daily', :priority => 0.9
+        add "#{categories_path}/page/#{index}" #, :changefreq => 'daily', :priority => 0.9
       end
 
       # Shall we add brands 
@@ -49,7 +49,7 @@ class SitemapWorker < ResqueJob
       end
 
       Product.page(1).num_pages.times do |index|
-        add "#{products_path}/page/#{index}", :changefreq => 'daily', :priority => 0.9
+        add "#{products_path}/page/#{index}"#, :changefreq => 'daily', :priority => 0.9
       end 
 
     end

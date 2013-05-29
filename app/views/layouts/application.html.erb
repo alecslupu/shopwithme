@@ -2,8 +2,8 @@
 <html>
 <head>
     <% if Rails.env == 'production' %>
-      <title><%= raw('ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : "" )) %></title>
-      <meta name="description" content="<%= raw('ShopWithMe' + (content_for?(:page_description) ? ' - ' + yield(:page_description) : "") )%>"/>
+      <title><%= ('ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : "" )) %></title>
+      <meta name="description" content="<%= ('ShopWithMe' + (content_for?(:page_description) ? ' - ' + yield(:page_description) : "") )%>"/>
       <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -20,8 +20,8 @@
 
     <% elsif !devise_controller? %>
 
-      <title><%= raw( 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : (raise "no title" )) ) %></title>
-      <meta name="description" content="<%= raw(content_for?(:page_description) ? 'ShopWithMe - ' + yield(:page_description) : ( raise "no page_description" )) %>"/>
+      <title><%= ( 'ShopWithMe' + (content_for?(:page_title) ? ' - ' + yield(:page_title) : (raise "no title" )) ) %></title>
+      <meta name="description" content="<%= (content_for?(:page_description) ? 'ShopWithMe - ' + yield(:page_description) : ( raise "no page_description" )) %>"/>
     <% end %>
     
   <%= stylesheet_link_tag    "application", :media => "all" %>

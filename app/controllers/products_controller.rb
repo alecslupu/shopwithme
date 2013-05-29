@@ -6,7 +6,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    begin
+      @product = Product.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render 'error/404'
+    end
   end 
 
   def visit

@@ -1,25 +1,25 @@
 <% content_for(:page_title) { "#{@product.name} by #{@product.advertiser}" } %>
 <% content_for(:page_description) { "View #{@product.name}"} %>
 <div class="main_content detail-product">           
-  <h3 class="title"><%=raw(@product.category)%></h3>      
+  <h3 class="title"><%=(@product.category)%></h3>      
   <div class="row-fluid">
     <div class="span4">
       <%= link_to(image_tag(@product.aw_image_url, {
-        :alt => raw(@product.name),
-        :title => raw(@product.name),
+        :alt => (@product.name),
+        :title => (@product.name),
       }), @product.merchant_image_url, {
         :class => "thumbnail", 
-        :title => raw(@product.name),
+        :title => (@product.name),
         :"data-fancybox-group" => "group1"
       } )%>
       <ul class="thumbnails small">               
         <li class="span4">
           <%= link_to(image_tag(@product.aw_image_url, {
-        :alt => raw(@product.name),
-        :title => raw(@product.name),
+        :alt => (@product.name),
+        :title => (@product.name),
       }), @product.merchant_image_url, {
         :class => "thumbnail", 
-        :title => raw(@product.name),
+        :title => (@product.name),
         :"data-fancybox-group" => "group1"
       } )%>
         </li>
@@ -40,18 +40,18 @@
     </div> -->
 
     <div class="span8">
-      <h5><!-- <span class="label label-important">10%</span> --> <%= raw(@product.name)%></h5>
-      <%= raw(@product.description)%>
+      <h5><!-- <span class="label label-important">10%</span> --> <%= (@product.name)%></h5>
+      <%= (@product.description)%>
       <h4 class="clearfix"><strong>Price: 
           <span class="label label-important price"><%=@product.price%> <%=@product.currency%></span></strong></h4>                
       <div class="contact-information">
         <h5>MERCHANT INFORMATION</h5>
         <address>       
-          <i><%= raw(@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
+          <i><%= (@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
         </address>
         <%= link_to 'Details', visit_product_path(@product), {
           :class => 'btn btn-charlie', 
-          :title => raw(@product.name)
+          :title => (@product.name)
         }  %>
 <% 
 =begin %> <p><strong>Contact Name:</strong> Adam Samdllor<br/>
@@ -76,7 +76,7 @@
       </ul>              
       <div class="tab-content">
         <div class="tab-pane active" id="specs">
-          <%= @product.specifications.blank? ? "There are no specifications available" : raw(@product.specifications)%>
+          <%= @product.specifications.blank? ? "There are no specifications available" : (@product.specifications)%>
         </div>
         <% 
 =begin %>
