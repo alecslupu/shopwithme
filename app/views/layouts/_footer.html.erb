@@ -1,7 +1,8 @@
 <div class="container-fluid footer">      
   <div class="row-fluid">         
      <div class="span3">   
-      <!-- 
+<%
+=begin %>
       <h4 class="">Information</h4>
       <ul>
         <li><a href="#">About Us</a></li>
@@ -9,10 +10,12 @@
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms &amp; Conditions</a></li>
       </ul>
-      -->
+<%
+=end %>
     </div>
     <div class="span3">
-      <!-- 
+<%
+=begin %>
       <h4>My Account</h4>
       <ul>
         <li><a href="#">My Account</a></li>
@@ -20,14 +23,20 @@
         <li><a href="#">Wish List</a></li>
         <li><a href="#">Newsletter</a></li>
       </ul>
-      -->
+<%
+=end %>
     </div>
     <div class="span3">
-      <!-- <h4>Connect with us</h4>
+      
+<%
+=begin %>
+      <h4>Connect with us</h4>
       <a href="#"><img src="img/social-facebook.png" alt="Facebook" /></a>
       <a href="#"><img src="img/social-twitter.png" alt="Twitter" /></a>
       <a href="#"><img src="img/social-rss.png" alt="RSS" /></a>
-      <a href="#"><img src="img/social-flickr.png" alt="Flickr" /></a> -->
+      <a href="#"><img src="img/social-flickr.png" alt="Flickr" /></a> 
+      <%
+=end %>
     </div>
     <div class="span3">
       <div class="company_info">
@@ -39,7 +48,8 @@
 
 <%= javascript_include_tag "application" %>
 
-<!-- 
+<%
+=begin %>
 <hr>
 <footer>
     <div class="clearfix addthis_toolbox addthis_default_style ">
@@ -52,5 +62,6 @@
     <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51993ef2289b1b22"></script>
 
-</footer>
--->
+</footer>  
+<%
+=end %>

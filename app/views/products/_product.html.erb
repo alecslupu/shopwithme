@@ -4,20 +4,28 @@
       <div class="featured-item">
         <div class="span4">
           <%= avatar_of_product(product, {}, {:class => "img"})%>
-          <!--<div class="rate">
+
+<%
+=begin %> 
+<div class="rate">
             <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
             <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
             <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
             <img src="img/products/img_rateMiniStarOn.png" alt="Star On">
             <img src="img/products/img_rateMiniStarOff.png" alt="Star Off">
           </div>  
-          -->
+<%
+=end %>
         </div>
         <div class="span8">
           <h5><%= link_to_product(product, :short , { :class => "title" }) %></h5>
           in  <%= link_to_category(product.category,:short, {:class => "subinfo"}) %>
-          <p><%=(product.short_description(20)) %></p>
-          <!-- <i>(0 review)</i> -->
+          <p><%=(product.short_description(20)) %></p> 
+          
+<%
+=begin %>   <i>(0 review)</i> 
+<%
+=end %>
         </div>
       </div>
     </div>

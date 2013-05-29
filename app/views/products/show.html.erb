@@ -4,6 +4,8 @@
   <h3 class="title"><%=(@product.category)%></h3>      
   <div class="row-fluid">
     <div class="span4">
+      <% unless @product.aw_image_url.blank? %>
+
       <%= link_to(image_tag(@product.aw_image_url, {
         :alt => (@product.name),
         :title => (@product.name),
@@ -12,21 +14,27 @@
         :title => (@product.name),
         :"data-fancybox-group" => "group1"
       } )%>
+      <% end %>
       <ul class="thumbnails small">               
         <li class="span4">
-          <%= link_to(image_tag(@product.aw_image_url, {
+          <% unless @product.aw_image_url.blank? %>
+            <%= link_to(image_tag(@product.aw_image_url, {
         :alt => (@product.name),
         :title => (@product.name),
       }), @product.merchant_image_url, {
         :class => "thumbnail", 
         :title => (@product.name),
         :"data-fancybox-group" => "group1"
-      } )%>
+      } )%>  
+          <% end %>
+          
         </li>
       </ul> 
     </div>
 
-   <!--  <div class="span8">
+<%
+=begin %> 
+<div class="span8">
       <ul class="social pull-right">
         <li>                  
           <div class="fb-like" send="false" layout="button_count" data-href="example.org"></div>
@@ -37,10 +45,18 @@
           <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         </li>
       </ul>
-    </div> -->
+    </div> 
+
+    <%
+=end %>
 
     <div class="span8">
-      <h5><!-- <span class="label label-important">10%</span> --> <%= (@product.name)%></h5>
+      <h5>
+        <%
+=begin %> <span class="label label-important">10%</span> 
+<%
+=end %>  
+  <%= (@product.name)%></h5>
       <%= (@product.description)%>
       <h4 class="clearfix"><strong>Price: 
           <span class="label label-important price"><%=@product.price%> <%=@product.currency%></span></strong></h4>                

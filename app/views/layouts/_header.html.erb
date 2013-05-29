@@ -2,14 +2,16 @@
     <div class="row-fluid">
       <div class="span12">
         <center style="color: #FFF;">The website is going through a rebranding process</center>
-        <!-- 
+<%
+=begin %>
         <a class="brand pull-left" href="index.html"><img src="img/logo.png" alt="e-Classifieds" title="e-Classifieds"></a>
         <ul class="nav nav-pills pull-right">
           <li class="phone"><img src="img/phone.png" alt="" /></li>
           <li><a href="#"><i class="icon-user icon-white"></i> Sign In</a></li>
           <li><a href="#"><i class="icon-edit icon-white"></i> Create your profile</a></li>
         </ul>
-      -->
+<%
+=end %>
       </div>
     </div>
   </div>
@@ -37,6 +39,8 @@
               <li<%= ' class=active' if  params[:controller] == 'brands'%>>
                 <a href="<%=brands_path%>">Brands</a>
               </li>
+              <%
+=begin %>
               <!--<li<%= ' class=active' if  params[:controller] == 'brands'%>>
                 <a href="classifieds.html">Classifieds</a>
               </li>
@@ -44,55 +48,11 @@
               <li><a href="#">Articles</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="#">Contact Us</a></li>
-            -->
+<%
+=end %>
             </ul>
           </div>
         </div>
       </div>
     </div>    
-  </div>  
-<!--
-  To be deleted
-
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-      </button>
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li><a href="">Home</a></li>
-          <li><a href="<%=advertisers_path%>">Merchants</a></li>
-       
-          <li><a href="<%=brands_path%>">Brands</a></li>
-          <%
-=begin %>
-           <li class="dropdown"><a href="#" class="dropdown-toggle"><b class="caret"></b>Dropdown </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a>
-              </li>
-              <li><a href="#">Another action</a>
-              </li>
-              <li><a href="#">Something else here</a>
-              </li>
-              <li class="divider"></li>
-              <li class="nav-header">Nav header</li>
-              <li><a href="#">Separated link</a>
-              </li>
-              <li><a href="#">One more separated link</a>
-              </li>
-            </ul>
-          </li>
-          <%
-=end %>
-        </ul>
-        <!-- 
-        <form class="navbar-form pull-right">
-          <input class="search-query" placeholder="Search" type="text">
-        </form>
-      --><!--
-      </div>
-    </div>
-  </div>
-</div>
--->
+  </div> 
