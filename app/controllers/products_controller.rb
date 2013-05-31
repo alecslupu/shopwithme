@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :fix_missing_products , :only => :show
+  before_filter :fix_missing_products , :only => [ :show, :visit ]
 
 
   def index 
