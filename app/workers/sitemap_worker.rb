@@ -24,9 +24,9 @@ class SitemapWorker < ResqueJob
         add brand_path(brand), lastmod: brand.updated_at
       end 
 
-      # Brand.page(1).num_pages.times do |index|
-      #   add "#{brands_path}/page/#{index}", :changefreq => 'daily', :priority => 0.9
-      # end 
+      Brand.page(1).num_pages.times do |index|
+        add "#{brands_path}/page/#{index}", :changefreq => 'daily', :priority => 0.9
+      end 
 
 
       # Shall we add Merchants 
