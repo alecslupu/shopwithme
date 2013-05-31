@@ -1,7 +1,7 @@
 class Brand < ActiveRecord::Base
   has_many :products
   has_many :random_products, :class_name => 'RandomBrandProduct', :dependent => :destroy
-
+  after_commit :flush_cache
   attr_accessible :name
 
   extend FriendlyId
@@ -29,7 +29,12 @@ class Brand < ActiveRecord::Base
     end
   end
 
-  # 
-  # scope :random, with_products.order("Rand()")
-  # scope :ordered, with_products.
+  def self.cached_find(id)
+    Rails.cache.fetch([name, id]) { find(id) }
+  end
+
+  private 
+  def flush_cache
+    Rails.cache.delete([self.class.name, id])
+  end
 end
