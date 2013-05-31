@@ -1,9 +1,9 @@
-<div class="listing-item">
+<div class="listing-item" itemscope itemtype="http://schema.org/Product">
   <div class="row-fluid">
     <div class="span7">
       <div class="featured-item">
         <div class="span4">
-          <%= avatar_of_product(product, {}, {:class => "img"})%>
+          <%= avatar_of_product(product, {}, {:class => "img", :itemprop=>"image" })%>
 
 <%
 =begin %> 
@@ -18,9 +18,9 @@
 =end %>
         </div>
         <div class="span8">
-          <h5><%= link_to_product(product, :short , { :class => "title" }) %></h5>
+          <h5><%= link_to_product(product, :short , { :class => "title", :itemprop=>"name" }) %></h5>
           in  <%= link_to_category(product.category,:short, {:class => "subinfo"}) %>
-          <p><%=(product.short_description(20)) %></p> 
+          <p itemprop="description"><%=(product.short_description(20)) %></p> 
           
 <%
 =begin %>   <i>(0 review)</i> 
