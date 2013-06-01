@@ -14,5 +14,5 @@
 /log/*.log
 /tmp
 public/sitemaps/
-solr/data/
-solr/pids/
+solr/data/*
+solr/pids/*

@@ -29,9 +29,6 @@ set :repository, "git@github.com:alecslupu/shopwithme.git"
 
 set :port, 22222
 
-
-
-
 namespace :deploy do
   desc "Tell Passenger to restart the app."
   task :restart do
@@ -60,9 +57,22 @@ namespace :deploy do
     run "rm -r #{release_path}/public/assets"
     run "cd #{release_path}; rake RAILS_ENV=#{rails_env} assets:precompile"
   end
+  task :solr, :roles => :web, :except => { :no_release => true } do 
+    run "rm -r #{release_path}/solr/data"
+    run "rm -r #{release_path}/solr/pids"
+    run "ln -nfs #{shared_path}/solr/data #{release_path}/solr/data"
+    run "ln -nfs #{shared_path}/solr/pids #{release_path}/solr/pids"
+  end 
+  task :stop_solr, :roles => :web , :except => { :no_release => true } do 
+    run "cd #{current_path}; rake sunspot:solr:stop"
+  end 
+  task :start_solr, :roles => :web , :except => { :no_release => true } do 
+    run "cd #{current_path}; rake sunspot:solr:start"
+  end 
 end
 
-after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile'
+# before 'deploy:update_code', 'deploy:stop_solr'
+after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile', 'deploy:start_solr'
 # after "deploy:update",  "deploy:cleanup"
 before 'deploy:create_symlink', 'deploy:permission_fix'
 
