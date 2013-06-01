@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
       :referrer => request.referer, 
       :user_agent => request.user_agent, 
       :ip => request.remote_ip
-    }) if request.referer.start_with?(root_url)
+    }) unless request.referer.start_with?(root_url)
 
   end 
 
