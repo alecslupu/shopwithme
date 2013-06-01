@@ -1,6 +1,6 @@
 ShopWithMe::Application.routes.draw do
   
-  get "search/index", :as => :search
+  get "search",:action => :index, :controller => :search, :as => :search
 
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
