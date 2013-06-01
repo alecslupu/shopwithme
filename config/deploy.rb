@@ -9,7 +9,7 @@ role :web, application
 role :db,  application, :primary => true
 
 set :user, "root"
-
+# set :bundle_flags, "--deployment --quiet --binstubs"
 
 # the user whch is running the server
 # set :user, "www-data"
@@ -58,21 +58,28 @@ namespace :deploy do
     run "cd #{release_path}; rake RAILS_ENV=#{rails_env} assets:precompile"
   end
   task :solr, :roles => :web, :except => { :no_release => true } do 
-    run "rm -r #{release_path}/solr/data"
-    run "rm -r #{release_path}/solr/pids"
+    run "if [ -d #{release_path}/solr/data ]; then rm -r #{release_path}/solr/data ; fi "
+    run "if [ -d #{release_path}/solr/pids ]; then rm -r #{release_path}/solr/pids ; fi "
     run "ln -nfs #{shared_path}/solr/data #{release_path}/solr/data"
     run "ln -nfs #{shared_path}/solr/pids #{release_path}/solr/pids"
   end 
   task :stop_solr, :roles => :web , :except => { :no_release => true } do 
-    run "cd #{current_path}; rake sunspot:solr:stop"
+    run "cd #{current_path}; rake RAILS_ENV=#{rails_env} sunspot:solr:stop"
   end 
   task :start_solr, :roles => :web , :except => { :no_release => true } do 
-    run "cd #{current_path}; rake sunspot:solr:start"
+    run "cd #{current_path}; rake RAILS_ENV=#{rails_env} sunspot:solr:start"
+  end
+  task :stop_resque, :roles => :web , :except => { :no_release => true } do 
+    run "ps -e -o pid,command | grep  resque  | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT"
   end 
+  task :start_resque, :roles => :web , :except => { :no_release => true } do 
+    run "cd #{current_path}; COUNT=2 BACKGROUND=yes RAILS_ENV=#{rails_env} rake resque:workers "
+  end
 end
 
-# before 'deploy:update_code', 'deploy:stop_solr'
-after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile', 'deploy:start_solr'
+# before 'deploy:update_code', ''
+after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile' , 'deploy:solr'
 # after "deploy:update",  "deploy:cleanup"
-before 'deploy:create_symlink', 'deploy:permission_fix'
+before 'deploy:create_symlink' , 'deploy:permission_fix', 'deploy:stop_solr'
+after 'deploy:create_symlink', 'deploy:start_solr', 'deploy:start_resque'
 

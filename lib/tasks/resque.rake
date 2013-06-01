@@ -5,7 +5,6 @@ require 'resque_scheduler/tasks'
 namespace :resque do
   puts "Loading Rails environment for Resque"
   task :setup => :environment do
-    ENV['QUEUE'] = '*'
 
     require 'resque'
     require 'resque_scheduler'
