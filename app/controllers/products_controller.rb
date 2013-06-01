@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   def show
     begin
       @product = Product.cached_find(params[:id])
-      log_product_view(@product) unless product.nil?
+      log_product_view(@product) unless @product.nil?
     rescue ActiveRecord::RecordNotFound => e
       render 'error/404', :layout => 'error', :status => :not_found
     end
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
       :referrer => request.referer, 
       :user_agent => request.user_agent, 
       :ip => request.remote_ip
-    }) unless request.referer.blank? && request.referer.start_with?(root_url)
+    }) unless !request.referer.nil? && request.referer.start_with?(root_url)
 
   end 
 
