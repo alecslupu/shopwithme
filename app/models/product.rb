@@ -2,6 +2,11 @@ class Product < ActiveRecord::Base
   belongs_to :advertiser, :counter_cache => true
   belongs_to :category, :counter_cache => true
   belongs_to :brand, :counter_cache => true
+  has_many :visit_logs, :class_name => 'ProductVisitLog',:dependent => :destroy
+  has_many :display_logs, :class_name => 'ProductDisplayLog',:dependent => :destroy
+
+
+
   attr_accessible :aw_deep_link, :aw_image_url, :aw_product_id, :aw_thumb_url, :currency, :delivery_cost, :description, :merchant_product_id, :model_number, :name, :search_price, :stock_quantity, :valid_from, :valid_to, :merchant_category, :merchant_deep_link, :merchant_image_url, :commission_group, :condition, :delivery_time, :ean,:in_stock,:isbn,:is_for_sale,:language,:merchant_thumb_url,:mpn, :pre_order, :product_type, :promotional_text, :upc,:warranty,:parent_product_id, :rrp_price, :web_offer, :specifications
   after_commit :flush_cache
 

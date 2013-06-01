@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529210035) do
+ActiveRecord::Schema.define(:version => 20130601214741) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -118,6 +118,27 @@ ActiveRecord::Schema.define(:version => 20130529210035) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "product_display_logs", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "user_agent"
+    t.string   "ip"
+    t.text     "referrer"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "product_display_logs", ["product_id"], :name => "index_product_display_logs_on_product_id"
+
+  create_table "product_visit_logs", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "user_agent"
+    t.string   "ip"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "product_visit_logs", ["product_id"], :name => "index_product_visit_logs_on_product_id"
 
   create_table "products", :force => true do |t|
     t.integer  "advertiser_id"

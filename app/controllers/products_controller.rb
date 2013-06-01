@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
   before_filter :fix_missing_products , :only => [ :show, :visit ]
 
-
   def index 
     product_count = Rails.cache.fetch('all_products_count',:expires_in => 6.hours) { Product.count }
     @products = Product.includes(:category, :advertiser, :brand).page_with_cached_total_count params[:page], product_count
@@ -11,6 +10,7 @@ class ProductsController < ApplicationController
   def show
     begin
       @product = Product.cached_find(params[:id])
+      log_product_view(@product) 
     rescue ActiveRecord::RecordNotFound => e
       render 'error/404', :layout => 'error', :status => :not_found
     end
@@ -25,10 +25,27 @@ class ProductsController < ApplicationController
 
   def visit
     product = Product.find(params[:id])
+    log_product_visit product if product 
     redirect_to product.aw_deep_link
   end
 
   private 
+
+  def log_product_view(product) 
+    product.display_logs.create({
+      :referrer => request.referer, 
+      :user_agent => request.user_agent, 
+      :ip => request.remote_ip
+    }) if request.referer.start_with?(root_url)
+
+  end 
+
+  def log_product_visit(product)
+    product.visit_logs.create({
+      :user_agent => request.user_agent, 
+      :ip => request.remote_ip
+    })
+  end
 
   def ensure_search_term_presence
     if params[:search].blank?

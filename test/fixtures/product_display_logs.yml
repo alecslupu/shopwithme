@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product: 
+  user_agent: MyString
+  ip: MyString
+  referrer: MyText
+
+two:
+  product: 
+  user_agent: MyString
+  ip: MyString
+  referrer: MyText
