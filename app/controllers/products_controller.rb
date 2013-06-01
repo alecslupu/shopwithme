@@ -22,14 +22,16 @@ class ProductsController < ApplicationController
 
   private 
   def fix_missing_products
-    redirect_to_product(params[:id].gsub!('-amp', '')) if params[:id].include?('-amp')
-    redirect_to_product(params[:id].gsub!('-quot', '')) if params[:id].include?('-quot')
-    redirect_to_product(params[:id].gsub!('-39', '')) if params[:id].include?('-39')
-    redirect_to_product(params[:id].gsub!('-pound', '')) if params[:id].include?('-pound')
+    params[:old_id] = params[:id]
+    params[:id].gsub!('-amp', '')    if params[:id].include?('-amp')
+    params[:id].gsub!('-quot', '')   if params[:id].include?('-quot')
+    params[:id].gsub!('-39', ''))    if params[:id].include?('-39')
+    params[:id].gsub!('-pound', '')  if params[:id].include?('-pound')
+    redirect_to_product(params[:id]) if params[:old_id] != params[:id]
   end
 
   def redirect_to_product(id)
     product = Product.cached_find id
-    redirect_to product_path(product), :status => :moved_permanently
+    redirect_to(product_path(product), :status => :moved_permanently) and return
   end
 end
