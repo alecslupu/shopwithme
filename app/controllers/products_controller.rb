@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_filter :ensure_search_term_presence, :only => [ :search ]
   before_filter :fix_missing_products , :only => [ :show, :visit ]
 
 
@@ -15,17 +16,31 @@ class ProductsController < ApplicationController
     end
   end 
 
+  def search 
+    @products = Product.search do
+      fulltext params[:search]
+      paginate :page => params[:page], :per_page => 10
+    end
+  end 
+
   def visit
     product = Product.find(params[:id])
     redirect_to product.aw_deep_link
   end
 
   private 
+
+  def ensure_search_term_presence
+    if params[:search].blank?
+      redirect_to(products_path) and return 
+    end 
+  end 
+
   def fix_missing_products
     params[:old_id] = params[:id]
     params[:id].gsub!('-amp', '')    if params[:id].include?('-amp')
     params[:id].gsub!('-quot', '')   if params[:id].include?('-quot')
-    params[:id].gsub!('-39', ''))    if params[:id].include?('-39')
+    params[:id].gsub!('-39', '')    if params[:id].include?('-39')
     params[:id].gsub!('-pound', '')  if params[:id].include?('-pound')
     redirect_to_product(params[:id]) if params[:old_id] != params[:id]
   end

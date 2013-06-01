@@ -1,5 +1,7 @@
 ShopWithMe::Application.routes.draw do
   
+  get "search/index", :as => :search
+
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
     mount Resque::Server.new, :at => "/jobs"
@@ -8,6 +10,10 @@ ShopWithMe::Application.routes.draw do
   
   resources :products, :only => [:index, :show] do 
     get 'page/:page', :action => :index, :on => :collection
+    get 'search/:search/page/:page', :action => :search, :on => :collection
+    collection do 
+      get 'search/(:search)', :action => :search, :as => :search
+    end 
     member do 
       get :visit
     end
@@ -17,16 +23,28 @@ ShopWithMe::Application.routes.draw do
   resources :advertisers, :only => [ :index, :show ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
+    get 'search/:search/page/:page', :action => :search, :on => :collection
+    collection do 
+      get 'search/(:search)', :action => :search, :as => :search
+    end
   end 
   
   resources :brands, :only => [ :index, :show ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
+    get 'search/:search/page/:page', :action => :search, :on => :collection
+    collection do 
+      get 'search/(:search)', :action => :search, :as => :search
+    end 
   end 
 
   resources :categories, :only => [ :show, :index ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
+    get 'search/:search/page/:page', :action => :search, :on => :collection
+    collection do 
+      get 'search/(:search)', :action => :search, :as => :search
+    end
   end 
 
   match '(errors)/:status', to: 'error#show', constraints: {status: /\d{3}/}

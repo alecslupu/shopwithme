@@ -75,6 +75,7 @@ GEM
       actionmailer (>= 3.0.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fattr (2.2.1)
     font-awesome-sass-rails (3.0.2.2)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -131,8 +132,14 @@ GEM
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.2.96)
     nokogiri (1.5.9)
+    options (2.3.0)
+      fattr
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    pr_geohash (1.0.0)
+    progress_bar (1.0.0)
+      highline (~> 1.6.1)
+      options (~> 2.3.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -207,6 +214,8 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.20.0)
       rufus-scheduler
+    rsolr (1.0.9)
+      builder (>= 2.1.2)
     rufus-scheduler (2.0.19)
       tzinfo (>= 0.3.23)
     safe_yaml (0.9.1)
@@ -226,6 +235,13 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sunspot (2.0.0)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.0.0)
+      nokogiri
+      sunspot (= 2.0.0)
+    sunspot_solr (2.0.0)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -268,6 +284,7 @@ DEPENDENCIES
   meta_request
   mysql2
   newrelic_rpm
+  progress_bar
   rails (= 3.2.13)
   rails_admin
   rails_admin_nestable
@@ -277,6 +294,8 @@ DEPENDENCIES
   resque-scheduler
   sass-rails (~> 3.2.3)
   sitemap_generator
+  sunspot_rails
+  sunspot_solr
   therubyracer
   uglifier (>= 1.0.3)
   zeus

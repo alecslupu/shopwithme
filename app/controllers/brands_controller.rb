@@ -1,4 +1,6 @@
 class BrandsController < ApplicationController
+  before_filter :ensure_search_term_presence, :only => [ :search ]
+
   before_filter :fix_missing_brands , :only => :show
 
   def show
@@ -19,7 +21,21 @@ class BrandsController < ApplicationController
     @brands = Brand.alphabetically.with_products.page(params[:page])
   end
 
+  def search 
+    @brands = Brand.search do
+      fulltext params[:search]
+      paginate :page => params[:page], :per_page => 10
+    end
+  end 
+
   private 
+
+  def ensure_search_term_presence
+    if params[:search].blank?
+      redirect_to(brands_path) and return 
+    end 
+  end 
+  
   def fix_missing_brands
     redirect_to_brand(params[:id].gsub!('-amp', '')) if params[:id].include?('-amp')
     redirect_to_brand(params[:id].gsub!('-quot', '')) if params[:id].include?('-quot')

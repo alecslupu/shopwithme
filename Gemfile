@@ -43,8 +43,14 @@ gem 'kaminari'
 gem 'zip'
 gem 'newrelic_rpm'
 
-gem 'sitemap_generator'
+gem 'sitemap_generator'  #google sitemaps
 gem 'htmlentities'
+
+#search 
+gem 'sunspot_solr'
+gem 'sunspot_rails' 
+gem 'progress_bar'
+
 
 
 

@@ -8,6 +8,11 @@ class Product < ActiveRecord::Base
   extend FriendlyId
 
   friendly_id :name, use: :slugged
+
+  searchable do
+    text :name, :boost => 5, :more_like_this => true
+    text :description
+  end
   
   paginates_per 15
 

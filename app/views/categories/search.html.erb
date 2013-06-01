@@ -1,0 +1,16 @@
+<% content_for(:page_title) { "ShopWithMe - Listing all the categories" } %>
+<% content_for(:page_description) { "ShopWithMe - Listing all the categories" } %>
+
+<%= render 'products/search_form' %>
+
+<div class="main_content detail-product">
+  <h3 class="title uppercase">Categories</h3>
+
+  <% if @categories.results.size > 0 %>
+    <%= render @categories.results %>
+    <%= paginate @categories.results, :window => 2 %>
+  <% else %>
+    <%= render 'categories/no_categories' %>
+  <% end %>
+
+</div>

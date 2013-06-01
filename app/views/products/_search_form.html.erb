@@ -1,29 +1,27 @@
-<%
-=begin %>
-<!-- <form class="search_top_form">            
+<form class="search_top_form" action="<%=search_path%>" method="GET">            
   <ul>
     <li>
-      <input type="text" value="" placeholder="Keyword...">
+      <input type="text" name="search" value="<%= params[:search].blank? ? '' : params[:search] %>" placeholder="I am looking for">
     </li>
     <li>
       <select name="type">
-        <option value="1">Auto</option>
-        <option value="2">Beauty and Fitness</option>
-        <option value="3">Real Estate</option>
+        <option value="all">Select type</option>
+        <% ['product', 'brand', 'advertiser', 'category'].each do |a| %>
+          <option value="<%=a%>"<%=params[:controller].start_with?(a[0..-2]) ? 'selected' : '' %>><%=a.titleize%></option>
+        <% end %>
       </select>
     </li>
+    <!--
     <li>
-      <select name="city">
-        <option value="1">All city...</option>
+      <select name="category">
+        <option value="1">Categories</option>
         <option value="2">Da Nang</option>
         <option value="3">Ho Chi Minh</option>
       </select>
     </li>
+  -->
     <li>
       <button class="btn btn-warning"><i class="icon-search icon-white"></i> Search Now</button>
     </li>
   </ul>
-</form> -->
-
-<%
-=end %>
+</form> 
