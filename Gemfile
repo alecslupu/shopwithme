@@ -20,6 +20,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'split', require: 'split/dashboard'
+
+
 gem 'jquery-rails'
 gem 'awesome_nested_set'
 gem 'rails_admin_nested_set'

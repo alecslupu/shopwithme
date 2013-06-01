@@ -5,6 +5,7 @@ ShopWithMe::Application.routes.draw do
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
     mount Resque::Server.new, :at => "/jobs"
+    mount Split::Dashboard => '/split'
     mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   end
   

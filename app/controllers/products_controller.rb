@@ -24,8 +24,13 @@ class ProductsController < ApplicationController
   end 
 
   def visit
+    finished('hide_price_in_show_page')
+    finished('cta_visit_text')
+    finished('cta_visit_color')
+    finished('cta_visit_size')
     product = Product.find(params[:id])
     log_product_visit(product) unless product.nil?
+
     redirect_to product.aw_deep_link
   end
 

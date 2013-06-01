@@ -60,8 +60,19 @@
 =end %>  
   <%= (@product.name)%></h5>
       <span itemprop="description"><%= (@product.description)%></span>
-      <h4 class="clearfix"><strong>Price: 
-          <span class="label label-important price"><%=@product.price%> <%=@product.currency%></span></strong></h4>                
+      
+      <h4 class="clearfix">
+        <% variant =  ab_test("hide_price_in_show_page", 'yes', 'no') %>
+        <% if variant == 'no' %>
+          <strong>Price:<span class="label label-important price"><%=@product.price%> <%=@product.currency%></span></strong>
+        <% else %>
+          <% text = ab_test('cta_visit_text', "Get me to the product", "Details", "Click to view price", "Click here to view price") %>
+          <% css  = ab_test('cta_visit_color', 'btn-charlie', 'btn-danger', 'btn-success', 'btn-warning', 'btn-info') %>
+          <% size = ab_test('cta_visit_size', 'btn-large', 'btn-normal')%>
+          <%= link_to text, visit_product_path(@product), {:class => "btn #{size} #{css}", :title => (@product.name)}  %>
+        <% end %>
+      </h4>
+
       <div class="contact-information">
         <h5>MERCHANT INFORMATION</h5>
         <address>       
