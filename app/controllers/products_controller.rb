@@ -24,10 +24,9 @@ class ProductsController < ApplicationController
   end 
 
   def visit
-    finished('hide_price_in_show_page')
-    finished('cta_visit_text')
-    finished('cta_visit_color')
-    finished('cta_visit_size')
+
+    ab_tests_finish
+
     product = Product.find(params[:id])
     log_product_visit(product) unless product.nil?
 
@@ -35,6 +34,14 @@ class ProductsController < ApplicationController
   end
 
   private 
+  def ab_tests_finish
+
+    finished('hide_price_in_show_page')
+    finished('cta_visit_text')
+    finished('cta_visit_color')
+    finished('cta_visit_size')
+    finished('details_link_to_visit_in_listing')
+  end 
 
   def log_product_view(product) 
     product.display_logs.create({

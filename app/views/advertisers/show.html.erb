@@ -5,8 +5,10 @@
 <div class="main_content detail-product">
   <h3 class="title">LISTINGS by <%=@advertiser%></h3>
 
+  <% path = ab_test('details_link_to_visit_in_listing', true, false)%>
+
   <% if @products.size > 0 %>
-    <%= render @products %>
+    <%= render @products, :path => path  %>
     <%= paginate @products, :window => 2 %>
   <% else %>
     <%= render 'products/no_products' %>
