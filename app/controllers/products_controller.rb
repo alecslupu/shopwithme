@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
   before_filter :fix_missing_products , :only => [ :show, :visit ]
+  before_filter :redirect_to_product_view, :only => [ :show ]
 
   def index 
     product_count = Rails.cache.fetch('all_products_count',:expires_in => 6.hours) { Product.count }
@@ -34,6 +35,16 @@ class ProductsController < ApplicationController
   end
 
   private 
+  def redirect_to_product_view
+    unless bot?
+      redirect_to visit_product_path(@product) and return
+    end
+  end 
+
+  def bot?
+    request.referer.match(Split.configuration.robot_regex)
+  end
+
   def ab_tests_finish
 
     finished('hide_price_in_show_page')
