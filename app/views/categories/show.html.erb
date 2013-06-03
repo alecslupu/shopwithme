@@ -27,7 +27,7 @@
   <% end %>
   <h3 class="title">LISTINGS in <%=@category%></h3>
 
-  <% path = ab_test('details_link_to_visit_in_listing', true, false)%>
+<% path = ab_test('details_link_to_visit_in_listing', 'yes', 'no')%>
 
   <% if @products.size > 0 %>
     <%= render @products, :path => path %>

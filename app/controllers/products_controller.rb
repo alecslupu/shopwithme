@@ -25,7 +25,6 @@ class ProductsController < ApplicationController
   end 
 
   def visit
-
     ab_tests_finish
 
     product = Product.find(params[:id])
@@ -46,7 +45,6 @@ class ProductsController < ApplicationController
   end
 
   def ab_tests_finish
-
     finished('hide_price_in_show_page')
     finished('cta_visit_text')
     finished('cta_visit_color')
