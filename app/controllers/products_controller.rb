@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
   end 
 
   def visit
-    ab_tests_finish
+    ab_tests_finish unless bot?
 
     product = Product.find(params[:id])
     log_product_visit(product) unless product.nil?
