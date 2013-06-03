@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   end 
 
   def bot?
-    request.referer.match(Split.configuration.robot_regex)
+    request.user_agent.match(Split.configuration.robot_regex)
   end
 
   def ab_tests_finish
