@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def avatar_of_advertiser(advertiser, link_options = {}, image_options = {})
-    return if advertiser.nil?
+    return if advertiser.nil? || advertiser.logo.blank? || !advertiser.logo.starts_with?('http')
     default_link_options = { :title => (advertiser.strapline), :class => 'pull-left' }
     default_image_options = {:title => (advertiser.strapline), :alt => (advertiser.strapline)}
 
