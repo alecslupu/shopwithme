@@ -38,6 +38,7 @@ class ProductFeedDemon < JobUtilsDemon
       end
       process_feed(row)
     end 
+    GC.start
   end 
 
   private 
