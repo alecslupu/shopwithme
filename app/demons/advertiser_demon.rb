@@ -59,7 +59,7 @@ class AdvertiserDemon < JobUtilsDemon
             af.feed_product_count = row["Product Feed No. Products"].to_i
           end
 
-          if (@enabled or feed.feed_last_modified_changed?)
+          if (not feed.new_record? and feed.feed_last_modified_changed?)
             Resque.enqueue(ProductFeedWorker, advertiser.id)
           end
           feed.save

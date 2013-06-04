@@ -73,13 +73,13 @@ namespace :deploy do
     run "ps -e -o pid,command | grep  resque  | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT"
   end 
   task :start_resque, :roles => :web  do  #, :except => { :no_release => true }
-    run "(export RAILS_ENV=#{rails_env} && export COUNT=2 && cd #{current_path} && nohup rake resque:workers &) && sleep 1", :pty => true
+    run "(export RAILS_ENV=#{rails_env} && export COUNT=2 && export QUEUE=* && cd #{current_path} && nohup rake resque:workers &) && sleep 1", :pty => true
   end
 end
 
 # before 'deploy:update_code', ''
 after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile' , 'deploy:solr'
 # after "deploy:update",  "deploy:cleanup"
-before 'deploy:create_symlink' , 'deploy:permission_fix', 'deploy:stop_solr'
+before 'deploy:create_symlink' , 'deploy:permission_fix', 'deploy:stop_solr', 'deploy:stop_resque'
 after 'deploy:create_symlink', 'deploy:start_solr', 'deploy:start_resque'
 

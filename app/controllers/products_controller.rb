@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
+  before_filter :find_product, :only => [:show, :visit]
   before_filter :ensure_search_term_presence, :only => [ :search ]
-  before_filter :fix_missing_products , :only => [ :show, :visit ]
   before_filter :redirect_to_product_view, :only => [ :show ]
 
   def index 
@@ -9,12 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    begin
-      @product = Product.cached_find(params[:id])
-      log_product_view(@product) unless @product.nil?
-    rescue ActiveRecord::RecordNotFound => e
-      render 'error/404', :layout => 'error', :status => :not_found
-    end
+    log_product_view(@product) unless @product.nil?
   end 
 
   def search 
@@ -27,13 +22,16 @@ class ProductsController < ApplicationController
   def visit
     ab_tests_finish unless bot?
 
-    product = Product.find(params[:id])
-    log_product_visit(product) unless product.nil?
+    log_product_visit(@product) unless @product.nil?
 
-    redirect_to product.aw_deep_link
+    redirect_to @product.aw_deep_link
   end
 
   private 
+  def find_product
+    @product = Product.cached_find(params[:id])
+  end 
+
   def redirect_to_product_view
     unless bot?
       redirect_to visit_product_path(@product) and return
@@ -73,16 +71,7 @@ class ProductsController < ApplicationController
       redirect_to(products_path) and return 
     end 
   end 
-
-  def fix_missing_products
-    params[:old_id] = params[:id]
-    params[:id].gsub!('-amp', '')    if params[:id].include?('-amp')
-    params[:id].gsub!('-quot', '')   if params[:id].include?('-quot')
-    params[:id].gsub!('-39', '')    if params[:id].include?('-39')
-    params[:id].gsub!('-pound', '')  if params[:id].include?('-pound')
-    redirect_to_product(params[:id]) if params[:old_id] != params[:id]
-  end
-
+  
   def redirect_to_product(id)
     product = Product.cached_find id
     redirect_to(product_path(product), :status => :moved_permanently) and return
