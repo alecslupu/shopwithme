@@ -11,7 +11,7 @@ Delayed::Job.enqueue CategoryJob.new.perform
     Resque.enqueue(CategoryWorker)
     Resque.enqueue(AdvertiserWorker)
     Resque.enqueue(SitemapWorker)
-    
+    Resque.enqueue(CacheEnqueueWorker)
   end
 
 

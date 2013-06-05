@@ -1,5 +1,5 @@
 class CategoryWorker < ResqueJob
-  @queue = :cache
+  @queue = :category
 
   def self.perform
     ActiveRecord::Base.verify_active_connections!
