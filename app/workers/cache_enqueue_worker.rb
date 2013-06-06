@@ -10,6 +10,7 @@ class CacheEnqueueWorker < ResqueJob
   end 
 
   protected 
+
   def enqueue_advertisers
     Advertiser.with_products.each do |a|
       Resque.remove_delayed(AdvertiserProductRandomCacheWorker, a.id)
@@ -24,11 +25,10 @@ class CacheEnqueueWorker < ResqueJob
   def enqueue_brands 
     Brand.with_products.each do |b|
       Resque.remove_delayed(BrandProductRandomCacheWorker, b.id)
-        if b.products_count > 30000
-          Resque.enqueue_at(a.products_count.seconds.from_now, BrandProductRandomCacheWorker, b.id)
-        else
-          Resque.enqueue_at(4.hours.from_now, BrandProductRandomCacheWorker, b.id)
-        end
+      if b.products_count > 30000
+        Resque.enqueue_at(a.products_count.seconds.from_now, BrandProductRandomCacheWorker, b.id)
+      else
+        Resque.enqueue_at(4.hours.from_now, BrandProductRandomCacheWorker, b.id)
       end 
     end
   end
