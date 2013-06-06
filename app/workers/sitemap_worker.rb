@@ -2,6 +2,7 @@ class SitemapWorker < ResqueJob
   @queue = :sitemap
   
   def self.perform
+
     ActiveRecord::Base.verify_active_connections!
 
     SitemapGenerator::Sitemap.default_host = 'http://www.shop-with.me/'
@@ -55,6 +56,9 @@ class SitemapWorker < ResqueJob
     end
     
     SitemapGenerator::Sitemap.ping_search_engines
+
+    Resque.remove_delayed(SitemapWorker)
+    Resque.enqueue_at( Time.now.end_of_day, SitemapWorker)
 
   end 
   

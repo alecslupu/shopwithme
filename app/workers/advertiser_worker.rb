@@ -6,5 +6,9 @@ class AdvertiserWorker < ResqueJob
 
     advertiser = AdvertiserDemon.new
     advertiser.process
+
+
+    Resque.remove_delayed(AdvertiserWorker)
+    Resque.enqueue_at(Time.now.end_of_day+10.minutes, AdvertiserWorker)
   end 
 end

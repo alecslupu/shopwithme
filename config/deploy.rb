@@ -74,6 +74,7 @@ namespace :deploy do
   end 
   task :start_resque, :roles => :web  do  #, :except => { :no_release => true }
     run "(export RAILS_ENV=#{rails_env} && export COUNT=2 && export QUEUE=* && cd #{current_path} && nohup rake resque:workers &) && sleep 1", :pty => true
+    run "(export RAILS_ENV=#{rails_env} && cd #{current_path} && export PIDFILE=/tmp/resque-scheduler.pid && nohup rake resque:scheduler &) && sleep 1", :pty => true
   end
 end
 

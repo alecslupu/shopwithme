@@ -6,5 +6,8 @@ class CategoryWorker < ResqueJob
 
     category = CategoryDemon.new
     category.process
+
+    Resque.remove_delayed(CategoryWorker)
+    Resque.enqueue_at(Time.now.end_of_day + 10.minutes, CategoryWorker)
   end 
 end
