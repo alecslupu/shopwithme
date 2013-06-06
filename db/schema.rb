@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130601214741) do
+ActiveRecord::Schema.define(:version => 20130606175456) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -235,5 +235,14 @@ ActiveRecord::Schema.define(:version => 20130601214741) do
 
   add_index "random_category_products", ["category_id"], :name => "index_random_category_products_on_category_id"
   add_index "random_category_products", ["product_id"], :name => "index_random_category_products_on_product_id"
+
+  create_table "system_exceptions", :force => true do |t|
+    t.text     "backtrace"
+    t.text     "params"
+    t.string   "message"
+    t.integer  "exception_count"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
 end

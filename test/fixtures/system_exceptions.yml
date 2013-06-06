@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  backtrace: MyText
+  params: MyText
+  message: MyString
+  exception_count: 1
+
+two:
+  backtrace: MyText
+  params: MyText
+  message: MyString
+  exception_count: 1

@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   def visit
     ab_tests_finish if current_admin.nil? and not bot?
 
-    log_product_visit(@product) unless @product.nil?
+    log_product_visit(@product) unless @product.nil? 
 
     redirect_to @product.aw_deep_link
   end
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
       :referrer => request.referer, 
       :user_agent => request.user_agent, 
       :ip => request.remote_ip
-    }) unless !request.referer.nil? && request.referer.start_with?(root_url)
+    }) unless not request.referer.nil? and request.referer.start_with?(root_url)
 
   end 
 
@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
     product.visit_logs.create({
       :user_agent => request.user_agent, 
       :ip => request.remote_ip
-    })
+    }) unless bot?
   end
 
   def ensure_search_term_presence
