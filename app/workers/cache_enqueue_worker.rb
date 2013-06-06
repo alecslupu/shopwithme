@@ -4,14 +4,14 @@ class CacheEnqueueWorker < ResqueJob
   def self.perform
     ActiveRecord::Base.verify_active_connections!
 
-    enqueue_categories
-    enqueue_brands
-    enqueue_advertisers
+    self.enqueue_categories
+    self.enqueue_brands
+    self.enqueue_advertisers
   end 
 
   protected 
 
-  def enqueue_advertisers
+  def self.enqueue_advertisers
     Advertiser.with_products.each do |a|
       Resque.remove_delayed(AdvertiserProductRandomCacheWorker, a.id)
       if a.products_count > 30000
@@ -22,7 +22,7 @@ class CacheEnqueueWorker < ResqueJob
     end     
   end 
 
-  def enqueue_brands 
+  def self.enqueue_brands 
     Brand.with_products.each do |b|
       Resque.remove_delayed(BrandProductRandomCacheWorker, b.id)
       if b.products_count > 30000
@@ -33,7 +33,7 @@ class CacheEnqueueWorker < ResqueJob
     end
   end
 
-  def enqueue_categories
+  def self.enqueue_categories
     Category.with_products.each do |c|
       Resque.remove_delayed(CategoryProductRandomCacheWorker, c.id)
       if c.products_count > 30000
