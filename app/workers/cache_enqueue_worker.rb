@@ -26,7 +26,7 @@ class CacheEnqueueWorker < ResqueJob
     Brand.with_products.each do |b|
       Resque.remove_delayed(BrandProductRandomCacheWorker, b.id)
       if b.products_count > 30000
-        Resque.enqueue_at(a.products_count.seconds.from_now, BrandProductRandomCacheWorker, b.id)
+        Resque.enqueue_at(b.products_count.seconds.from_now, BrandProductRandomCacheWorker, b.id)
       else
         Resque.enqueue_at(4.hours.from_now, BrandProductRandomCacheWorker, b.id)
       end 
@@ -37,7 +37,7 @@ class CacheEnqueueWorker < ResqueJob
     Category.with_products.each do |c|
       Resque.remove_delayed(CategoryProductRandomCacheWorker, c.id)
       if c.products_count > 30000
-        Resque.enqueue_at(a.products_count.seconds.from_now, CategoryProductRandomCacheWorker, c.id)
+        Resque.enqueue_at(c.products_count.seconds.from_now, CategoryProductRandomCacheWorker, c.id)
       else
         Resque.enqueue_at(4.hours.from_now, CategoryProductRandomCacheWorker, c.id)
       end
