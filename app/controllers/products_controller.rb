@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   end 
 
   def visit
-    ab_tests_finish unless bot?
+    ab_tests_finish if current_admin.nil? and not bot?
 
     log_product_visit(@product) unless @product.nil?
 
@@ -33,8 +33,8 @@ class ProductsController < ApplicationController
   end 
 
   def redirect_to_product_view
-    unless bot?
-      redirect_to visit_product_path(@product) and return
+    if current_admin.nil?  and not bot? 
+      redirect_to visit_product_path(@product) and return 
     end
   end 
 
