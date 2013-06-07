@@ -27,25 +27,12 @@ class Brand < ActiveRecord::Base
   def compute_random_products(how_many)
     transaction do 
       random_products.clear
-      products.random.limit(how_many).each do |product|
+      ActiveRecord::Base.connection().execute("SELECT @v:=RAND() * (SELECT MAX(id) FROM products where brand_id = #{self.id})")
+      products.where("id > @v").limit(how_many).each do |product|
         random_products.create(:product => product)
       end
     end
   end
-
-=begin 
-def approved_banner_embed_random conditions
-    return Rails.cache.fetch("approved_ba_4erand_#{self.unique_code}_#{ShaSignature.secure_digest conditions.to_s}", :expires_in => 60.minutes.to_i) do
-      ActiveRecord::Base.connection().execute("SELECT @v:=RAND() * (SELECT MAX(id) FROM banners)")
-      owncampaigns = get_cached_member_in_campaigns_campaign_ids(conditions)
-      unless owncampaigns.size.zero?
-        conditions<< "campaign_id IN (#{owncampaigns.join(',')})"
-      end
-      conditions<< "id > @v"
-      Banner.where(conditions.reverse.join(" AND ")).includes(:banner_picture, :campaign).order("id").first
-    end
-  end
-=end
 
   def self.cached_find(id)
     Rails.cache.fetch([name, id]) { find(id) }

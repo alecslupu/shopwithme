@@ -41,7 +41,8 @@ class Category < ActiveRecord::Base
   def compute_random_products(how_many)
     transaction do 
       random_products.clear
-      products.random.limit(how_many).each do |product|
+      ActiveRecord::Base.connection().execute("SELECT @v:=RAND() * (SELECT MAX(id) FROM products where category_id = #{self.id})")
+      products.where("id > @v").limit(how_many).each do |product|
         random_products.create(:product => product)
       end
     end

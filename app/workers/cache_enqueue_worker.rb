@@ -4,43 +4,17 @@ class CacheEnqueueWorker < ResqueJob
   def self.perform
     ActiveRecord::Base.verify_active_connections!
 
-    self.enqueue_categories
-    self.enqueue_brands
-    self.enqueue_advertisers
-  end 
-
-  protected 
-
-  def self.enqueue_advertisers
     Advertiser.with_products.each do |a|
-      Resque.remove_delayed(AdvertiserProductRandomCacheWorker, a.id)
-      if a.products_count > 30000
-        Resque.enqueue_at(a.products_count.seconds.from_now, AdvertiserProductRandomCacheWorker, a.id)
-      else
-        Resque.enqueue_at(4.hours.from_now, AdvertiserProductRandomCacheWorker, a.id)
-      end
-    end     
-  end 
-
-  def self.enqueue_brands 
-    Brand.with_products.each do |b|
-      Resque.remove_delayed(BrandProductRandomCacheWorker, b.id)
-      if b.products_count > 30000
-        Resque.enqueue_at(b.products_count.seconds.from_now, BrandProductRandomCacheWorker, b.id)
-      else
-        Resque.enqueue_at(4.hours.from_now, BrandProductRandomCacheWorker, b.id)
-      end 
+      a.compute_random_products(20)
     end
-  end
-
-  def self.enqueue_categories
+    Brand.with_products.each do |b|
+      b.compute_random_products(20)
+    end
     Category.with_products.each do |c|
-      Resque.remove_delayed(CategoryProductRandomCacheWorker, c.id)
-      if c.products_count > 30000
-        Resque.enqueue_at(c.products_count.seconds.from_now, CategoryProductRandomCacheWorker, c.id)
-      else
-        Resque.enqueue_at(4.hours.from_now, CategoryProductRandomCacheWorker, c.id)
-      end
+      c.compute_random_products(20)
     end 
-  end
+
+    Resque.remove_delayed(CacheEnqueueWorker)
+    Resque.enqueue_at(12.hours.from_now, CacheEnqueueWorker)
+  end 
 end
