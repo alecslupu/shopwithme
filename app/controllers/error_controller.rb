@@ -4,9 +4,9 @@ class ErrorController < ApplicationController
 
   def show
     exception = env["action_dispatch.exception"]
-    SystemException.log(exception, params,current_request_url) if exception 
-
     template = request.path[1..-1]
+    SystemException.log(exception, params,template) if exception 
+
     render template , :layout => 'error', :status => template
   end
 

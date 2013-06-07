@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_filter :products_gone, :only => [ :show ]
   before_filter :find_product, :only => [:show, :visit]
   before_filter :ensure_search_term_presence, :only => [ :search ]
   before_filter :redirect_to_product_view, :only => [ :show ]
@@ -28,6 +29,17 @@ class ProductsController < ApplicationController
   end
 
   private 
+
+  def products_gone
+    id = params[:id]
+    params[:id].gsub!(/-amp-/, '')
+    params[:id].gsub!(/-quot-/, '')
+    params[:id].gsub!(/-39-/, '')
+     if id != params[:id]
+      render :text => "", :status => :gone and return
+    end
+  end
+
   def find_product
     @product = Product.cached_find(params[:id])
   end 
@@ -71,9 +83,4 @@ class ProductsController < ApplicationController
       redirect_to(products_path) and return 
     end 
   end 
-  
-  def redirect_to_product(id)
-    product = Product.cached_find id
-    redirect_to(product_path(product), :status => :moved_permanently) and return
-  end
 end
