@@ -16,7 +16,7 @@
           <% if product.newer? %><span class="label label-success">new</span><br/><% end %>
           in <%= link_to_category(product.category,:short, {:class => "subinfo"}) %>
           at <%= link_to_advertiser(product.advertiser, :short, {:class => "subinfo"}) %>
-          <p><%=product.short_description%></p>
+          <p><%=raw(product.short_description)%></p>
         </div>
       </div>
     <% if (index % 4) == 3 %></div>  <% end %>

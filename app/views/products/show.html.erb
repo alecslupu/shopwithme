@@ -59,7 +59,7 @@
 <%
 =end %>  
   <%= (@product.name)%></h5>
-      <span itemprop="description"><%= (@product.description)%></span>
+      <span itemprop="description"><%= raw(@product.description)%></span>
       
       <h4 class="clearfix">
         <% variant =  ab_test("hide_price_in_show_page", 'yes', 'no') %>
@@ -69,7 +69,7 @@
           <% text = ab_test('cta_visit_text', "Get me to the product", "Details", "Click to view price", "Click here to view price") %>
           <% css  = ab_test('cta_visit_color', 'btn-charlie', 'btn-danger', 'btn-success', 'btn-warning', 'btn-info') %>
           <% size = ab_test('cta_visit_size', 'btn-large', 'btn-normal')%>
-          <%= link_to text, visit_product_path(@product), {:class => "btn #{size} #{css}", :title => (@product.name)}  %>
+          <%= link_to text, visit_product_path(@product), {:rel => 'nofollow', :class => "btn #{size} #{css}", :title => (@product.name)}  %>
         <% end %>
       </h4>
 
@@ -79,6 +79,7 @@
           <i><%= raw(@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
         </address>
         <%= link_to 'Details', visit_product_path(@product), {
+          :rel => 'nofollow',
           :class => 'btn btn-charlie', 
           :title => (@product.name)
         }  %>
@@ -96,6 +97,7 @@
   <div class="row-fluid">
     <div class="span12">
       <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#desc">DESCRIPTION</a></li>
         <li class="active"><a href="#specs">SPECIFICATIONS</a></li>
         <% 
 =begin %>
@@ -105,7 +107,10 @@
       </ul>              
       <div class="tab-content">
         <div class="tab-pane active" id="specs">
-          <%= @product.specifications.blank? ? "There are no specifications available" : (@product.specifications)%>
+          <%= @product.description.blank? ? "There is no description available" : raw(@product.description)%>
+        </div>
+        <div class="tab-pane" id="specs">
+          <%= @product.specifications.blank? ? "There are no specifications available" : raw(@product.specifications)%>
         </div>
         <% 
 =begin %>
