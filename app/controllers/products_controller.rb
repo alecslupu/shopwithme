@@ -32,9 +32,9 @@ class ProductsController < ApplicationController
 
   def products_gone
     id = params[:id]
-    params[:id] = params[:id].gsub(/-amp-/, '')
-    params[:id] = params[:id].gsub(/-quot-/, '')
-    params[:id] = params[:id].gsub(/-39-/, '')
+    replacements = ['-amp-', '-quot-', '-pound-', '-39-']
+    replacements.each {|replacement| params[:id] = params[:id].gsub(replacement, '-')}
+   
     if id != params[:id]
       render :text => "", :status => :gone and return
     end
