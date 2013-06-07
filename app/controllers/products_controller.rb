@@ -32,10 +32,10 @@ class ProductsController < ApplicationController
 
   def products_gone
     id = params[:id]
-    params[:id].gsub!(/-amp-/, '')
-    params[:id].gsub!(/-quot-/, '')
-    params[:id].gsub!(/-39-/, '')
-     if id != params[:id]
+    params[:id] = params[:id].gsub(/-amp-/, '')
+    params[:id] = params[:id].gsub(/-quot-/, '')
+    params[:id] = params[:id].gsub(/-39-/, '')
+    if id != params[:id]
       render :text => "", :status => :gone and return
     end
   end
