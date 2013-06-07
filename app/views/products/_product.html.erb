@@ -1,4 +1,3 @@
-<% path = (path == 'yes' ? visit_product_path(product) : product_path(product) ) %>
 <div class="listing-item" itemscope itemtype="http://schema.org/Product">
   <div class="row-fluid">
     <div class="span7">
@@ -49,10 +48,15 @@
           <% end %>
           <strong>Merchant URL:</strong> 
           <a href="<%=product.advertiser.promote_url%>" rel="nofollow" target="_blank"><%=product.advertiser.single_url%></a></p>
-          <%= link_to 'Details', path, {
-            :class => 'btn btn-small btn-primary ', 
-            :title => (product.name)
-          }  %>
+
+          <% if path == 'yes'%> 
+            <%= button_to "Details", visit_product_path(product), :class => 'btn btn-small btn-primary ' %>
+          <% else %>
+            <%= link_to 'Details', product_path(product), {
+              :class => 'btn btn-small btn-primary ', 
+              :title => (product.name)
+            }  %>
+          <% end %>
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@ ShopWithMe::Application.routes.draw do
       get 'search/(:search)', :action => :search, :as => :search
     end 
     member do 
-      get :visit
+      match :visit
     end
   end
 

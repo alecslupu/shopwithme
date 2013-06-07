@@ -69,7 +69,8 @@
           <% text = ab_test('cta_visit_text', "Get me to the product", "Details", "Click to view price", "Click here to view price") %>
           <% css  = ab_test('cta_visit_color', 'btn-charlie', 'btn-danger', 'btn-success', 'btn-warning', 'btn-info') %>
           <% size = ab_test('cta_visit_size', 'btn-large', 'btn-normal')%>
-          <%= link_to text, visit_product_path(@product), {:rel => 'nofollow', :class => "btn #{size} #{css}", :title => (@product.name)}  %>
+
+          <%= button_to text, visit_product_path(@product), :class => "btn #{size} #{css}" %>
         <% end %>
       </h4>
 
@@ -78,11 +79,7 @@
         <address>       
           <i><%= raw(@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
         </address>
-        <%= link_to 'Details', visit_product_path(@product), {
-          :rel => 'nofollow',
-          :class => 'btn btn-charlie', 
-          :title => (@product.name)
-        }  %>
+        <%= button_to "Details", visit_product_path(@product), :class => 'btn btn-charlie ' %>
 <% 
 =begin %> <p><strong>Contact Name:</strong> Adam Samdllor<br/>
           <strong>Phone:</strong> (434) 658-4638<br/>
@@ -98,7 +95,7 @@
     <div class="span12">
       <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a href="#desc">DESCRIPTION</a></li>
-        <li class="active"><a href="#specs">SPECIFICATIONS</a></li>
+        <li><a href="#specs">SPECIFICATIONS</a></li>
         <% 
 =begin %>
         <li><a href="#profile">RECENT REVIEWS</a></li>
@@ -106,7 +103,7 @@
 =end %>
       </ul>              
       <div class="tab-content">
-        <div class="tab-pane active" id="specs">
+        <div class="tab-pane active" id="desc">
           <%= @product.description.blank? ? "There is no description available" : raw(@product.description)%>
         </div>
         <div class="tab-pane" id="specs">
