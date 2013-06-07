@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
 
   def products_gone
     id = params[:id]
-    replacements = ['-amp-', '-quot-', '-pound-', '-39-', '-ndash-', '-rsquo-', '-eacute-', '-euml-']
+    replacements = ['-amp-', '-quot-', '-pound-', '-euro-','-39-', '-ndash-', '-rsquo-', '-eacute-', '-euml-', '-auml-', '-reg-']
     replacements.each {|replacement| params[:id] = params[:id].gsub(replacement, '-')}
    
     if id != params[:id]
