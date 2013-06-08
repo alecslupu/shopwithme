@@ -37,6 +37,11 @@
               <li<%= ' class=active' if  params[:controller] == 'brands'%>>
                 <a href="<%=brands_path%>">Brands</a>
               </li>
+              <% unless Rails.env == 'production'%>
+              <li<%= ' class=active' if  params[:controller] == 'deals'%>>
+                <a href="<%=deals_path%>">Deals</a>
+              </li>
+              <% end %>
               <%
 =begin %>
               <!--<li<%= ' class=active' if  params[:controller] == 'brands'%>>

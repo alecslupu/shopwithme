@@ -9,6 +9,13 @@ ShopWithMe::Application.routes.draw do
     mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   end
   
+  resources :deals, :only => [ :index ] do 
+    get 'page/:page', :action => :index, :on => :collection
+    member do 
+      match :visit
+    end
+  end
+
   resources :products, :only => [:index, :show] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'search/:search/page/:page', :action => :search, :on => :collection

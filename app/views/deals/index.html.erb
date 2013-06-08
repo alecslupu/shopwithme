@@ -1,0 +1,14 @@
+<% content_for(:page_title) { "ShopWithMe - Listing all the categories  page #{params[:page]}" } %>
+<% content_for(:page_description) { "ShopWithMe - Listing all the categories page #{params[:page]}" } %>
+
+<div class="main_content detail-product">
+  <h3 class="title uppercase">Deals</h3>
+
+  <% if @deals.size > 0 %>
+    <%= render @deals %>
+    <%= paginate @deals, :window => 2 %>
+  <% else %>
+    <%= render 'deals/no_deals' %>
+  <% end %>
+
+</div>

@@ -15,6 +15,25 @@
 //= require bootstrap
 //= require_tree .
 
+var deals_listing = {
+  initialize: function(){
+    $('.expires').each(function(i, el){
+      var obj = $(el);
+      var expire = obj.attr("data-exp");
+      var expires = new Date(expire*1000);
+      obj.countdown({until: expires, layout: "&nbsp;expires in {dn} {dl}, {hn} {hl}, {mn} {ml}, and {sn} {sl}"});
+    });
+
+    $('button.btn').click(function(e){
+      el = $(this);
+      window.open(el.parents('form').attr('action'));
+      if (el.hasClass('code')) {
+        alert("code is" + el.attr("data-code"));
+      }
+      e.preventDefault();
+    });
+  }
+}
 
 var product_details = {
   initialize: function(){
@@ -40,5 +59,8 @@ $(document).ready(function() {
   body = $("body");
   if (body.hasClass('products') && body.hasClass("show")) {
     product_details.initialize();
+  }
+  if (body.hasClass('deals') && body.hasClass("index")) {
+    deals_listing.initialize();
   }
 });

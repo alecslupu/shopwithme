@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606175456) do
+ActiveRecord::Schema.define(:version => 20130608075356) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -102,6 +102,22 @@ ActiveRecord::Schema.define(:version => 20130606175456) do
   end
 
   add_index "countries", ["slug"], :name => "index_countries_on_slug", :unique => true
+
+  create_table "deals", :force => true do |t|
+    t.integer  "advertiser_id"
+    t.integer  "country_id"
+    t.string   "code"
+    t.string   "description"
+    t.string   "url"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "date_added"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "deals", ["advertiser_id"], :name => "index_deals_on_advertiser_id"
+  add_index "deals", ["country_id"], :name => "index_deals_on_country_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -243,6 +259,8 @@ ActiveRecord::Schema.define(:version => 20130606175456) do
     t.integer  "exception_count"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "uri"
+    t.string   "status_code"
   end
 
 end

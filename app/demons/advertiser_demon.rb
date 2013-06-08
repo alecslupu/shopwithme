@@ -5,6 +5,7 @@ class AdvertiserDemon < JobUtilsDemon
   def process 
     process_advertisers(get_data)
   end 
+
   protected
   
   private 
@@ -42,7 +43,7 @@ class AdvertiserDemon < JobUtilsDemon
       advertiser.category = Category.where(:name => coder.decode(row["Merchant Category"])).first
       advertiser.country = Country.where(:country_code => row["Primary Region"]).first
 
-      advertiser.promote_url = "http://www.awin1.com/awclick.php?mid=#{advertiser.id}&id=176745"
+      advertiser.promote_url = "http://www.awin1.com/awclick.php?mid=#{advertiser.id}&id=#{user_id}"
       advertiser.url = row["Display URL"]
       advertiser.click_through = row["Default Clickthrough"]
       advertiser.enabled = (row["Default Clickthrough"] != "You are not joined to this merchant")
