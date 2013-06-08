@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  advertiser: 
+  country: 
+  code: MyString
+  description: MyString
+  url: MyString
+  start_date: 2013-06-08 10:53:56
+  end_date: 2013-06-08 10:53:56
+  date_added: 2013-06-08 10:53:56
+
+two:
+  advertiser: 
+  country: 
+  code: MyString
+  description: MyString
+  url: MyString
+  start_date: 2013-06-08 10:53:56
+  end_date: 2013-06-08 10:53:56
+  date_added: 2013-06-08 10:53:56
