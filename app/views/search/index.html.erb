@@ -9,7 +9,12 @@
   <% if @results.size > 0 %>
     
     <% @results.each do |result| %>
-      <%= render result %>
+      <% if result.is_a?(Product)%>
+        <% path = ab_test('details_link_to_visit_in_listing', 'yes', 'no')%>
+        <%= render result, :path => path %>
+      <% else %>
+        <%= render result %>
+      <% end %>
     <% end %>
     <%#= render @products %>
     <%= paginate @results, :window => 2 %>
