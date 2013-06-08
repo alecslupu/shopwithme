@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<%= Rails.cache.fetch("cache_footer", :expires_in => 20.minutes ) { render 'layouts/footer' } %>
+<%= render 'layouts/footer' %>
 
 </body>
 </html>

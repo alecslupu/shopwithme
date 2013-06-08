@@ -56,7 +56,7 @@
 <%
 =end %>  
   <%= (@product.name)%></h5>
-      <span itemprop="description"><%= raw(@product.description)%></span>
+      <span itemprop="description"><%= raw(@product.short_description(15))%></span>
       
       <h4 class="clearfix">
         <% variant =  ab_test("hide_price_in_show_page", 'yes', 'no') %>
