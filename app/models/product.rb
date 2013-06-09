@@ -25,7 +25,7 @@ class Product < ActiveRecord::Base
   scope :include_all, includes(:advertiser, :category)
   
   scope :page_with_cached_total_count, lambda {|page_number, total_count|
-    use_index("PRIMARY").page(page_number).extending {
+    order("id").page(page_number).extending {
       # open scope to smuggle total_count
       define_method(:total_count) { @total_count = total_count }
     }

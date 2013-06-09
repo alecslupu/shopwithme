@@ -7,7 +7,11 @@ class ProductsController < ApplicationController
   def index
     # product_count = Rails.cache.fetch('all_products_count',:expires_in => 6.hours) { Product.count }
     # @products = Product.includes(:category, :advertiser, :brand).page_with_cached_total_count params[:page], product_count
-    render :text => "", :status => :gone 
+    if bot?
+      render :text => "", :status => :gone and return 
+    else
+      render :text => "", :status => :not_found and return 
+    end
   end
 
   def show
@@ -33,7 +37,7 @@ class ProductsController < ApplicationController
 
   def visit
     render :text => "", :status => :gone  and return if bot?
-    
+
     ab_tests_finish if current_admin.nil? and not bot?
 
     log_product_visit(@product) unless @product.nil? 
