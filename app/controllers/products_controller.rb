@@ -4,13 +4,24 @@ class ProductsController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
   before_filter :redirect_to_product_view, :only => [ :show ]
 
-  def index 
-    product_count = Rails.cache.fetch('all_products_count',:expires_in => 6.hours) { Product.count }
-    @products = Product.includes(:category, :advertiser, :brand).page_with_cached_total_count params[:page], product_count
+  def index
+    # product_count = Rails.cache.fetch('all_products_count',:expires_in => 6.hours) { Product.count }
+    # @products = Product.includes(:category, :advertiser, :brand).page_with_cached_total_count params[:page], product_count
+    render :text => "", :status => :gone 
   end
 
   def show
-    log_product_view(@product) unless @product.nil?
+    unless @product.nil?
+      log_product_view(@product)
+      @@product = @product 
+      @products = Rails.cache.fetch("p#{@product.id}_similiar_products") do 
+        Product.search do
+          keywords @@product.name.split(" ")
+          without @@product
+          paginate :page => 1, :per_page => 4
+        end.results
+      end
+    end
   end 
 
   def search 
@@ -21,6 +32,8 @@ class ProductsController < ApplicationController
   end 
 
   def visit
+    render :text => "", :status => :gone  and return if bot?
+    
     ab_tests_finish if current_admin.nil? and not bot?
 
     log_product_visit(@product) unless @product.nil? 

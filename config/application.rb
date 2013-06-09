@@ -9,8 +9,6 @@ require 'resque_scheduler/server'
 require 'resque-history'
 require 'resque-history/server'
 
-
-
 require File.expand_path('../../lib/resque/resque_job', __FILE__)
 
 if defined?(Bundler)
