@@ -7,12 +7,12 @@
       <% unless @product.aw_image_url.blank? %>
 
       <%= link_to(image_tag(@product.aw_image_url, {
-        :alt => (@product.name),
-        :title => (@product.name),
+        :alt => raw(@product.name),
+        :title => raw(@product.name),
         :itemprop => "image",
       }), @product.merchant_image_url, {
         :class => "thumbnail", 
-        :title => (@product.name),
+        :title => raw(@product.name),
         :itemprop=>product_path(@product), 
         :"data-fancybox-group" => "group1"
       } )%>
@@ -21,11 +21,11 @@
         <li class="span4">
           <% unless @product.aw_image_url.blank? %>
             <%= link_to(image_tag(@product.aw_image_url, {
-        :alt => (@product.name),
-        :title => (@product.name),
+        :alt => raw(@product.name),
+        :title => raw(@product.name),
       }), @product.merchant_image_url, {
         :class => "thumbnail", 
-        :title => (@product.name),
+        :title => raw(@product.name),
         :"data-fancybox-group" => "group1"
       } )%>  
           <% end %>
