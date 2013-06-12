@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_filter :redirect_to_product, :only => [ :show ]
   before_filter :products_gone, :only => [ :show ]
   before_filter :find_product, :only => [:show, :visit]
   before_filter :ensure_search_term_presence, :only => [ :search ]
@@ -46,6 +47,14 @@ class ProductsController < ApplicationController
   end
 
   private 
+
+  def redirect_to_product
+    redirect = RedirectLink.where(:from_link => params[:id]).first
+    unless redirect.nil?
+      redirect.increment!(:redirect_count)
+      redirect_to redirect.to_link, :status => :moved_permanently and return 
+    end
+  end
 
   def products_gone
     id = params[:id]

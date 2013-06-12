@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608134232) do
+ActiveRecord::Schema.define(:version => 20130612052145) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -251,6 +251,16 @@ ActiveRecord::Schema.define(:version => 20130608134232) do
 
   add_index "random_category_products", ["category_id"], :name => "index_random_category_products_on_category_id"
   add_index "random_category_products", ["product_id"], :name => "index_random_category_products_on_product_id"
+
+  create_table "redirect_links", :force => true do |t|
+    t.string   "from_link"
+    t.string   "to_link"
+    t.integer  "redirect_count"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "redirect_links", ["from_link"], :name => "index_redirect_links_on_from_link"
 
   create_table "system_exceptions", :force => true do |t|
     t.text     "backtrace"
