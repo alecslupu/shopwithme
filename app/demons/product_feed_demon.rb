@@ -19,7 +19,7 @@ class ProductFeedDemon < JobUtilsDemon
       lines = []
       IO.foreach(obtained_file) do |line|
         lines << line
-        if lines.size >= 100
+        if lines.size >= 250
           lines = CSV.parse(lines.join)
           store lines
           lines = []
@@ -31,12 +31,14 @@ class ProductFeedDemon < JobUtilsDemon
   
 
   def store(lines)
-    lines.each do |row|
-      unless @header_skipped 
-        @header_skipped = true
-        next
-      end
-      process_feed(row)
+    ActiveRecord::Base.transaction do 
+      lines.each do |row|
+        unless @header_skipped 
+          @header_skipped = true
+          next
+        end
+        process_feed(row)
+      end 
     end 
     GC.start
   end 
