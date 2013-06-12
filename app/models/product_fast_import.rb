@@ -1,0 +1,3 @@
+class ProductFastImport < ActiveRecord::Base
+  attr_accessible :aw_deep_link, :aw_image_url, :aw_product_id, :aw_thumb_url, :brand_id, :brand_name, :category_id, :commission_group, :condition, :currency, :delivery_cost, :delivery_time, :description, :display_price, :ean, :in_stock, :is_for_sale, :isbn, :language, :merchant_category, :merchant_deep_link, :merchant_id, :merchant_image_url, :merchant_product_id, :merchant_thumb_url, :model_number, :mpn, :parent_product_id, :pre_order, :product_name, :product_type, :promotional_text, :rrp_price, :search_price, :specifications, :stock_quantity, :store_price, :upc, :valid_from, :valid_to, :warranty, :web_offer
+end
