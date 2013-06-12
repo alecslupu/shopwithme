@@ -48,11 +48,6 @@ class SitemapWorker < ResqueJob
           add product_path(product), lastmod: product.updated_at
         end
       end
-
-      Product.page(1).num_pages.times do |index|
-        add "#{products_path}/page/#{index}"#, :changefreq => 'daily', :priority => 0.9
-      end 
-
     end
     
     SitemapGenerator::Sitemap.ping_search_engines
