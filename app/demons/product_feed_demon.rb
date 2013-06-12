@@ -18,7 +18,7 @@ class ProductFeedDemon < JobUtilsDemon
       @header_skipped = false
       lines = []
       IO.foreach(obtained_file) do |line|
-        lines << @coder.decode(line)
+        lines << line
         if lines.size >= 100
           lines = CSV.parse(lines.join)
           store lines
@@ -68,17 +68,17 @@ class ProductFeedDemon < JobUtilsDemon
     
     ProductFastImport.create!({
       :merchant_product_id => row[FIELDS.index('merchant_product_id')].to_i,
-      :description => row[FIELDS.index('description')], 
+      :description => @coder.decode(row[FIELDS.index('description')]), 
       :category_id => row[FIELDS.index('category_id')].to_i, 
       :aw_product_id => row[FIELDS.index('aw_product_id')].to_i,  
-      :product_name => row[FIELDS.index('product_name')], 
-      :aw_deep_link => row[FIELDS.index('aw_deep_link')],
+      :product_name => @coder.decode(row[FIELDS.index('product_name')]), 
+      :aw_deep_link => @coder.decode(row[FIELDS.index('aw_deep_link')]),
       :stock_quantity => row[FIELDS.index('stock_quantity')].to_i, 
-      :model_number => row[FIELDS.index('model_number')],
+      :model_number => @coder.decode(row[FIELDS.index('model_number')]),
       :currency => row[FIELDS.index('currency')],
       :valid_to => row[FIELDS.index('valid_to')],
       :valid_from => row[FIELDS.index('valid_from')],
-      :brand_name => row[FIELDS.index('brand_name')],
+      :brand_name => @coder.decode(row[FIELDS.index('brand_name')]),
       :aw_thumb_url => row[FIELDS.index('aw_thumb_url')],
       :display_price => row[FIELDS.index('display_price')].to_f, 
       :store_price => row[FIELDS.index('store_price')].to_f, 
@@ -86,27 +86,27 @@ class ProductFeedDemon < JobUtilsDemon
       :search_price => row[FIELDS.index('search_price')].to_f,
       :delivery_cost => row[FIELDS.index('delivery_cost')].to_f,
       :commission_group => row[FIELDS.index('commission_group')],
-      :merchant_category => row[FIELDS.index('merchant_category')],
+      :merchant_category => @coder.decode(row[FIELDS.index('merchant_category')]),
       :merchant_deep_link => row[FIELDS.index('merchant_deep_link')],
       :merchant_image_url => row[FIELDS.index('merchant_image_url')],
-      :condition => row[FIELDS.index('condition')], 
+      :condition => @coder.decode(row[FIELDS.index('condition')]), 
       :delivery_time => row[FIELDS.index('delivery_time')],
-      :ean => row[FIELDS.index('ean')],
+      :ean => @coder.decode(row[FIELDS.index('ean')]),
       :in_stock => row[FIELDS.index('in_stock')], 
-      :isbn => row[FIELDS.index('isbn')],
+      :isbn => @coder.decode(row[FIELDS.index('isbn')]),
       :is_for_sale => row[FIELDS.index('is_for_sale')],
-      :language => row[FIELDS.index('language')], 
+      :language => @coder.decode(row[FIELDS.index('language')]), 
       :merchant_thumb_url => row[FIELDS.index('merchant_thumb_url')],
-      :mpn => row[FIELDS.index('mpn')], 
+      :mpn => @coder.decode(row[FIELDS.index('mpn')]), 
       :parent_product_id => row[FIELDS.index('parent_product_id')],
       :pre_order => row[FIELDS.index('pre_order')],
       :product_type => row[FIELDS.index('product_type')], 
-      :promotional_text => row[FIELDS.index('promotional_text')],
+      :promotional_text => @coder.decode(row[FIELDS.index('promotional_text')]),
       :rrp_price => row[FIELDS.index('rrp_price')], 
-      :specifications => row[FIELDS.index('specifications')], 
-      :upc => row[FIELDS.index('upc')], 
-      :warranty => row[FIELDS.index('warranty')],
-      :web_offer => row[FIELDS.index('web_offer')],
+      :specifications => @coder.decode(row[FIELDS.index('specifications')]), 
+      :upc => @coder.decode(row[FIELDS.index('upc')]), 
+      :warranty => @coder.decode(row[FIELDS.index('warranty')]),
+      :web_offer => @coder.decode(row[FIELDS.index('web_offer')]),
       :merchant_id => @advertiser.id,
       :brand_id => row[FIELDS.index('brand_id')].to_i,  
     })
