@@ -19,7 +19,7 @@ class ProductFeedDemon < JobUtilsDemon
       lines = []
       IO.foreach(obtained_file) do |line|
         lines << line
-        if lines.size >= 100
+        if lines.size >= 10
           lines = CSV.parse(lines.join) rescue next
           store lines
           lines = []
