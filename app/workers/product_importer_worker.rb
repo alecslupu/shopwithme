@@ -44,7 +44,7 @@ class ProductImporterWorker < ResqueJob
       product.web_offer           = a.web_offer
       product.merchant_category   = a.merchant_category
       product.commission_group    = a.commission_group
-      product.advertiser          = Rails.cache.fetch("adv_#{a.advertiser_id.to_i}", :expires_in => 500.minutes) { Advertiser.where(:id => a.advertiser_id.to_i).first }
+      product.advertiser          = Rails.cache.fetch("adv_#{a.merchant_id.to_i}", :expires_in => 500.minutes) { Advertiser.where(:id => a.merchant_id.to_i).first }
       product.category            = Rails.cache.fetch("cat_#{a.category_id.to_i}", :expires_in => 500.minutes)   { Category.where(:id => a.category_id.to_i).first }
 
       if a.brand_id.to_i > 0 
