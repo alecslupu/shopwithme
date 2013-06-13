@@ -3,12 +3,12 @@ class ProductImporterWorker < ResqueJob
 
   def self.perform
 
-    ProductFastImport.limit(10).each do |a|
+    ProductFastImport.limit(50).each do |a|
 
       product = Product.where(:aw_product_id => a.aw_product_id).first_or_initialize
 
       product.merchant_product_id = a.merchant_product_id
-      product.name                = a.name
+      product.name                = a.product_name
       product.description         = a.description
       product.aw_deep_link        = a.aw_deep_link
       product.aw_image_url        = a.aw_image_url
