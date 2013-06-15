@@ -1,6 +1,6 @@
 ShopWithMe::Application.routes.draw do
   
-  get "search",:action => :index, :controller => :search, :as => :search
+  get "search", :action => :index, :controller => :search, :as => :search
 
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
@@ -8,7 +8,9 @@ ShopWithMe::Application.routes.draw do
     mount Split::Dashboard => '/split'
     mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
   end
+
   
+
   resources :deals, :only => [ :index ] do 
     get 'page/:page', :action => :index, :on => :collection
     member do 
@@ -55,6 +57,13 @@ ShopWithMe::Application.routes.draw do
     end
   end 
 
+  scope :path => :extensions do 
+    scope :path => :chrome do 
+      scope :path => :search do
+        get :product, to: "search#chrome", :format => :json
+      end
+    end
+  end
   match '(errors)/:status', to: 'error#show', constraints: {status: /\d{3}/}
 
 

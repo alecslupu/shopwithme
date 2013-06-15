@@ -8,5 +8,4 @@ Delayed::Job.enqueue CategoryJob.new.perform
   def async_add_achievement_to_users
     Resque.enqueue(CacheEnqueueWorker)
   end
-
 =end

@@ -9,5 +9,5 @@ Split.configure do |config|
   config.db_failover_on_db_error = proc{|error| Rails.logger.error(error.message) }
   config.allow_multiple_experiments = true
   config.enabled = true
-  config.robot_regex = /\b(Baidu|bingbot|Gigabot|Googlebot|libwww-perl|lwp-trivial|msnbot|MJ12bot|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)\b/i
+  config.robot_regex = /\b(Baidu|linkdex|bingbot|Gigabot|Googlebot|libwww-perl|lwp-trivial|msnbot|MJ12bot|SiteUptime|Slurp|WordPress|ZIBB|ZyBorg)\b/i
 end

@@ -56,7 +56,7 @@ class ProductImporterWorker < ResqueJob
 
       product.brand = Rails.cache.fetch("brand_#{a.brand_id.to_i}", :expires_in => 500.minutes)   { Brand.where(:id => a.brand_id.to_i).first }  
 
-      product.save!
+      product.save
 
       a.destroy
     end
