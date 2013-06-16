@@ -2,17 +2,17 @@
 
 <div class="reviews-item">
   <ul class="inline padded">
-    <% cache("advertisers_for_#{@category.id}_category", :expires_in => 3.hours) do %>
+    <%# cache("advertisers_for_#{@category.id}_category", :expires_in => 3.hours) do %>
       <% @category.fetch_advertisers.random.limit(9).each do |advertiser| %>
         <li><%=avatar_of_advertiser(advertiser)%></li>
       <% end %>
-    <% end %>
+    <%# end %>
   </ul>
 </div>
 
 
-<% cache('sidebar_categories', :expires => 24.hours) do %>
+<%# cache('sidebar_categories', :expires => 24.hours) do %>
   <%= render 'layouts/sidebar_categories' %>
-<% end %>
+<%# end %>
 
 

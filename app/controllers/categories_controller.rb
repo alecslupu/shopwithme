@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
 
+  caches_page :index, :show
+
   def show
     @category = Category.find(params[:id])
     product_count = Rails.cache.fetch("all_category_#{@category.id}_products_count",:expires_in => 6.hours) { @category.products.size }

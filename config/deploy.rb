@@ -40,6 +40,7 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
     run "ln -nfs #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+    run "ln -nfs #{shared_path}/cache/advertisers  #{release_path}/public/advertisers" 
   end
   
   desc "Sync the public/assets directory."

@@ -1,6 +1,8 @@
 class AdvertisersController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
 
+  caches_page :index, :show
+
   def show
     @advertiser = Advertiser.find(params[:id])
     product_count = Rails.cache.fetch("all_advertiser_#{@advertiser.id}_products_count",:expires_in => 6.hours) { @advertiser.products.size  }

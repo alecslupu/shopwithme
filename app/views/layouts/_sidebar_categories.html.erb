@@ -13,7 +13,7 @@
           <ul class="nav nav-list">
             <% if category.children.size > 0 %>
               <% category.children.each do |cat|%>
-              <li>» <%= link_to_category(cat)%><span>(<%=cat.products.size%>)</span></li>
+              <li>&raquo; <%= link_to_category(cat)%><span>(<%=cat.products.size%>)</span></li>
               <% end %>
             <% else %>
             <li>» <%= link_to_category(category)%><span>(<%=category.products.size%>)</span></li>

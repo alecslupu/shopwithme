@@ -22,7 +22,7 @@ class Product < ActiveRecord::Base
   paginates_per 15
 
   scope :random, order("RAND()")
-  scope :include_all, includes(:advertiser, :category)
+  scope :include_all, includes(:advertiser, :category,:brand)
   
   scope :page_with_cached_total_count, lambda {|page_number, total_count|
     order("id").page(page_number).extending {

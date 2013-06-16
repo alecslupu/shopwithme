@@ -16,3 +16,9 @@
 public/sitemaps/
 solr/data/*
 solr/pids/*
+public/advertisers.html
+public/advertisers/
+public/brands.html
+public/brands/
+public/categories/
+public/categories.html
