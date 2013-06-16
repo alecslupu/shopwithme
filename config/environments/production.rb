@@ -62,8 +62,8 @@ ShopWithMe::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  # config.cache_store = :dalli_store, 'localhost',
-  # { :namespace => "ShopWithMe", :expires_in => 1.day, :compress => true }
+  config.cache_store = :dalli_store, 'localhost',
+  { :namespace => "ShopWithMe", :expires_in => 1.day, :compress => true }
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

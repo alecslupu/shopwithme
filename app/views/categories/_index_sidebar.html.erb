@@ -1,6 +1,7 @@
 
 <h3 class="title nm">MERCHANTS IN THIS CATEGORY</h3>
-
+<% 
+=begin %>
 <div class="reviews-item">
   <ul class="inline padded">
     <% Advertiser.fetch_by_categories_id(@categories.map(&:id)).random.limit(9).each do |advertiser| %>
@@ -8,8 +9,9 @@
     <% end %>
   </ul>
 </div>
+<% 
+=end %>
 
 <%# cache('sidebar_categories', :expires => 24.hours) do %>
   <%= render 'layouts/sidebar_categories' %>
 <%# end %>
-
