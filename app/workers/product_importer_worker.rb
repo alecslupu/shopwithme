@@ -3,7 +3,16 @@ class ProductImporterWorker < ResqueJob
 
   def self.perform
 
-    ProductFastImport.limit(200).each do |a|
+    10.times do |a|
+      ProductFastImport.limit(200).each do |a|
+        self.process_product(a)
+      end
+    end
+
+    Resque.enqueue(ProductImporterWorker) unless ProductFastImport.first.nil?
+  end 
+  protected 
+  def self.process_product(a)
 
       product = Product.where(:aw_product_id => a.aw_product_id).first_or_initialize
 
@@ -59,8 +68,5 @@ class ProductImporterWorker < ResqueJob
       product.save
 
       a.destroy
-    end
-
-    Resque.enqueue(ProductImporterWorker) unless ProductFastImport.first.nil?
   end 
 end
