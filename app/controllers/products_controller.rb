@@ -1,13 +1,9 @@
 class ProductsController < ApplicationController
-  before_filter :redirect_to_product, :only => [ :show ]
-  before_filter :products_gone, :only => [ :show ]
   before_filter :find_product, :only => [:show, :visit]
   before_filter :ensure_search_term_presence, :only => [ :search ]
   before_filter :redirect_to_product_view, :only => [ :show ]
 
   def index
-    # product_count = Rails.cache.fetch('all_products_count',:expires_in => 6.hours) { Product.count }
-    # @products = Product.includes(:category, :advertiser, :brand).page_with_cached_total_count params[:page], product_count
     if bot?
       render :text => "", :status => :gone and return 
     else
@@ -48,26 +44,12 @@ class ProductsController < ApplicationController
 
   private 
 
-  def redirect_to_product
-    redirect = RedirectLink.where(:from_link => params[:id]).first
-    unless redirect.nil?
-      redirect.increment!(:redirect_count)
-      redirect_to redirect.to_link, :status => :moved_permanently and return 
-    end
-  end
-
-  def products_gone
-    id = params[:id]
-    replacements = ['-aacute-', '-amp-', '-quot-', '-pound-', '-euro-','-39-', '-ndash-', '-rsquo-', '-eacute-', '-euml-', '-auml-', '-reg-']
-    replacements.each {|replacement| params[:id] = params[:id].gsub(replacement, '-')}
-   
-    if id != params[:id]
-      render :text => "", :status => :gone and return
-    end
-  end
-
   def find_product
-    @product = Product.cached_find(params[:id])
+    begin 
+      @product = Product.cached_find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render 'error/404' , :layout => 'error', :status =>  404
+    end
   end 
 
   def redirect_to_product_view

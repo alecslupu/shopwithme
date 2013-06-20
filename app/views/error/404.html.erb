@@ -4,6 +4,9 @@
   <p>The page you requested could not be found, either contact your webmaster or try again. Use your browsers <b>Back</b> button to navigate to the page you have prevously come from</p>
   <p><b>Or you could just press this neat little button:</b></p>
   <a href="<%=root_url%>" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Take Me Home</a>
-  <!-- <a href="<%=root_url%>" class="btn btn-large btn-info"><i class="icon-arrow-left icon-white"></i> Take Me Back</a> -->
+  <% if current_admin and not current_admin.nil? %>
+  <a href="<%="https://www.google.com/webmasters/tools/removals-request?hl=en&siteUrl=http://www.shop-with.me/&urlt=#{request.protocol}#{request.host_with_port}#{request.fullpath}"%>" target="_blank" class="btn btn-large btn-danger"><i class="icon-remove icon-white"></i>Remove from google</a>
+  <% end %>
+  
 </div>
 <br />
