@@ -1,6 +1,9 @@
 <% content_for(:page_title) { @category.name } %>
 <% content_for(:page_description) { "View products in #{@category.name}"} %>
 
+<% content_for(:page_title) { "Display products in #{@category.name} category" } %>
+<% content_for(:page_description) { "View over {@products.total_count} products in #{@category.name} category "} %>
+
 <%#=render 'products/search_form' %>
 <div class="main_content detail-product">
 

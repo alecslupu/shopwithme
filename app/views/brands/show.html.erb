@@ -1,5 +1,5 @@
-<% content_for(:page_title) { @brand.name } %>
-<% content_for(:page_description) { "View products by #{@brand}"} %>
+<% content_for(:page_title) { "Display products by #{@brand.name}" } %>
+<% content_for(:page_description) { "View over {@products.total_count} products by  #{@brand}"} %>
 
 <%#=render 'products/search_form' %>
 <div class="main_content detail-product">
