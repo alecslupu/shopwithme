@@ -31,14 +31,11 @@
     </div>
     <div class="span5">
       <div class="other_info">
-        <% if product.price > 0 %>
-          <span class="label label-important price"><%=product.price%> <%=product.currency%></span> <!-- Save 15% -->
-          <hr/>
-        <% end %>
+       
         <address>
           <i><%=link_to_advertiser(product.advertiser)%>
            <br />
-           <%= (product.advertiser.strapline) %></i>
+           <%= raw(product.advertiser.strapline) %></i>
         </address>
         <p>
           

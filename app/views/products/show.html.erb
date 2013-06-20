@@ -1,7 +1,7 @@
 <% content_for(:page_title) { "#{@product.name} by #{@product.advertiser}" } %>
 <% content_for(:page_description) { "View #{@product.name}"} %>
 <div class="main_content detail-product" itemscope itemtype="http://schema.org/Product">           
-  <h3 class="title"><%=(@product.category)%></h3>      
+  <h3 class="title"><%= raw(@product.name)%></h3>      
   <div class="row-fluid">
     <div class="span4">
       <% unless @product.aw_image_url.blank? %>
@@ -50,31 +50,28 @@
     </div> 
 
     <div class="span8">
-      <h5 itemprop="name">
+      <h1 itemprop="name" class="smaller">
         <%
 =begin %> <span class="label label-important">10%</span> 
 <%
 =end %>  
-  <%= (@product.name)%></h5>
+  <%= (@product.name)%></h1>
       <span itemprop="description"><%= raw(@product.short_description(15))%></span>
       
       <h4 class="clearfix">
-        <% variant =  ab_test("hide_price_in_show_page", 'yes', 'no') %>
-        <% if variant == 'no' %>
-          <strong>Price:<span class="label label-important price"><%=@product.price%> <%=@product.currency%></span></strong>
-        <% else %>
-          <% text = ab_test('cta_visit_text', "Get me to the product", "Details", "Click to view price", "Click here to view price") %>
-          <% css  = ab_test('cta_visit_color', 'btn-charlie', 'btn-danger', 'btn-success', 'btn-warning', 'btn-info') %>
-          <% size = ab_test('cta_visit_size', 'btn-large', 'btn-normal')%>
-
-          <%= button_to text, visit_product_path(@product), :class => "btn #{size} #{css}" %>
-        <% end %>
+        <%= button_to "Click Here To See The Brand New Price!", visit_product_path(@product), :class => "btn btn-large btn-danger" %>
       </h4>
 
       <div class="contact-information">
         <h5>MERCHANT INFORMATION</h5>
         <address>       
           <i><%= raw(@product.advertiser.name + "<br />" + @product.advertiser.strapline) %></i>
+          <p>
+            <strong>See more products by:</strong> <%=link_to_advertiser(@product.advertiser)%> 
+            <% unless  @product.category.nil? %>
+              <br />
+              <strong>See more products in category:</strong> <%=link_to_category(@product.category)%>
+            <% end %> <br /></p>
         </address>
         <%= button_to "Details", visit_product_path(@product), :class => 'btn btn-charlie ' %>
 <% 
@@ -91,24 +88,29 @@
   <div class="row-fluid">
     <div class="span12">
       <ul class="nav nav-tabs" id="myTab">
-        <!-- <li class="active"><a href="#sim">SIMILAR PRODUCTS</a></li> -->
-        <li class='active'><a href="#desc">DESCRIPTION</a></li>
+        <% if @products.size > 0 %>
+          <li class="active"><a href="#sim">SIMILAR PRODUCTS</a></li>
+          <li><a href="#desc">DESCRIPTION</a></li>
+        <% else %>
+          <li class="active"><a href="#desc">DESCRIPTION</a></li>
+        <% end %>
         <li><a href="#specs">SPECIFICATIONS</a></li>
-        <li><a href="#profile">RECENT REVIEWS</a></li>
+        <!-- <li><a href="#profile">RECENT REVIEWS</a></li> -->
       </ul>              
       <div class="tab-content">
-        <!--<div class="tab-pane active" id="sim">
-          <% if @products.size > 0 %>
-            <div class="row-fluid">
-              <%= render 'similar_products', :products => @products%>
-            </div>
+        <% if @products.size > 0 %>
+          <div class="tab-pane active" id="sim">
+              <div class="row-fluid">
+                <%= render 'similar_products', :products => @products%>
+              </div>
+          </div>
 
-          <% else %>
-          <% end %>
-        </div>-->
-        <div class="tab-pane" id="desc">
-          <%= @product.description.blank? ? "There is no description available" : raw(@product.description)%>
-        </div>
+          <div class="tab-pane" id="desc">
+        <% else %>
+          <div class="tab-pane active" id="desc">
+        <% end %>
+          <%= @product.description.blank? ? "There is no description available" : raw(@product.description)%></div>
+
         <div class="tab-pane" id="specs">
           <%= @product.specifications.blank? ? "There are no specifications available" : raw(@product.specifications)%>
         </div>
