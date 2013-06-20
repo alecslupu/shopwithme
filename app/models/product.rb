@@ -57,11 +57,7 @@ class Product < ActiveRecord::Base
   def price 
     display_price || store_price || search_price 
   end 
-
-  # def product_by_advertiser
-  #   advertiser.products.where('id <> ?', id).random.limit(3)
-  # end
-
+  
   private 
   def flush_cache
     Rails.cache.delete([self.class.name, id])

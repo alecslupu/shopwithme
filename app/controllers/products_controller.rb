@@ -15,13 +15,13 @@ class ProductsController < ApplicationController
     unless @product.nil?
       log_product_view(@product)
       @@product = @product 
-      @products = # Rails.cache.fetch("p#{@product.id}_similiar_products") do 
+      @products = Rails.cache.fetch("p#{@product.id}_similiar_products") do 
         Product.search do
           keywords @@product.name.split(" "), :fields => [ :name ]
           without @@product
-          paginate :page => 1, :per_page => 6
+          paginate :page => 1, :per_page => 4
         end.results
-      #end
+      end
     end
   end 
 

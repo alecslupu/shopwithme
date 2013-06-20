@@ -15,7 +15,7 @@
     <% set1.each do |product| %>
       <div class="featured-item">
         <%= avatar_of_product(product, {}, {
-          :class => 'img pull-left width127'
+          :class => 'img pull-left span3'
         }) %>
         <strong><%= link_to_product(product)%></strong>
         <p>
@@ -35,7 +35,7 @@
     <% set2.each do |product| %>
       <div class="featured-item">
         <%= avatar_of_product(product, {}, {
-          :class => 'img pull-left width127'
+          :class => 'img pull-left span3'
         }) %>
         <strong><%= link_to_product(product)%></strong>
         <p>
