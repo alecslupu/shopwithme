@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
 
   extend FriendlyId
 
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :history]
 
   searchable do
     text :name, :boost => 5, :more_like_this => true

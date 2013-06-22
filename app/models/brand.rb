@@ -5,7 +5,7 @@ class Brand < ActiveRecord::Base
   attr_accessible :name
 
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :history]
 
   searchable do
     text :name

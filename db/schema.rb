@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130612052145) do
+ActiveRecord::Schema.define(:version => 20130622094125) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -119,21 +119,16 @@ ActiveRecord::Schema.define(:version => 20130612052145) do
   add_index "deals", ["advertiser_id"], :name => "index_deals_on_advertiser_id"
   add_index "deals", ["country_id"], :name => "index_deals_on_country_id"
 
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+  create_table "friendly_id_slugs", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "sluggable_id",                 :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.datetime "created_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
+  add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "product_display_logs", :force => true do |t|
     t.integer  "product_id"
@@ -145,6 +140,53 @@ ActiveRecord::Schema.define(:version => 20130612052145) do
   end
 
   add_index "product_display_logs", ["product_id"], :name => "index_product_display_logs_on_product_id"
+
+  create_table "product_fast_imports", :force => true do |t|
+    t.string   "merchant_id"
+    t.string   "merchant_category"
+    t.string   "merchant_deep_link"
+    t.string   "merchant_image_url"
+    t.string   "aw_thumb_url"
+    t.string   "commission_group"
+    t.string   "condition"
+    t.string   "delivery_time"
+    t.string   "ean"
+    t.string   "in_stock"
+    t.string   "isbn"
+    t.string   "is_for_sale"
+    t.string   "language"
+    t.string   "merchant_thumb_url"
+    t.string   "mpn"
+    t.string   "parent_product_id"
+    t.string   "pre_order"
+    t.string   "product_type"
+    t.string   "promotional_text"
+    t.string   "rrp_price"
+    t.string   "specifications"
+    t.string   "upc"
+    t.string   "warranty"
+    t.string   "web_offer"
+    t.integer  "aw_product_id"
+    t.integer  "merchant_product_id"
+    t.string   "product_name"
+    t.float    "display_price"
+    t.float    "store_price"
+    t.string   "description"
+    t.integer  "category_id"
+    t.string   "aw_deep_link"
+    t.string   "aw_image_url"
+    t.float    "search_price"
+    t.string   "currency"
+    t.float    "delivery_cost"
+    t.string   "brand_name"
+    t.integer  "brand_id"
+    t.string   "valid_to"
+    t.string   "valid_from"
+    t.integer  "stock_quantity"
+    t.string   "model_number"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "product_visit_logs", :force => true do |t|
     t.integer  "product_id"
@@ -163,7 +205,7 @@ ActiveRecord::Schema.define(:version => 20130612052145) do
     t.integer  "merchant_product_id"
     t.string   "name"
     t.string   "slug"
-    t.string   "description"
+    t.text     "description"
     t.text     "aw_deep_link"
     t.string   "aw_image_url"
     t.string   "aw_thumb_url"
@@ -269,7 +311,6 @@ ActiveRecord::Schema.define(:version => 20130612052145) do
     t.integer  "exception_count"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "uri"
     t.string   "status_code"
     t.string   "action"
     t.string   "controller"

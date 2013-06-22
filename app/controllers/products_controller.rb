@@ -45,11 +45,7 @@ class ProductsController < ApplicationController
   private 
 
   def find_product
-    begin 
-      @product = Product.cached_find(params[:id])
-    rescue ActiveRecord::RecordNotFound => e
-      render 'error/404' , :layout => 'error', :status =>  404
-    end
+    @product = Product.cached_find(params[:id])
   end 
 
   def redirect_to_product_view
@@ -70,12 +66,16 @@ class ProductsController < ApplicationController
     finished('details_link_to_visit_in_listing')
   end 
 
+  def skip_log
+    return ( not request.referer.nil? and request.referer.start_with?(root_url) and not bot? and not current_admin )
+  end
+
   def log_product_view(product) 
     product.display_logs.create({
       :referrer => request.referer, 
       :user_agent => request.user_agent, 
       :ip => request.remote_ip
-    }) unless not request.referer.nil? and request.referer.start_with?(root_url)
+    }) unless skip_log 
 
   end 
 

@@ -22,7 +22,7 @@ class Advertiser < ActiveRecord::Base
   scope :with_products, where('products_count > 0')
   
 
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :history]
   paginates_per 5
 
   def compute_random_products(how_many)

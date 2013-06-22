@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
   
   extend FriendlyId
 
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :history]
   acts_as_nested_set
   rails_admin do
     nested_set({
