@@ -13,6 +13,11 @@ class ProductsController < ApplicationController
 
   def show
     unless @product.nil?
+
+      if request.path != product_path(@product)
+        redirect_to @product, status: :moved_permanently and return 
+      end
+
       log_product_view(@product)
       @@product = @product 
       @products = Rails.cache.fetch("p#{@product.id}_similiar_products") do 
