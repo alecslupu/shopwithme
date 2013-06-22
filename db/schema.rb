@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130622094125) do
+ActiveRecord::Schema.define(:version => 20130622101526) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -187,6 +187,14 @@ ActiveRecord::Schema.define(:version => 20130622094125) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
+
+  create_table "product_name_hacks", :force => true do |t|
+    t.string "pname"
+    t.string "pslug"
+    t.string "htmlent"
+  end
+
+  add_index "product_name_hacks", ["htmlent"], :name => "index_product_name_hacks_on_htmlent"
 
   create_table "product_visit_logs", :force => true do |t|
     t.integer  "product_id"
