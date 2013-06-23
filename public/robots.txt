@@ -1,4 +1,2 @@
 User-agent: *
-Disallow: /products/page/
-Disallow: /products/*/visit
 Sitemap: http://www.shop-with.me/sitemaps/sitemap.gz
