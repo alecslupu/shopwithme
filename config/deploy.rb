@@ -74,13 +74,13 @@ namespace :deploy do
     run "cd #{current_path}; rake RAILS_ENV=#{rails_env} sunspot:solr:start"
   end
   task :stop_resque, :roles => :web , :except => { :no_release => true } do 
-    # run "(ps -e -o pid,command | grep resque  | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT) && sleep 3"
+    run "(ps -e -o pid,command | grep resque  | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT) && sleep 3"
     # run "(ps -e -o pid,command | grep resque-scheduler | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT) && sleep 3"
-    # run "(ps -e -o pid,command | grep resque  | grep -v 'grep' | cut -d ' ' -f 2 | xargs -L1 kill -s QUIT) && sleep 3"
+    run "(ps -e -o pid,command | grep resque  | grep -v 'grep' | cut -d ' ' -f 2 | xargs -L1 kill -s QUIT) && sleep 3"
     # run "(ps -e -o pid,command | grep resque-scheduler | grep -v 'grep' | cut -d ' ' -f 2 | xargs -L1 kill -s QUIT) && sleep 3"
   end 
   task :start_resque, :roles => :web  do  #, :except => { :no_release => true }
-    # run "(export RAILS_ENV=#{rails_env}  && export QUEUE=* && cd #{current_path} && nohup rake resque:work &) && sleep 1", :pty => true
+    run "(export RAILS_ENV=#{rails_env}  && export QUEUE=* && export COUNT=2 && cd #{current_path} && nohup rake resque:workers &) && sleep 1", :pty => true
     # run "(export RAILS_ENV=#{rails_env} && cd #{current_path} && nohup rake resque:scheduler &) && sleep 1", :pty => true
   end
 end
