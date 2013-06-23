@@ -6,13 +6,6 @@
   <a href="<%=root_url%>" class="btn btn-large btn-info"><i class="icon-home icon-white"></i> Take Me Home</a>
   <% if current_admin and not current_admin.nil? %>
   <a id="removeLink" href="#" class="btn btn-large btn-danger"><i class="icon-remove icon-white"></i>Remove from google</a>
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-      link = 'https://www.google.com/webmasters/tools/removals-request?hl=en&siteUrl=http://www.shop-with.me/&urlt=' + document.location.href;
-      $('#removeLink').attr('href',link);
-    });
-  </script>
   <% end %>
 </div>
 <br />

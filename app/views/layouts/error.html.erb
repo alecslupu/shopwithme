@@ -41,5 +41,13 @@
 
 <%= Rails.cache.fetch("cache_footer", :expires => 20.minutes ) { render 'layouts/footer' } %>
 
+<% if current_admin and not current_admin.nil? %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      link = 'https://www.google.com/webmasters/tools/removals-request?hl=en&siteUrl=http://www.shop-with.me/&urlt=' + document.location.href;
+      $('#removeLink').attr('href',link);
+    });
+  </script>
+<% end %>
 </body>
 </html>
