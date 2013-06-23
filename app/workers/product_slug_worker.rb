@@ -4,7 +4,7 @@ class ProductSlugWorker < ResqueJob
   def self.perform(product_id)
     ActiveRecord::Base.verify_active_connections!
 
-    Product.where('id >= ?', product_id).first(250).each do |p|
+    Product.where('id >= ?', product_id).first(1000).each do |p|
       p.save
       name = p.name
       name = name.gsub('&quot;', '"')
