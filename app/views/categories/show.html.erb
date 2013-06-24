@@ -20,17 +20,15 @@
     <h3 class="title"><span class="pull-left">BROWSE BY SUBCATEGORY</span></h3>
     <% @category.children.each_with_index do |cat, index| %>
       <% if index % 4 == 0 %><div class="row-fluid"><% end %>
-     <div class="span3">» <%= link_to_category(cat)%><span>(<%=cat.products.size%>)</span></div>
+     <div class="span3">&raquo; <%= link_to_category(cat)%><span>(<%=cat.products.size%>)</span></div>
       <% if index % 4 == 3 %></div><% end %>
     <% end %>
     <% if @category.children.count % 4 != 0 %></div><% end %>
   <% end %>
   <h3 class="title">LISTINGS in <%=@category%></h3>
 
-<% path = ab_test('details_link_to_visit_in_listing', 'yes', 'no')%>
-
   <% if @products.size > 0 %>
-    <%= render @products, :path => path %>
+    <%= render @products %>
     <%= paginate @products, :window => 2 %>
   <% else %>
     <%= render 'products/no_products' %>

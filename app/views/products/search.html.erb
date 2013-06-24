@@ -6,10 +6,8 @@
 <div class="main_content detail-product">
   <h3 class="title">LISTINGS by search <%=params[:search]%></h3>
 
-  <% path = ab_test('details_link_to_visit_in_listing', 'yes', 'no')%>
-
   <% if @products.results.size > 0 %>
-    <%= render @products.results, :path => path  %>
+    <%= render @products.results  %>
     <%= paginate @products.results, :window => 2 %>
   <% else %>
     <%= render 'products/no_products' %>

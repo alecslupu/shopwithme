@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_filter :find_product, :only => [:show, :visit]
   before_filter :ensure_search_term_presence, :only => [ :search ]
-  # before_filter :redirect_to_product_view, :only => [ :show ]
 
   def index
     if bot?
@@ -40,8 +39,6 @@ class ProductsController < ApplicationController
   def visit
     render :text => "", :status => :gone  and return if bot?
 
-    ab_tests_finish if current_admin.nil? and not bot?
-
     log_product_visit(@product) unless @product.nil? 
 
     redirect_to @product.aw_deep_link
@@ -51,25 +48,11 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.cached_find(params[:id])
-  end 
-
-  def redirect_to_product_view
-    if current_admin.nil?  and not bot? 
-      redirect_to visit_product_path(@product) and return 
-    end
-  end 
+  end
 
   def bot?
     request.user_agent.match(Split.configuration.robot_regex)
   end
-
-  def ab_tests_finish
-    finished('hide_price_in_show_page')
-    finished('cta_visit_text')
-    finished('cta_visit_color')
-    finished('cta_visit_size')
-    finished('details_link_to_visit_in_listing')
-  end 
 
   def skip_log
     return ( not request.referer.nil? and request.referer.start_with?(root_url) and not bot? and not current_admin )

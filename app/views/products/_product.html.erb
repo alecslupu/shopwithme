@@ -45,15 +45,10 @@
           <% end %>
           <strong>Merchant URL:</strong> 
           <a href="<%=product.advertiser.promote_url%>" rel="nofollow" target="_blank"><%=product.advertiser.single_url%></a></p>
-
-          <% if path == 'yes'%> 
-            <%= button_to "Details", visit_product_path(product), :class => 'btn btn-small btn-primary ' %>
-          <% else %>
-            <%= link_to 'Details', product_path(product), {
-              :class => 'btn btn-small btn-primary ', 
-              :title => (product.name)
-            }  %>
-          <% end %>
+          <%= link_to 'Details', product_path(product), {
+            :class => 'btn btn-small btn-primary ', 
+            :title => (product.name)
+          }  %>
       </div>
     </div>
   </div>
