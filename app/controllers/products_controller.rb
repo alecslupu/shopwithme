@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_filter :find_product, :only => [:show, :visit]
   before_filter :ensure_search_term_presence, :only => [ :search ]
-  before_filter :redirect_to_product_view, :only => [ :show ]
+  # before_filter :redirect_to_product_view, :only => [ :show ]
 
   def index
     if bot?
@@ -20,10 +20,9 @@ class ProductsController < ApplicationController
 
       log_product_view(@product)
       @@product = @product 
-      @@terms = @product.name.gsub!("+", '')
       @products = Rails.cache.fetch("p#{@product.id}_similiar_products") do 
         Product.search do
-          keywords @@terms.split(" "), :fields => [ :name ]
+          keywords @@product.name.gsub('+', '').split(" "), :fields => [ :name ]
           without @@product
           paginate :page => 1, :per_page => 4
         end.results
