@@ -20,9 +20,10 @@ class ProductsController < ApplicationController
 
       log_product_view(@product)
       @@product = @product 
+      @@terms = @product.name.gsub!("+", '')
       @products = Rails.cache.fetch("p#{@product.id}_similiar_products") do 
         Product.search do
-          keywords @@product.name.split(" "), :fields => [ :name ]
+          keywords @@terms.split(" "), :fields => [ :name ]
           without @@product
           paginate :page => 1, :per_page => 4
         end.results

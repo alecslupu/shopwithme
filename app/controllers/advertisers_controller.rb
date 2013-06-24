@@ -1,7 +1,7 @@
 class AdvertisersController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
 
-  caches_page :index, :show
+  # caches_page :index, :show
 
   def show
     @advertiser = Advertiser.find(params[:id])

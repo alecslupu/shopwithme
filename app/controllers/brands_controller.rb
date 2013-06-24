@@ -1,7 +1,7 @@
 class BrandsController < ApplicationController
   before_filter :ensure_search_term_presence, :only => [ :search ]
 
-  caches_page :index, :show
+  # caches_page :index, :show
 
   def show
     @brand = Brand.find(params[:id])
