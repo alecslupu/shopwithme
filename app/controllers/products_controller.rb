@@ -1,7 +1,9 @@
 class ProductsController < ApplicationController
-  caches_page :show 
+  
   
   before_filter :find_product, :only => [:show, :visit]
+  before_filter :redirect_to_product_view, :only => [ :show ]  
+  
   def index
     if bot?
       render :text => "", :status => :gone and return 
@@ -23,13 +25,16 @@ class ProductsController < ApplicationController
 
   def visit
     render :text => "", :status => :gone  and return if bot?
-
-    log_product_visit(@product) unless @product.nil? 
-
-    redirect_to @product.aw_deep_link
+    redirect_to ("http://www.shop-with.me"+visit_product_path(@product)) and return 
   end
 
   private 
+
+  def redirect_to_product_view
+    if current_admin.nil?  and not bot? 
+      redirect_to visit_product_path(@product) and return 
+    end
+  end 
 
   def find_product
     @product = Product.cached_find(params[:id])

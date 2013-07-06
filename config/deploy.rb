@@ -3,7 +3,7 @@ require "bundler/capistrano"
 # load 'deploy/assets'
 
 
-set :application, "shop-with.me"
+set :application, "productdepository.com"
 role :app, application
 role :web, application
 role :db,  application, :primary => true
@@ -19,7 +19,7 @@ set :use_sudo, false
 set :keep_releases, 5
 
 set :rails_env, "production"
-set :branch, "master"
+set :branch, "product_repository"
 
 set :scm, :git
 set :deploy_via, :remote_cache
@@ -60,16 +60,6 @@ namespace :deploy do
   task :assets_precompile, :roles => :web, :except => { :no_release => true } do
     run "rm -r #{release_path}/public/assets"
     run "cd #{release_path}; rake RAILS_ENV=#{rails_env} assets:precompile"
-  end
-  task :stop_resque, :roles => :web , :except => { :no_release => true } do 
-    run "(ps -e -o pid,command | grep resque  | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT) && sleep 3"
-    # run "(ps -e -o pid,command | grep resque-scheduler | grep -v 'grep' | cut -d ' ' -f 1 | xargs -L1 kill -s QUIT) && sleep 3"
-    run "(ps -e -o pid,command | grep resque  | grep -v 'grep' | cut -d ' ' -f 2 | xargs -L1 kill -s QUIT) && sleep 3"
-    # run "(ps -e -o pid,command | grep resque-scheduler | grep -v 'grep' | cut -d ' ' -f 2 | xargs -L1 kill -s QUIT) && sleep 3"
-  end 
-  task :start_resque, :roles => :web  do  #, :except => { :no_release => true }
-    run "(export RAILS_ENV=#{rails_env}  && export QUEUE=* && cd #{current_path} && nohup rake resque:work &) && sleep 1", :pty => true
-    # run "(export RAILS_ENV=#{rails_env} && cd #{current_path} && nohup rake resque:scheduler &) && sleep 1", :pty => true
   end
 end
 

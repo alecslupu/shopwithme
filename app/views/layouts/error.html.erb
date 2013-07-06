@@ -2,12 +2,12 @@
 <html>
 <head>
     <% if Rails.env == 'production' %>
-      <title><%= 'ShopWithMe - Error' %></title>
-      <meta name="description" content="<%= 'ShopWithMe - Some kind of error occured' %>"/>
+      <title><%= DOMAIN_NAME + ' - Error' %></title>
+      <meta name="description" content="<%= DOMAIN_NAME + ' - Some kind of error occured' %>"/>
       <script type="text/javascript">
 
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-41086843-1']);
+        _gaq.push(['_setAccount', <%=ANALITYCS%>]);
         _gaq.push(['_trackPageview']);
 
         (function() {
@@ -44,7 +44,7 @@
 <% if current_admin and not current_admin.nil? %>
   <script type="text/javascript">
     $(document).ready(function(){
-      link = 'https://www.google.com/webmasters/tools/removals-request?hl=en&siteUrl=http://www.shop-with.me/&urlt=' + document.location.href;
+      link = 'https://www.google.com/webmasters/tools/removals-request?hl=en&siteUrl=<%=root_url%>&urlt=' + document.location.href;
       $('#removeLink').attr('href',link);
     });
   </script>
