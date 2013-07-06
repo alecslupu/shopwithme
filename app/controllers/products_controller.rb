@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
+  caches_page :show 
+  
   before_filter :find_product, :only => [:show, :visit]
-  before_filter :ensure_search_term_presence, :only => [ :search ]
-
   def index
     if bot?
       render :text => "", :status => :gone and return 
@@ -18,21 +18,6 @@ class ProductsController < ApplicationController
       end
 
       log_product_view(@product)
-      @@product = @product 
-      @products = Rails.cache.fetch("p#{@product.id}_similiar_products") do 
-        Product.search do
-          keywords @@product.name.gsub('+', '').split(" "), :fields => [ :name ]
-          without @@product
-          paginate :page => 1, :per_page => 4
-        end.results
-      end
-    end
-  end 
-
-  def search 
-    @products = Product.search do
-      fulltext params[:search]
-      paginate :page => params[:page], :per_page => 10
     end
   end 
 
@@ -73,10 +58,4 @@ class ProductsController < ApplicationController
       :ip => request.remote_ip
     }) unless bot?
   end
-
-  def ensure_search_term_presence
-    if params[:search].blank?
-      redirect_to(products_path) and return 
-    end 
-  end 
 end

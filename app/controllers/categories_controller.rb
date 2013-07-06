@@ -1,6 +1,4 @@
 class CategoriesController < ApplicationController
-  before_filter :ensure_search_term_presence, :only => [ :search ]
-
   # caches_page :index, :show
 
   def show
@@ -13,18 +11,4 @@ class CategoriesController < ApplicationController
     @categories = Category.alphabetically.with_products.page(params[:page])
   end
 
-  def search 
-    @categories = Category.search do
-      fulltext params[:search]
-      paginate :page => params[:page], :per_page => 10
-    end
-  end 
-
-  private 
-
-  def ensure_search_term_presence
-    if params[:search].blank?
-      redirect_to(categories_path) and return 
-    end 
-  end 
 end

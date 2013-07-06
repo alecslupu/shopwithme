@@ -49,14 +49,6 @@ gem 'newrelic_rpm'
 gem 'sitemap_generator'  #google sitemaps
 gem 'htmlentities'
 
-#search 
-gem 'sunspot_solr'
-gem 'sunspot_rails' 
-gem 'progress_bar'
-
-
-
-
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

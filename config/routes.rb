@@ -1,6 +1,4 @@
 ShopWithMe::Application.routes.draw do
-  
-  get "search", :action => :index, :controller => :search, :as => :search
 
   devise_for :admins
   authenticate :admin do #replace admin_user(s) with whatever model your users are stored in.
@@ -20,10 +18,6 @@ ShopWithMe::Application.routes.draw do
 
   resources :products, :only => [:index, :show] do 
     get 'page/:page', :action => :index, :on => :collection
-    get 'search/:search/page/:page', :action => :search, :on => :collection
-    collection do 
-      get 'search/(:search)', :action => :search, :as => :search
-    end 
     member do 
       match :visit
     end
@@ -33,28 +27,16 @@ ShopWithMe::Application.routes.draw do
   resources :advertisers, :only => [ :index, :show ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
-    get 'search/:search/page/:page', :action => :search, :on => :collection
-    collection do 
-      get 'search/(:search)', :action => :search, :as => :search
-    end
   end 
   
   resources :brands, :only => [ :index, :show ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
-    get 'search/:search/page/:page', :action => :search, :on => :collection
-    collection do 
-      get 'search/(:search)', :action => :search, :as => :search
-    end 
   end 
 
   resources :categories, :only => [ :show, :index ] do 
     get 'page/:page', :action => :index, :on => :collection
     get 'page/:page', :action => :show, :on => :member
-    get 'search/:search/page/:page', :action => :search, :on => :collection
-    collection do 
-      get 'search/(:search)', :action => :search, :as => :search
-    end
   end 
 
   scope :path => :extensions do 

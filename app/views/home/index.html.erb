@@ -1,7 +1,6 @@
 <% content_for(:page_title) { " Shop inteligent! We have over 6 million products you can choose from." } %>
 <% content_for(:page_description) { "Shop inteligent! We have over 6 million products you can choose from." } %>
 
-<%= render 'products/search_form' %>
 <div class="main_content">
   <% cache('featured_products', :expires_in => 5.hours ) do %>
     <%= render 'featured_products' %>

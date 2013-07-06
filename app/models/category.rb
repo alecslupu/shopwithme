@@ -14,10 +14,6 @@ class Category < ActiveRecord::Base
     })
   end
 
-  searchable do
-    text :name, :description
-  end
-
   paginates_per 5
 
   scope :random, order("RAND()")

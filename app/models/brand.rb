@@ -7,10 +7,6 @@ class Brand < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
 
-  searchable do
-    text :name
-  end
-
   scope :with_products, where('products_count > 0')
   scope :alphabetically, order(:name)
   paginates_per 5

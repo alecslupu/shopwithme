@@ -88,27 +88,12 @@
   <div class="row-fluid">
     <div class="span12">
       <ul class="nav nav-tabs" id="myTab">
-        <% if @products.size > 0 %>
-          <li class="active"><a href="#sim">SIMILAR PRODUCTS</a></li>
-          <li><a href="#desc">DESCRIPTION</a></li>
-        <% else %>
-          <li class="active"><a href="#desc">DESCRIPTION</a></li>
-        <% end %>
+         <li class="active"><a href="#desc">DESCRIPTION</a></li>
         <li><a href="#specs">SPECIFICATIONS</a></li>
         <!-- <li><a href="#profile">RECENT REVIEWS</a></li> -->
       </ul>              
       <div class="tab-content">
-        <% if @products.size > 0 %>
-          <div class="tab-pane active" id="sim">
-              <div class="row-fluid">
-                <%= render 'similar_products', :products => @products%>
-              </div>
-          </div>
-
-          <div class="tab-pane" id="desc">
-        <% else %>
           <div class="tab-pane active" id="desc">
-        <% end %>
           <%= @product.description.blank? ? "There is no description available" : raw(@product.description)%></div>
 
         <div class="tab-pane" id="specs">

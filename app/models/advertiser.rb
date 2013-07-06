@@ -12,11 +12,6 @@ class Advertiser < ActiveRecord::Base
   attr_accessible :active, :click_through, :description, :enabled, :logo, :metadata_version, :name, :strapline, :url
   extend FriendlyId
 
-  searchable do
-    text :name, :boost => 5
-    text :description, :strapline
-  end
-
   scope :random, order("RAND()")
   scope :alphabetically, order(:name)
   scope :with_products, where('products_count > 0')
