@@ -3,14 +3,7 @@ class ProductsController < ApplicationController
   
   before_filter :find_product, :only => [:show, :visit]
   before_filter :redirect_to_product_view, :only => [ :show ]  
-  
-  def index
-    if bot?
-      render :text => "", :status => :gone and return 
-    else
-      render :text => "", :status => :not_found and return 
-    end
-  end
+
 
   def show
     unless @product.nil?
