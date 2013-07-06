@@ -1,2 +1,1 @@
 User-agent: *
-Sitemap: http://www.shop-with.me/sitemaps/sitemap.gz
