@@ -3,7 +3,7 @@ require "bundler/capistrano"
 # load 'deploy/assets'
 
 
-set :application, "productdepository.com"
+set :application, "productrepository.com"
 role :app, application
 role :web, application
 role :db,  application, :primary => true
@@ -37,12 +37,10 @@ namespace :deploy do
   
   desc "Symlink shared configs and folders on each release."
   task :symlink_shared do
+    run "cd #{release_path}/public; touch assets"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-    run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
-    run "ln -nfs #{shared_path}/sitemaps #{release_path}/public/sitemaps"
-    run "ln -nfs #{shared_path}/cache #{release_path}/public" 
-    # run "ln -nfs #{shared_path}/cache/brands #{release_path}/public/brands" 
-    # run "ln -nfs #{shared_path}/cache/categories #{release_path}/public/categories" 
+    run "rm #{release_path}/config/newrelic.yml;ln -nfs #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml"
+
   end
   
   desc "Sync the public/assets directory."
@@ -53,7 +51,6 @@ namespace :deploy do
   desc "fix permissions "
   task :permission_fix do
     run "cd #{release_path}; mkdir -p #{release_path}/tmp/cache; chmod -R 0777 #{release_path}/tmp/cache"
-    run "cd #{release_path}; mkdir -p #{release_path}/tmp/aw; chmod -R 0777 #{release_path}/tmp/aw"
     run "cd #{release_path}; chmod -R 0666 log"
   end
 
@@ -63,8 +60,7 @@ namespace :deploy do
   end
 end
 
-before 'deploy:update_code', 'deploy:stop_resque'
-after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate", 'deploy:assets_precompile'
+after 'deploy:update_code', 'deploy:symlink_shared', "deploy:migrate" , 'deploy:assets_precompile'
 before 'deploy:create_symlink' , 'deploy:permission_fix'
-after 'deploy:create_symlink', 'deploy:start_resque',  "deploy:cleanup"
+after 'deploy:create_symlink', "deploy:cleanup"
 

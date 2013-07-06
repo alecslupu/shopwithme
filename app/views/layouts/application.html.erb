@@ -2,8 +2,8 @@
 <html>
 <head>
     <% if Rails.env == 'production' %>
-      <title><%= (DOMAIN_NAME +  + (content_for?(:page_title) ? ' - ' + yield(:page_title) : DOMAIN_STRAPLINE )) %></title>
-      <meta name="description" content="<%= (DOMAIN_NAME +  + (content_for?(:page_description) ? ' - ' + yield(:page_description) : "") )%>"/>
+      <title><%= (DOMAIN_NAME  + (content_for?(:page_title) ? ' - ' + yield(:page_title) : DOMAIN_STRAPLINE )) %></title>
+      <meta name="description" content="<%= (DOMAIN_NAME  + (content_for?(:page_description) ? ' - ' + yield(:page_description) : "") )%>"/>
       <script type="text/javascript">
 
         var _gaq = _gaq || [];
