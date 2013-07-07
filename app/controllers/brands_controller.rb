@@ -1,5 +1,5 @@
 class BrandsController < ApplicationController
-  # caches_page :index, :show
+  caches_page :index, :show
 
   def show
     @brand = Brand.find(params[:id])

@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  # caches_page :index, :show
+  caches_page :index, :show
 
   def show
     @category = Category.find(params[:id])

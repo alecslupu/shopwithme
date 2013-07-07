@@ -1,5 +1,5 @@
 class AdvertisersController < ApplicationController
-  # caches_page :index, :show
+  caches_page :index, :show
 
   def show
     @advertiser = Advertiser.find(params[:id])
